@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Col, Container, Navbar, Nav, Row, Button } from "react-bootstrap";
+import { Col, Container, Navbar, Nav, Row } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginPage from "../login/LoginPage";
+import { FaLanguage, FaUser } from "react-icons/fa";
 
 const MyNavbar = () => {
   const [modale, setModale] = useState(false);
@@ -31,17 +32,30 @@ const MyNavbar = () => {
               </Col>
               <Col className="d-flex" style={{ flexDirection: "row-reverse" }}>
                 <Nav.Item>
-                  <Nav.Link style={{ marginRight: "2rem" }} eventKey="link-3">
-                    LINGUA
+                  <Nav.Link
+                    style={{
+                      marginRight: "2rem",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    eventKey="link-3"
+                  >
+                    <FaLanguage style={{ marginRight: "10px" }} />
+                    <span>LINGUA</span>
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link
                     onClick={() => setModale(!modale)}
-                    style={{ marginRight: "2rem" }}
+                    style={{
+                      marginRight: "2rem",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
                     eventKey="link-3"
                   >
-                    ACCEDI
+                    <FaUser style={{ marginRight: "10px" }} />
+                    <span>ACCEDI</span>
                   </Nav.Link>
                 </Nav.Item>
               </Col>

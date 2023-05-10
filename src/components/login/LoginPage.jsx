@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { authRequest } from "../../redux/actions/actions";
 import styles from "./login.module.css";
+import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 const LoginPage = () => {
   const [formUsernameValue, setFormUserValue] = useState("");
@@ -51,7 +52,7 @@ const LoginPage = () => {
             </Form.Group>
             <div className="w-100 d-flex flex-column justify-content-center">
               <Button
-                className="w-100"
+                className={`${styles.login_button}`}
                 variant="primary"
                 type="submit"
                 onClick={(e) => {
@@ -76,9 +77,14 @@ const LoginPage = () => {
               >
                 Connettiti
               </Button>
-              <div className="d-flex" style={{ textAlign: "center" }}>
-                <span className="d-flex">O CONNETTITI CON</span>
-              </div>
+            </div>
+            <div className="w-100 text-center">
+              <span className={`${styles.frase}`}>O CONNETTITI CON</span>
+            </div>
+            <div className={`${styles.login_icons}`}>
+              <FaFacebook />
+              <FaGoogle />
+              <FaApple />
             </div>
 
             {/* <Button
