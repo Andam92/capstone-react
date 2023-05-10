@@ -1,4 +1,21 @@
 .mainNav {
+  font-size: large;
   color: rgb(219, 219, 219);
   background-color: #0c0a20;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* imposta un colore di sfondo semitrasparente */
+  backdrop-filter: blur(5px); /* applica un effetto di sfocatura */
+  z-index: 999; /* imposta il livello di profondità dello z-index */
 }

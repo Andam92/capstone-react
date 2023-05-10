@@ -1,10 +1,11 @@
 import React from "react";
 import Navbar from "../navbar/Navbar";
 import MyCarousel from "../carousel/MyCarousel";
+import styles from "./home.module.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className={`${styles.body}`}>
       <Navbar />
       <MyCarousel />
     </div>

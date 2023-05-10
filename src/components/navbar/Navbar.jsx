@@ -10,23 +10,29 @@ const MyNavbar = () => {
   return (
     <>
       <div style={{ position: "relative" }}>
+        {modale && (
+          <div
+            className={`${styles.overlay}`}
+            onClick={() => setModale(false)}
+          ></div>
+        )}
         <Navbar className={`${styles.mainNav} p-4`}>
           <Container>
-            <Row className="d-flex flex-row justify-content-between w-100 ">
+            <Row className="d-flex w-100 ">
               <Col className="d-flex">
-                <Nav.Link style={{ marginRight: "2rem" }} href="/home">
+                <Nav.Link style={{ marginRight: "4rem" }} href="/home">
                   STORE
                 </Nav.Link>
 
-                <Nav.Link style={{ marginRight: "2rem" }} eventKey="link-1">
+                <Nav.Link style={{ marginRight: "4rem" }} eventKey="link-1">
                   COMUNITA'
                 </Nav.Link>
 
-                <Nav.Link style={{ marginRight: "2rem" }} eventKey="link-2">
+                <Nav.Link style={{ marginRight: "4rem" }} eventKey="link-2">
                   ASSISTENZA
                 </Nav.Link>
 
-                <Nav.Link style={{ marginRight: "2rem" }} eventKey="link-3">
+                <Nav.Link style={{ marginRight: "4rem" }} eventKey="link-3">
                   SUPPORTO
                 </Nav.Link>
               </Col>
@@ -34,7 +40,7 @@ const MyNavbar = () => {
                 <Nav.Item>
                   <Nav.Link
                     style={{
-                      marginRight: "2rem",
+                      marginRight: "4rem",
                       display: "flex",
                       alignItems: "center",
                     }}
@@ -48,7 +54,7 @@ const MyNavbar = () => {
                   <Nav.Link
                     onClick={() => setModale(!modale)}
                     style={{
-                      marginRight: "2rem",
+                      marginRight: "4rem",
                       display: "flex",
                       alignItems: "center",
                     }}
