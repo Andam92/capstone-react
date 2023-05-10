@@ -1,0 +1,33 @@
+export const authRequest = (
+  formUsernameValue,
+  formPswValue,
+  setStato,
+  setToken
+) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formUsernameValue,
+          password: formPswValue,
+        }),
+      });
+      if (response.ok) {
+        const data = (await response).json();
+        const value = await data.then((e) => e.accessToken);
+        setStato(value);
+        setToken(value);
+        dispatch({
+          type: "ADD_TOKEN",
+          payload: value,
+        });
+        //data.then((e) => console.log(e));
+        console.log(data); // TOKEN!
+      }
+    } catch (error) {}
+  };
+};
