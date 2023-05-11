@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { authRequest } from "../../redux/actions/actions";
 import styles from "./register.module.css";
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const RegisterPage = (props) => {
+const RegisterPage = () => {
   const [formUsernameValue, setFormUserValue] = useState("");
   const [formPswValue, setformPswValue] = useState("");
   const [formEmailValue, setformEmailValue] = useState("");
@@ -14,20 +13,52 @@ const RegisterPage = (props) => {
   // const [storage, setStorage] = useState(null);
   const [token, setToken] = useState(null);
   const tokenList = useSelector((state) => state.bearerToken);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   //useEffect(() => console.log(formEmailValue), [formEmailValue]);
 
-  useEffect(() => {
-    console.log("stato", stato);
-    console.log("tokenList", tokenList);
-  }, [stato, tokenList]);
+  const user = {
+    name: formNameValue,
+    username: formUsernameValue,
+    email: formEmailValue,
+    password: formPswValue,
+  };
+
+  const registerRequest = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        console.log("Utente registrato");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div
-      className={`${styles.login} d-flex justify-content-center align-items-center flex-column`}
-    >
-      {
-        <>
+    <>
+      {tokenList && navigate("/")}
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+          color: "white",
+          marginTop: "2rem",
+          marginBottom: "1rem",
+        }}
+      >
+        <h2>Registrati ora</h2>
+      </div>
+      <div
+        className={`${styles.login} d-flex justify-content-center align-items-center flex-column`}
+      >
+        {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
@@ -86,19 +117,11 @@ const RegisterPage = (props) => {
                 onClick={(e) => {
                   e.preventDefault();
                   if (formUsernameValue.length > 2 || formPswValue.length > 2) {
-                    console.log(formUsernameValue);
-                    dispatch(
-                      authRequest(
-                        formUsernameValue,
-                        formPswValue,
-                        setStato,
-                        setToken
-                      )
-                    );
-                    console.log("tokenList", tokenList);
+                    registerRequest();
                     setFormUserValue("");
                     setformPswValue("");
-                    props.setModale(false);
+                    setformEmailValue("");
+                    setformNameValue("");
                   } else {
                     console.log("troppo breveh!!!!");
                   }
@@ -108,9 +131,9 @@ const RegisterPage = (props) => {
               </Button>
             </div>
           </Form>
-        </>
-      }
-    </div>
+        }
+      </div>
+    </>
   );
 };
 

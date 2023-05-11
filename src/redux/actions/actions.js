@@ -21,7 +21,7 @@ export const authRequest = (
       });
       if (response.ok) {
         const data = (await response).json();
-        const value = await data.then((e) => e.accessToken);
+        const value = await data.then((e) => e);
         setStato(value);
         setToken(value);
         dispatch({

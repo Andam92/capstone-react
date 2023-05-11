@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authRequest } from "../../redux/actions/actions";
 import styles from "./login.module.css";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const LoginPage = (props) => {
   const [formUsernameValue, setFormUserValue] = useState("");
@@ -91,8 +92,11 @@ const LoginPage = (props) => {
               <FaGoogle />
               <FaApple />
             </div>
-            <div>
-              Non hai ancora un account? <a>Registrati qui!</a>
+            <div style={{ color: "white", marginTop: "1rem" }}>
+              Non hai ancora un account?{" "}
+              <span onClick={() => props.setModale(false)}>
+                <Link to={"/register"}>Registrati ora!</Link>
+              </span>
             </div>
 
             {/* <Button

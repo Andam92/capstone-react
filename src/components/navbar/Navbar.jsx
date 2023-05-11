@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Container, Navbar, Nav, Row } from "react-bootstrap";
+import { Col, Container, Navbar, Nav, Row, NavLink } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginPage from "../login/LoginPage";
 import { FaLanguage, FaUser } from "react-icons/fa";
@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
   const [modale, setModale] = useState(false);
-  const token = useSelector((state) => state.bearerToken);
+  const token = useSelector((state) => state?.bearerToken?.accessToken);
+  const username = useSelector((state) => state?.bearerToken?.username);
   const logModale = () => console.log(modale);
 
   return (
@@ -54,18 +55,24 @@ const MyNavbar = () => {
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link
-                    onClick={() => setModale(!modale)}
-                    style={{
-                      marginRight: "4rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                    eventKey="link-3"
-                  >
-                    <FaUser style={{ marginRight: "10px" }} />
-                    <span>ACCEDI</span>
-                  </Nav.Link>
+                  {!token ? (
+                    <Nav.Link
+                      onClick={() => setModale(!modale)}
+                      style={{
+                        marginRight: "4rem",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                      eventKey="link-3"
+                    >
+                      <FaUser style={{ marginRight: "10px" }} />
+                      <span>ACCEDI</span>
+                    </Nav.Link>
+                  ) : (
+                    <NavLink style={{ marginRight: "1rem" }}>
+                      Benvenuto {username}
+                    </NavLink>
+                  )}
                 </Nav.Item>
               </Col>
             </Row>
