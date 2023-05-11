@@ -3,9 +3,12 @@ import { Col, Container, Navbar, Nav, Row } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginPage from "../login/LoginPage";
 import { FaLanguage, FaUser } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
   const [modale, setModale] = useState(false);
+  const token = useSelector((state) => state.bearerToken);
+  const logModale = () => console.log(modale);
 
   return (
     <>
@@ -68,7 +71,7 @@ const MyNavbar = () => {
             </Row>
           </Container>
         </Navbar>
-        {modale && <LoginPage />}
+        {modale && <LoginPage setModale={setModale} />}
       </div>
     </>
   );

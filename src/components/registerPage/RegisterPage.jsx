@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { authRequest } from "../../redux/actions/actions";
-import styles from "./login.module.css";
+import styles from "./register.module.css";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
-const LoginPage = (props) => {
+const RegisterPage = (props) => {
   const [formUsernameValue, setFormUserValue] = useState("");
   const [formPswValue, setformPswValue] = useState("");
+  const [formEmailValue, setformEmailValue] = useState("");
+  const [formNameValue, setformNameValue] = useState("");
   const [stato, setStato] = useState([]);
   // const [storage, setStorage] = useState(null);
   const [token, setToken] = useState(null);
@@ -24,13 +26,24 @@ const LoginPage = (props) => {
     <div
       className={`${styles.login} d-flex justify-content-center align-items-center flex-column`}
     >
-      {!token && (
+      {
         <>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
+                style={{ backgroundColor: "#2E2E34", color: "white" }}
+                value={formNameValue}
+                type="text"
+                placeholder="Nome"
+                onChange={(e) => {
+                  setformNameValue(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
                 style={{
-                  backgroundColor: "#171920",
+                  backgroundColor: "#2E2E34",
                   width: "500px",
                   color: "white",
                 }}
@@ -40,6 +53,17 @@ const LoginPage = (props) => {
                 onChange={(e) => {
                   // console.log(formEmailValue);
                   setFormUserValue(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                style={{ backgroundColor: "#2E2E34", color: "white" }}
+                value={formEmailValue}
+                type="email"
+                placeholder="Email"
+                onChange={(e) => {
+                  setformEmailValue(e.target.value);
                 }}
               />
             </Form.Group>
@@ -80,36 +104,14 @@ const LoginPage = (props) => {
                   }
                 }}
               >
-                Connettiti
+                Registrati
               </Button>
             </div>
-            <div className="w-100 text-center">
-              <span className={`${styles.frase}`}>O CONNETTITI CON</span>
-            </div>
-            <div className={`${styles.login_icons}`}>
-              <FaFacebook />
-              <FaGoogle />
-              <FaApple />
-            </div>
-            <div>
-              Non hai ancora un account? <a>Registrati qui!</a>
-            </div>
-
-            {/* <Button
-              variant="primary"
-              type="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                console.log(stato);
-              }}
-            >
-              Stato
-            </Button> */}
           </Form>
         </>
-      )}
+      }
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

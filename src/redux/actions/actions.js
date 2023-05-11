@@ -1,8 +1,11 @@
+// FUNZIONE DI LOGIN
+
 export const authRequest = (
   formUsernameValue,
   formPswValue,
   setStato,
-  setToken
+  setToken,
+  props
 ) => {
   return async (dispatch) => {
     try {
@@ -27,6 +30,8 @@ export const authRequest = (
         });
         //data.then((e) => console.log(e));
         console.log(data); // TOKEN!
+      } else {
+        console.log("Nessun utente trovato, effettua la registrazione");
       }
     } catch (error) {}
   };
