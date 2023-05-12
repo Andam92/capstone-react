@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Form, FormLabel } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import styles from "./register.module.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ const RegisterPage = () => {
   const [validated, setValidated] = useState(false);
   const tokenList = useSelector((state) => state.bearerToken);
   const navigate = useNavigate();
+  const [login, setLogin] = useState(false);
 
   //useEffect(() => console.log(formEmailValue), [formEmailValue]);
 
@@ -56,6 +57,12 @@ const RegisterPage = () => {
     setValidated(true);
   };
 
+  useEffect(() => {
+    if (login) {
+      navigate("/login");
+    }
+  }, [login]);
+
   return (
     <>
       {tokenList && navigate("/")}
@@ -68,7 +75,7 @@ const RegisterPage = () => {
           marginBottom: "1rem",
         }}
       >
-        <h2>Registrati ora</h2>
+        {<h2>Registrati ora</h2>}
       </div>
       <div
         className={`${styles.login} d-flex justify-content-center align-items-center flex-column`}
@@ -145,16 +152,27 @@ const RegisterPage = () => {
               </Form.Control.Feedback>
             </Form.Group>
             <div className="w-100 d-flex flex-column justify-content-center">
-              <Button
-                className={`${styles.login_button}`}
-                variant="primary"
-                type="submit"
-              >
-                Registrati
-              </Button>
+              {!success && (
+                <Button
+                  className={`${styles.login_button}`}
+                  variant="primary"
+                  type="submit"
+                >
+                  Registrati
+                </Button>
+              )}
               {success && (
-                <p style={{ color: "green", marginTop: "1rem" }}>
-                  Registrazione avvenuta con successo!
+                <p
+                  style={{ color: "green", marginTop: "1rem", marginBottom: 0 }}
+                >
+                  Registrazione avvenuta con successo!{" "}
+                  <p
+                    style={{ textDecoration: "underline" }}
+                    className=" text-light"
+                    onClick={() => setLogin(true)}
+                  >
+                    Clicca qui per cominciare
+                  </p>
                 </p>
               )}
             </div>

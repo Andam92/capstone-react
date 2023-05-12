@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { Col, Container, Navbar, Nav, Row, NavLink } from "react-bootstrap";
 import styles from "./navbar.module.css";
-import LoginPage from "../login/LoginPage";
+import LoginModal from "../login/LoginModal";
 import { FaLanguage, FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
+  // HOOKS
   const [modale, setModale] = useState(false);
   const token = useSelector((state) => state?.bearerToken?.accessToken);
   const username = useSelector((state) => state?.bearerToken?.username);
-  const logModale = () => console.log(modale);
 
   return (
     <>
-      <div style={{ position: "relative" }}>
+      <div
+        className={`${styles.navContainer}`}
+        style={{ position: "relative" }}
+      >
         {modale && (
           <div
             className={`${styles.overlay}`}
@@ -78,7 +81,7 @@ const MyNavbar = () => {
             </Row>
           </Container>
         </Navbar>
-        {modale && <LoginPage setModale={setModale} />}
+        {modale && <LoginModal setModale={setModale} />}
       </div>
     </>
   );

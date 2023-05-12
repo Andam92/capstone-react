@@ -1,12 +1,6 @@
 // FUNZIONE DI LOGIN
 
-export const authRequest = (
-  formUsernameValue,
-  formPswValue,
-  setStato,
-  setToken,
-  props
-) => {
+export const authRequest = (formUsernameValue, formPswValue) => {
   return async (dispatch) => {
     try {
       const response = await fetch("http://localhost:8080/api/auth/login", {
@@ -22,8 +16,6 @@ export const authRequest = (
       if (response.ok) {
         const data = (await response).json();
         const value = await data.then((e) => e);
-        setStato(value);
-        setToken(value);
         dispatch({
           type: "ADD_TOKEN",
           payload: value,

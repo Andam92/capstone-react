@@ -6,7 +6,7 @@ import styles from "./login.module.css";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const LoginPage = (props) => {
+const LoginModal = (props) => {
   const [formUsernameValue, setFormUserValue] = useState("");
   const [formPswValue, setformPswValue] = useState("");
   const [stato, setStato] = useState([]);
@@ -116,4 +116,4 @@ const LoginPage = (props) => {
   );
 };
 
-export default LoginPage;
+export default LoginModal;
