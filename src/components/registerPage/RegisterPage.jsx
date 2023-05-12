@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form, FormLabel } from "react-bootstrap";
 import styles from "./register.module.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  // HOOKS
   const [formUsernameValue, setFormUserValue] = useState("");
   const [formPswValue, setformPswValue] = useState("");
   const [formEmailValue, setformEmailValue] = useState("");
   const [formNameValue, setformNameValue] = useState("");
-  const [stato, setStato] = useState([]);
-  // const [storage, setStorage] = useState(null);
-  const [token, setToken] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [validated, setValidated] = useState(false);
   const tokenList = useSelector((state) => state.bearerToken);
   const navigate = useNavigate();
 
   //useEffect(() => console.log(formEmailValue), [formEmailValue]);
 
+  // OGGETTO UTENTE DA PASSARE COME BODY DELLA REQUEST
   const user = {
     name: formNameValue,
     username: formUsernameValue,
@@ -24,6 +25,7 @@ const RegisterPage = () => {
     password: formPswValue,
   };
 
+  // HTTP REQUEST PER REGISTRARE UN UTENTE
   const registerRequest = async () => {
     try {
       const response = await fetch("http://localhost:8080/api/auth/register", {
@@ -35,10 +37,23 @@ const RegisterPage = () => {
       });
       if (response.ok) {
         console.log("Utente registrato");
+        setSuccess(true);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // CONTROLLO SUI CAMPI DEL FORM AL SUBMIT
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      registerRequest();
+    }
+    setValidated(true);
   };
 
   return (
@@ -59,9 +74,10 @@ const RegisterPage = () => {
         className={`${styles.login} d-flex justify-content-center align-items-center flex-column`}
       >
         {
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="name">
               <Form.Control
+                required
                 style={{ backgroundColor: "#2E2E34", color: "white" }}
                 value={formNameValue}
                 type="text"
@@ -69,10 +85,15 @@ const RegisterPage = () => {
                 onChange={(e) => {
                   setformNameValue(e.target.value);
                 }}
+                isInvalid={validated && !formNameValue}
               />
+              <Form.Control.Feedback type="invalid">
+                Inserisci il tuo nome
+              </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="username">
               <Form.Control
+                required
                 style={{
                   backgroundColor: "#2E2E34",
                   width: "500px",
@@ -85,10 +106,15 @@ const RegisterPage = () => {
                   // console.log(formEmailValue);
                   setFormUserValue(e.target.value);
                 }}
+                isInvalid={validated && !formUsernameValue}
               />
+              <Form.Control.Feedback type="invalid">
+                Inserisci il tuo username
+              </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="email">
               <Form.Control
+                required
                 style={{ backgroundColor: "#2E2E34", color: "white" }}
                 value={formEmailValue}
                 type="email"
@@ -96,10 +122,15 @@ const RegisterPage = () => {
                 onChange={(e) => {
                   setformEmailValue(e.target.value);
                 }}
+                isInvalid={validated && !formEmailValue}
               />
+              <Form.Control.Feedback type="invalid">
+                Inserisci un'email valida
+              </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="password">
               <Form.Control
+                required
                 style={{ backgroundColor: "#2E2E34", color: "white" }}
                 value={formPswValue}
                 type="password"
@@ -107,28 +138,25 @@ const RegisterPage = () => {
                 onChange={(e) => {
                   setformPswValue(e.target.value);
                 }}
+                isInvalid={validated && !formPswValue}
               />
+              <Form.Control.Feedback type="invalid">
+                Inserisci una password
+              </Form.Control.Feedback>
             </Form.Group>
             <div className="w-100 d-flex flex-column justify-content-center">
               <Button
                 className={`${styles.login_button}`}
                 variant="primary"
                 type="submit"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (formUsernameValue.length > 2 || formPswValue.length > 2) {
-                    registerRequest();
-                    setFormUserValue("");
-                    setformPswValue("");
-                    setformEmailValue("");
-                    setformNameValue("");
-                  } else {
-                    console.log("troppo breveh!!!!");
-                  }
-                }}
               >
                 Registrati
               </Button>
+              {success && (
+                <p style={{ color: "green", marginTop: "1rem" }}>
+                  Registrazione avvenuta con successo!
+                </p>
+              )}
             </div>
           </Form>
         }
