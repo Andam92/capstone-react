@@ -30,3 +30,12 @@
   justify-content: space-around;
   color: white;
 }
+
+.error {
+  color: red;
+  outline: 2px solid red;
+}
+
+.success {
+  outline: 2px solid green;
+}

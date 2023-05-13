@@ -7,7 +7,7 @@ const tokenReducer = (state = initialState, action) => {
     case "ADD_TOKEN":
       return { ...state, bearerToken: action.payload };
     case "LOGOUT":
-      return { ...state, bearerToken: null };
+      return { ...state, bearerToken: action.payload };
     default:
       return state;
   }

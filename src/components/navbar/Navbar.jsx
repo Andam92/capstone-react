@@ -108,7 +108,7 @@ const MyNavbar = () => {
                           href="#/action-4"
                           onMouseOver={() => setOut(true)}
                           onMouseLeave={() => setOut(false)}
-                          onClick={() => dispatch(logout)}
+                          onClick={() => dispatch(logout())}
                         >
                           <AiOutlineDoubleLeft
                             className={`${styles.out} ${

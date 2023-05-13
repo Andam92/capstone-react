@@ -11,6 +11,7 @@ const RegisterPage = () => {
   const [formEmailValue, setformEmailValue] = useState("");
   const [formNameValue, setformNameValue] = useState("");
   const [success, setSuccess] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [validated, setValidated] = useState(false);
   const tokenList = useSelector((state) => state?.authReducer?.bearerToken);
   const navigate = useNavigate();
@@ -39,6 +40,10 @@ const RegisterPage = () => {
       if (response.ok) {
         console.log("Utente registrato");
         setSuccess(true);
+      } else if (response.status === 400) {
+        console.log("Utente già registrato");
+        setFailed(true);
+        //setValidated(false);
       }
     } catch (error) {
       console.log(error);
@@ -100,6 +105,9 @@ const RegisterPage = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="username">
               <Form.Control
+                className={`${failed && styles.error} ${
+                  success && styles.success
+                }`}
                 required
                 style={{
                   backgroundColor: "#2E2E34",
@@ -115,13 +123,28 @@ const RegisterPage = () => {
                 }}
                 isInvalid={validated && !formUsernameValue}
               />
-              <Form.Control.Feedback type="invalid">
-                Inserisci il tuo username
-              </Form.Control.Feedback>
+              {!failed && !success && (
+                <Form.Control.Feedback type="invalid">
+                  Inserisci il tuo username
+                </Form.Control.Feedback>
+              )}
+              {failed && !success && (
+                <Form.Control.Feedback type="error" style={{ color: "red" }}>
+                  Username già esistente!
+                </Form.Control.Feedback>
+              )}
+              {/* {failed && !success && validated && (
+                <p style={{ color: "red", marginTop: "1rem", marginBottom: 0 }}>
+                  Utente già presente nel database ⚠️
+                </p>
+              )} */}
             </Form.Group>
             <Form.Group className="mb-3" controlId="email">
               <Form.Control
                 required
+                className={`${failed && styles.error} ${
+                  success && styles.success
+                }`}
                 style={{ backgroundColor: "#2E2E34", color: "white" }}
                 value={formEmailValue}
                 type="email"
@@ -131,9 +154,21 @@ const RegisterPage = () => {
                 }}
                 isInvalid={validated && !formEmailValue}
               />
-              <Form.Control.Feedback type="invalid">
-                Inserisci un'email valida
-              </Form.Control.Feedback>
+              {!failed && !success && (
+                <Form.Control.Feedback type="invalid">
+                  Inserisci la tua mail
+                </Form.Control.Feedback>
+              )}
+              {failed && !success && (
+                <Form.Control.Feedback type="error" style={{ color: "red" }}>
+                  Email già esistente!
+                </Form.Control.Feedback>
+              )}
+              {/* {failed && !success && validated && (
+                <p style={{ color: "red", marginTop: "1rem", marginBottom: 0 }}>
+                  Email già presente nel database ⚠️
+                </p>
+              )} */}
             </Form.Group>
             <Form.Group className="mb-3" controlId="password">
               <Form.Control
@@ -175,6 +210,11 @@ const RegisterPage = () => {
                   </p>
                 </p>
               )}
+              {/* {failed && !success && (
+                <p style={{ color: "red", marginTop: "1rem", marginBottom: 0 }}>
+                  Utente già presente nel database
+                </p>
+              )} */}
             </div>
           </Form>
         }
