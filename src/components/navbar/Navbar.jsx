@@ -1,27 +1,17 @@
 import React, { useState } from "react";
-import {
-  Col,
-  Container,
-  Navbar,
-  Nav,
-  Row,
-  NavLink,
-  Dropdown,
-} from "react-bootstrap";
+import { Col, Container, Navbar, Nav, Row, Dropdown } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
 import { FaLanguage, FaUser } from "react-icons/fa";
-import {
-  AiFillCaretDown,
-  AiFillCaretUp,
-  AiOutlineDoubleLeft,
-} from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { AiOutlineDoubleLeft } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/actions/logout";
 
 const MyNavbar = () => {
   // HOOKS
   const [modale, setModale] = useState(false);
   const [out, setOut] = useState(false);
+  const dispatch = useDispatch();
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
@@ -63,7 +53,7 @@ const MyNavbar = () => {
               </Col>
               <Col className="d-flex" style={{ flexDirection: "row-reverse" }}>
                 <Nav.Item>
-                  <Nav.Link
+                  {/* <Nav.Link
                     style={{
                       marginRight: "4rem",
                       display: "flex",
@@ -73,7 +63,7 @@ const MyNavbar = () => {
                   >
                     <FaLanguage style={{ marginRight: "10px" }} />
                     <span>LINGUA</span>
-                  </Nav.Link>
+                  </Nav.Link> */}
                 </Nav.Item>
                 <Nav.Item>
                   {!token ? (
@@ -118,6 +108,7 @@ const MyNavbar = () => {
                           href="#/action-4"
                           onMouseOver={() => setOut(true)}
                           onMouseLeave={() => setOut(false)}
+                          onClick={() => dispatch(logout)}
                         >
                           <AiOutlineDoubleLeft
                             className={`${styles.out} ${

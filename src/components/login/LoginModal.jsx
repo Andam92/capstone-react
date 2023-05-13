@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { authRequest } from "../../redux/actions/actions";
+import { authRequest } from "../../redux/actions/authRequest";
 import styles from "./login.module.css";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { authRequest } from "../../redux/actions/actions";
+import { authRequest } from "../../redux/actions/authRequest";
 import styles from "./register.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
