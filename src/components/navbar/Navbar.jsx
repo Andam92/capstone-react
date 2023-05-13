@@ -1,14 +1,27 @@
 import React, { useState } from "react";
-import { Col, Container, Navbar, Nav, Row, NavLink } from "react-bootstrap";
+import {
+  Col,
+  Container,
+  Navbar,
+  Nav,
+  Row,
+  NavLink,
+  Dropdown,
+} from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
 import { FaLanguage, FaUser } from "react-icons/fa";
-import { AiFillCaretDown } from "react-icons/ai";
+import {
+  AiFillCaretDown,
+  AiFillCaretUp,
+  AiOutlineDoubleLeft,
+} from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
   // HOOKS
   const [modale, setModale] = useState(false);
+  const [out, setOut] = useState(false);
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
@@ -77,9 +90,44 @@ const MyNavbar = () => {
                       <span>ACCEDI</span>
                     </Nav.Link>
                   ) : (
-                    <NavLink style={{ marginRight: "1rem" }}>
-                      <AiFillCaretDown /> Benvenuto {username} !
-                    </NavLink>
+                    // <NavLink style={{ marginRight: "1rem" }}>
+                    //   <AiFillCaretUp
+                    //     className={`${styles.down}`}
+                    //   />{" "}
+                    //   Benvenuto {username} !
+                    // </NavLink>
+                    <Dropdown className={`${styles.down}`}>
+                      <Dropdown.Toggle
+                        id="dropdown-button-dark-example1"
+                        variant="none"
+                        className="text-light"
+                      >
+                        Benvenuto {username}
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu variant="dark">
+                        <Dropdown.Item href="#/action-1" active>
+                          Profilo
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">
+                          Carrello
+                        </Dropdown.Item>
+
+                        <Dropdown.Divider />
+                        <Dropdown.Item
+                          href="#/action-4"
+                          onMouseOver={() => setOut(true)}
+                          onMouseLeave={() => setOut(false)}
+                        >
+                          <AiOutlineDoubleLeft
+                            className={`${styles.out} ${
+                              out && styles.outHover
+                            }`}
+                          />
+                          Logout
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   )}
                 </Nav.Item>
               </Col>

@@ -18,3 +18,18 @@
   backdrop-filter: blur(5px); /* applica un effetto di sfocatura */
   z-index: 999; /* imposta il livello di profondità dello z-index */
 }
+
+.down {
+  border: 0.5px solid white;
+  margin-right: 1rem;
+  align-self: center;
+}
+
+.out {
+  margin-right: 0.5rem;
+  transition: all 0.5s;
+}
+
+.outHover {
+  transform: translate(-0.3rem);
+}
