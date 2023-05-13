@@ -3,13 +3,18 @@ import { Col, Container, Navbar, Nav, Row, NavLink } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
 import { FaLanguage, FaUser } from "react-icons/fa";
+import { AiFillCaretDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
   // HOOKS
   const [modale, setModale] = useState(false);
-  const token = useSelector((state) => state?.bearerToken?.accessToken);
-  const username = useSelector((state) => state?.bearerToken?.username);
+  const token = useSelector(
+    (state) => state?.authReducer?.bearerToken?.accessToken
+  );
+  const username = useSelector(
+    (state) => state?.authReducer?.bearerToken?.username
+  );
 
   return (
     <>
@@ -73,7 +78,7 @@ const MyNavbar = () => {
                     </Nav.Link>
                   ) : (
                     <NavLink style={{ marginRight: "1rem" }}>
-                      Benvenuto {username}
+                      <AiFillCaretDown /> Benvenuto {username} !
                     </NavLink>
                   )}
                 </Nav.Item>

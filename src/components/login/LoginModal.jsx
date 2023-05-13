@@ -12,7 +12,7 @@ const LoginModal = (props) => {
   const [stato, setStato] = useState([]);
   // const [storage, setStorage] = useState(null);
   const [token, setToken] = useState(null);
-  const tokenList = useSelector((state) => state.bearerToken);
+  const tokenList = useSelector((state) => state?.authReducer?.bearerToken);
   const dispatch = useDispatch();
   //useEffect(() => console.log(formEmailValue), [formEmailValue]);
 

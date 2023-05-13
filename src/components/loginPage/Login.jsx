@@ -12,7 +12,7 @@ export const Login = () => {
   const [validated, setValidated] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = useSelector((state) => state.bearerToken);
+  const token = useSelector((state) => state?.authReducer?.bearerToken);
 
   // CONTROLLO SUI CAMPI DEL FORM AL SUBMIT
   const handleSubmit = (event) => {

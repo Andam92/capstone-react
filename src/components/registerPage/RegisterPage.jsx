@@ -12,7 +12,7 @@ const RegisterPage = () => {
   const [formNameValue, setformNameValue] = useState("");
   const [success, setSuccess] = useState(false);
   const [validated, setValidated] = useState(false);
-  const tokenList = useSelector((state) => state.bearerToken);
+  const tokenList = useSelector((state) => state?.authReducer?.bearerToken);
   const navigate = useNavigate();
   const [login, setLogin] = useState(false);
 
