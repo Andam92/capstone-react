@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Videogioco } from "../videogioco/Videogioco";
 
 export const Store = () => {
   // HOOKS
@@ -30,14 +32,24 @@ export const Store = () => {
   }, []);
 
   return (
-    <div>
-      <ol>
+    <div className="p-4">
+      <h1>Giochi in evidenza</h1>
+      {/* <ol>
         {prodotti.map((p, i) => (
           <li style={{ color: "white" }} key={i}>
             {p.titolo}{" "}
           </li>
         ))}
-      </ol>
+      </ol> */}
+      <Container>
+        <Row>
+          {prodotti.map((p, i) => (
+            <Col>
+              <Videogioco titolo={p.titolo}></Videogioco>
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   );
 };

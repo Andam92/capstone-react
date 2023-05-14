@@ -33,101 +33,89 @@ const MyNavbar = () => {
             onClick={() => setModale(false)}
           ></div>
         )}
-        <Navbar className={`${styles.mainNav} p-4`}>
+        <Navbar variant="dark" expand="lg" className={`${styles.mainNav} p-4`}>
           <Container>
-            <Row className="d-flex w-100 ">
-              <Col className="d-flex">
-                <Nav.Link
-                  style={{ marginRight: "4rem" }}
-                  onClick={() => navigate("/store")}
-                >
-                  STORE
-                </Nav.Link>
-
-                <Nav.Link style={{ marginRight: "4rem" }} eventKey="link-1">
-                  COMUNITA'
-                </Nav.Link>
-
-                <Nav.Link style={{ marginRight: "4rem" }} eventKey="link-2">
-                  ASSISTENZA
-                </Nav.Link>
-
-                <Nav.Link style={{ marginRight: "4rem" }} eventKey="link-3">
-                  SUPPORTO
-                </Nav.Link>
-              </Col>
-              <Col className="d-flex" style={{ flexDirection: "row-reverse" }}>
-                <Nav.Item>
-                  {/* <Nav.Link
-                    style={{
-                      marginRight: "4rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                    eventKey="link-3"
+            <Navbar.Brand
+              className={`${styles.navLink} ${styles.brand}`}
+              href="#home"
+            >
+              Logo_here
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="justify-content-between w-100">
+                <div className="d-flex flex-column flex-lg-row mt-4 mt-lg-0">
+                  <Nav.Link
+                    className={`${styles.navLink}`}
+                    onClick={() => navigate("/store")}
                   >
-                    <FaLanguage style={{ marginRight: "10px" }} />
-                    <span>LINGUA</span>
-                  </Nav.Link> */}
-                </Nav.Item>
-                <Nav.Item>
-                  {!token ? (
-                    <Nav.Link
-                      onClick={() => setModale(!modale)}
-                      style={{
-                        marginRight: "4rem",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                      eventKey="link-3"
-                    >
-                      <FaUser style={{ marginRight: "10px" }} />
-                      <span>ACCEDI</span>
-                    </Nav.Link>
-                  ) : (
-                    // <NavLink style={{ marginRight: "1rem" }}>
-                    //   <AiFillCaretUp
-                    //     className={`${styles.down}`}
-                    //   />{" "}
-                    //   Benvenuto {username} !
-                    // </NavLink>
-                    <Dropdown className={`${styles.down}`}>
-                      <Dropdown.Toggle
-                        id="dropdown-button-dark-example1"
-                        variant="none"
-                        className="text-light"
+                    STORE
+                  </Nav.Link>
+                  <Nav.Link
+                    className={`${styles.navLink}`}
+                    style={{ marginRight: "4rem" }}
+                    eventKey="link-2"
+                  >
+                    ASSISTENZA
+                  </Nav.Link>
+
+                  <Nav.Link className={`${styles.navLink}`}>SUPPORTO</Nav.Link>
+                </div>
+                <div className="d-flex">
+                  <Nav.Item>
+                    {!token ? (
+                      <Nav.Link
+                        onClick={() => setModale(!modale)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                        eventKey="link-3"
                       >
-                        Benvenuto {username}
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu variant="dark">
-                        <Dropdown.Item href="#/action-1" active>
-                          Profilo
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                          Carrello
-                        </Dropdown.Item>
-
-                        <Dropdown.Divider />
-                        <Dropdown.Item
-                          href="#/action-4"
-                          onMouseOver={() => setOut(true)}
-                          onMouseLeave={() => setOut(false)}
-                          onClick={() => dispatch(logout())}
+                        <FaUser
+                          style={{ marginRight: "10px", color: "whitesmoke" }}
+                        />
+                        <span className={`${styles.navLink}`}>ACCEDI</span>
+                      </Nav.Link>
+                    ) : (
+                      <Dropdown className={`${styles.down}`}>
+                        <Dropdown.Toggle
+                          id="dropdown-button-dark-example1"
+                          variant="none"
+                          className="text-light"
                         >
-                          <AiOutlineDoubleLeft
-                            className={`${styles.out} ${
-                              out && styles.outHover
-                            }`}
-                          />
-                          Logout
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  )}
-                </Nav.Item>
-              </Col>
-            </Row>
+                          Benvenuto {username}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu variant="dark">
+                          <Dropdown.Item href="#/action-1" active>
+                            Profilo
+                          </Dropdown.Item>
+                          <Dropdown.Item href="#/action-2">
+                            Carrello
+                          </Dropdown.Item>
+
+                          <Dropdown.Divider />
+                          <Dropdown.Item
+                            href="#/action-4"
+                            onMouseOver={() => setOut(true)}
+                            onMouseLeave={() => setOut(false)}
+                            onClick={() => dispatch(logout())}
+                          >
+                            <AiOutlineDoubleLeft
+                              className={`${styles.out} ${
+                                out && styles.outHover
+                              }`}
+                            />
+                            Logout
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    )}
+                  </Nav.Item>
+                </div>
+              </Nav>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
         {modale && <LoginModal setModale={setModale} />}

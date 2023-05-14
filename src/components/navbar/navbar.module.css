@@ -3,6 +3,17 @@
   background-color: #0c0a20;
 }
 
+.navLink {
+  margin-right: 4rem;
+  color: whitesmoke;
+}
+
+@media screen and (max-width: 360px) {
+  .brand {
+    display: none;
+  }
+}
+
 .overlay {
   position: fixed;
   top: 0;

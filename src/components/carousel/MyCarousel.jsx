@@ -5,7 +5,7 @@ function MyCarousel() {
   return (
     <div className={`${styles.body}`}>
       <Carousel>
-        <Carousel.Item interval={10000000}>
+        <Carousel.Item>
           <div className={`${styles.slide}`}>
             <div className={`${styles.slide_inner}`}>
               <h3>PROVA</h3>
