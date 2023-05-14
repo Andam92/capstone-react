@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { Main } from "../carousel/main/Main";
 import RegisterPage from "../registerPage/RegisterPage";
 import { Login } from "../loginPage/Login";
+import { Store } from "../store/Store";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         <Route path="/" element={<Main />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/store" element={<Store />}></Route>
       </Routes>
       {/* <MyCarousel /> */}
     </div>

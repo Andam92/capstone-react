@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { Col, Container, Navbar, Nav, Row, Dropdown } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
-import { FaLanguage, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { AiOutlineDoubleLeft } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/logout";
+import { useNavigate } from "react-router-dom";
 
 const MyNavbar = () => {
   // HOOKS
   const [modale, setModale] = useState(false);
   const [out, setOut] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
@@ -35,7 +37,10 @@ const MyNavbar = () => {
           <Container>
             <Row className="d-flex w-100 ">
               <Col className="d-flex">
-                <Nav.Link style={{ marginRight: "4rem" }} href="/home">
+                <Nav.Link
+                  style={{ marginRight: "4rem" }}
+                  onClick={() => navigate("/store")}
+                >
                   STORE
                 </Nav.Link>
 
