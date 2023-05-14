@@ -8,27 +8,34 @@ export const Store = () => {
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
 
+  // FETCH
+  const recuperaProdotti = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/vg");
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setProdotti(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // EFFECT
   useEffect(() => {
-    // FETCH
-    const recuperaProdotti = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/api/auth/vg");
-        if (response.ok) {
-          const data = await response.json();
-          setProdotti(data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    if (prodotti.length === 0) {
+      recuperaProdotti();
+    }
   }, []);
 
   return (
     <div>
       <ol>
-        {prodotti.map((p) => (
-          <li>{p.titolo}</li>
+        {prodotti.map((p, i) => (
+          <li style={{ color: "white" }} key={i}>
+            {p.titolo}{" "}
+          </li>
         ))}
       </ol>
     </div>
