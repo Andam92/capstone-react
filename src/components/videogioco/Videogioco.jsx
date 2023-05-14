@@ -4,7 +4,7 @@ import { Button, Card } from "react-bootstrap";
 export const Videogioco = (props) => {
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+      <Card.Img variant="top" src={props.immagine} />
       <Card.Body>
         <Card.Title>{props.titolo}</Card.Title>
         <Card.Text>

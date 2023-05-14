@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Videogioco } from "../videogioco/Videogioco";
+import img from "../../../src/assets/covers/God_of_war.jpg";
 
 export const Store = () => {
   // HOOKS
@@ -45,7 +46,11 @@ export const Store = () => {
         <Row>
           {prodotti.map((p, i) => (
             <Col>
-              <Videogioco titolo={p.titolo}></Videogioco>
+              <Videogioco
+                key={i}
+                titolo={p.titolo}
+                immagine={p.immagine}
+              ></Videogioco>
             </Col>
           ))}
         </Row>
