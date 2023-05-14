@@ -44,15 +44,12 @@ export const Store = () => {
       </ol> */}
       <Container>
         <Row>
-          {prodotti.map((p, i) => (
-            <Col>
-              <Videogioco
-                key={i}
-                titolo={p.titolo}
-                immagine={p.immagine}
-              ></Videogioco>
+          {prodotti?.map((p, i) => (
+            <Col key={i}>
+              <Videogioco titolo={p.titolo} immagine={p?.immagine}></Videogioco>
             </Col>
           ))}
+          {/* {prodotti.map((p) => console.log(p.immagine))} */}
         </Row>
       </Container>
     </div>
