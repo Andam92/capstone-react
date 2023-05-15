@@ -8,8 +8,6 @@ const tokenReducer = (state = initialState, action) => {
       return { ...state, bearerToken: action.payload };
     case "LOGOUT":
       return { ...state, bearerToken: action.payload };
-    case "NOT_FOUND":
-      return { ...state, bearerToken: action.payload };
     default:
       return state;
   }

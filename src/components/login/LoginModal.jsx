@@ -5,6 +5,7 @@ import { authRequest } from "../../redux/actions/authRequest";
 import styles from "./login.module.css";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { MyAlert } from "../login_alert/MyAlert";
 
 const LoginModal = (props) => {
   const [formUsernameValue, setFormUserValue] = useState("");
@@ -13,13 +14,13 @@ const LoginModal = (props) => {
   // const [storage, setStorage] = useState(null);
   const [token, setToken] = useState(null);
   const tokenList = useSelector((state) => state?.authReducer?.bearerToken);
+  const failedLogin = useSelector((state) => state?.failedLogin?.failedLogin);
   const dispatch = useDispatch();
   //useEffect(() => console.log(formEmailValue), [formEmailValue]);
 
   useEffect(() => {
-    console.log("stato", stato);
-    console.log("tokenList", tokenList);
-  }, [stato, tokenList]);
+    if (tokenList) props.setModale(false);
+  }, [tokenList]);
 
   return (
     <div
@@ -75,7 +76,7 @@ const LoginModal = (props) => {
                     console.log("tokenList", tokenList);
                     setFormUserValue("");
                     setformPswValue("");
-                    props.setModale(false);
+                    // props.setModale(false);
                   } else {
                     console.log("troppo breveh!!!!");
                   }
@@ -92,12 +93,24 @@ const LoginModal = (props) => {
               <FaGoogle />
               <FaApple />
             </div>
-            <div style={{ color: "white", marginTop: "1rem" }}>
-              Non hai ancora un account?{" "}
-              <span onClick={() => props.setModale(false)}>
-                <Link to={"/register"}>Registrati ora!</Link>
-              </span>
-            </div>
+            {!tokenList && !failedLogin && (
+              <div style={{ color: "white", marginTop: "2rem" }}>
+                Non hai ancora un account?{" "}
+                <span onClick={() => props.setModale(false)}>
+                  <Link to={"/register"}>Registrati ora!</Link>
+                </span>
+              </div>
+            )}
+            {failedLogin && (
+              <div style={{ color: "white", marginTop: "2rem" }}>
+                Utente non trovato!{" "}
+                <span onClick={() => props.setModale(false)}>
+                  <Link to={"/register"}>
+                    Vuoi effettuare la registrazione?
+                  </Link>
+                </span>
+              </div>
+            )}
 
             {/* <Button
               variant="primary"

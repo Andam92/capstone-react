@@ -6,10 +6,16 @@ import {
 import tokenReducer from "../reducers";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import failedLogin from "../reducers/failedLogin";
+import prodottiReducer from "../reducers/prodotti";
 
 // const store = configureStore({reducer: tokenReducer});
 
-const rootReducer = combineReducers({ authReducer: tokenReducer });
+const rootReducer = combineReducers({
+  authReducer: tokenReducer,
+  failedLogin: failedLogin,
+  prodotti: prodottiReducer,
+});
 
 const persistConfig = {
   key: "root",

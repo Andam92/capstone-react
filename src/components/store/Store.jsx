@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Videogioco } from "../videogioco/Videogioco";
-import img from "../../../src/assets/covers/God_of_war.jpg";
-import { MyAlert } from "../login_alert/MyAlert";
+import { PacmanLoader } from "react-spinners";
+import styles from "./store.module.css";
 
 export const Store = () => {
   // HOOKS
   const [prodotti, setProdotti] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
+  const dispatch = useDispatch();
 
   // FETCH
   const recuperaProdotti = async () => {
@@ -20,6 +23,10 @@ export const Store = () => {
         const data = await response.json();
         console.log(data);
         setProdotti(data);
+        // dispatch({
+        //   type: "STORE_FETCH",
+        //   payload: data,
+        // });
       }
     } catch (error) {
       console.log(error);
@@ -30,29 +37,48 @@ export const Store = () => {
   useEffect(() => {
     if (prodotti.length === 0) {
       recuperaProdotti();
+      setInterval(() => {
+        console.log("Pacman!");
+        setIsLoading(false);
+      }, 3000);
     }
   }, []);
 
   return (
     <div className="p-4">
       <h1>Giochi in evidenza</h1>
-      {/* <ol>
-        {prodotti.map((p, i) => (
-          <li style={{ color: "white" }} key={i}>
-            {p.titolo}{" "}
-          </li>
-        ))}
-      </ol> */}
-      <Container>
+      <div>
         <Row>
-          {prodotti?.map((p, i) => (
-            <Col key={i}>
-              <Videogioco titolo={p.titolo} immagine={p?.immagine}></Videogioco>
-            </Col>
-          ))}
-          {/* {prodotti.map((p) => console.log(p.immagine))} */}
+          {/* {loading && <Spinner animation="grow" />} */}
+          {/* {
+            prodotti?.map(
+              (p, i) => (
+                <Videogioco
+                  key={i}
+                  titolo={p.titolo}
+                  immagine={p?.immagine}
+                ></Videogioco>
+              )
+
+              )} */}
+          {isLoading && (
+            <div className={`${styles.pacman}`}>
+              <PacmanLoader color="#FFE900" />
+            </div>
+          )}
+          {prodotti?.map(
+            (p, i) => (
+              <Videogioco
+                key={i}
+                titolo={p.titolo}
+                immagine={p?.immagine}
+              ></Videogioco>
+            )
+
+            /* <PacmanLoader color="#FFE900" /> */
+          )}
         </Row>
-      </Container>
+      </div>
     </div>
   );
 };
