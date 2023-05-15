@@ -13,7 +13,8 @@ export const Store = () => {
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
-  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
 
   // FETCH
   const recuperaProdotti = async () => {
@@ -40,7 +41,7 @@ export const Store = () => {
       setInterval(() => {
         console.log("Pacman!");
         setIsLoading(false);
-      }, 3000);
+      }, 1500);
     }
   }, []);
 
