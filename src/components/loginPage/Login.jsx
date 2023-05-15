@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { authRequest } from "../../redux/actions/authRequest";
 import styles from "./register.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { MyAlert } from "../login_alert/MyAlert";
 
 export const Login = () => {
   // HOOKS
   const [formUsernameValue, setFormUserValue] = useState("");
   const [formPswValue, setformPswValue] = useState("");
   const [validated, setValidated] = useState(false);
+  const [notFound, setNotFound] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state?.authReducer?.bearerToken);
@@ -34,6 +36,7 @@ export const Login = () => {
 
   return (
     <div className={`${styles.loginContainer}`}>
+      {token === false && <MyAlert variant="primary"></MyAlert>}
       <h2 style={{ color: "white" }}>Accedi</h2>
       <Form
         className={`${styles.formContainer}`}

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Videogioco } from "../videogioco/Videogioco";
 import img from "../../../src/assets/covers/God_of_war.jpg";
+import { MyAlert } from "../login_alert/MyAlert";
 
 export const Store = () => {
   // HOOKS

@@ -13,6 +13,7 @@ export const authRequest = (formUsernameValue, formPswValue) => {
           password: formPswValue,
         }),
       });
+
       if (response.ok) {
         const data = (await response).json();
         const value = await data.then((e) => e);
@@ -21,8 +22,11 @@ export const authRequest = (formUsernameValue, formPswValue) => {
           payload: value,
         });
         //data.then((e) => console.log(e));
-        console.log(data); // TOKEN!
       } else {
+        dispatch({
+          type: "NOT_FOUND",
+          payload: false,
+        });
         console.log("Nessun utente trovato, effettua la registrazione");
       }
     } catch (error) {}
