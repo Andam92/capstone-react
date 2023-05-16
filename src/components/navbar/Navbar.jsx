@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Container, Navbar, Nav, Row, Dropdown } from "react-bootstrap";
+import { Container, Navbar, Nav, Dropdown } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
 import { FaUser } from "react-icons/fa";

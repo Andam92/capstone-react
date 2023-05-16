@@ -39,7 +39,6 @@ export const Store = () => {
     if (prodotti.length === 0) {
       recuperaProdotti();
       setInterval(() => {
-        console.log("Pacman!");
         setIsLoading(false);
       }, 1500);
     }
@@ -73,6 +72,7 @@ export const Store = () => {
                 key={i}
                 titolo={p.titolo}
                 immagine={p?.immagine}
+                id={p?.id}
               ></Videogioco>
             )
 

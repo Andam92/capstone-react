@@ -2,19 +2,35 @@ import React, { useState } from "react";
 import { Card, Col } from "react-bootstrap";
 import styles from "./videogioco.module.css";
 import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export const Videogioco = (props) => {
   const [hover, setHover] = useState(false);
+  const navigate = useNavigate();
+  //const [id] = useState(props.id);
+
+  // HANDLE NAVIGATE
+  const handleNavigate = () => {
+    navigate(`/store/${props.id}`);
+  };
 
   return (
     <Col xs={12} sm={6} lg={4} xl={3} className="mt-3 border border-0">
       <Card className={`${styles.body}`}>
         <div style={{ maxHeight: "60%" }}>
-          <Card.Img variant="top" src={props.immagine} />
+          <Card.Img
+            className={`${styles.img}`}
+            variant="top"
+            src={props.immagine}
+            onClick={() => handleNavigate()}
+          />
         </div>
         <Card.Body className={`${styles.text}`}>
           <div className="d-flex flex-column justify-content-evenly">
-            <Card.Title className={`${styles.title}`}>
+            <Card.Title
+              className={`${styles.title}`}
+              onClick={() => handleNavigate()}
+            >
               {props.titolo}
             </Card.Title>
             <Card.Text>

@@ -1,0 +1,40 @@
+.body {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+
+.img {
+  max-width: 70%;
+  height: 100%;
+  animation: image ease 2s;
+}
+
+@keyframes image {
+  0% {
+    translate: -300%;
+  }
+
+  50% {
+    translate: -300%;
+  }
+
+  100% {
+    translate: 0%;
+  }
+}
+
+.text {
+  animation: text 1s ease-in-out 1.5s both;
+}
+
+@keyframes text {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
