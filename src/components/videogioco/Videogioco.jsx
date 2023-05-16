@@ -15,7 +15,7 @@ export const Videogioco = (props) => {
   };
 
   return (
-    <Col xs={12} sm={6} lg={4} xl={3} className="mt-3 border border-0">
+    <Col xs={12} sm={6} lg={4} xl={3} className="mt-3 px-4">
       <Card className={`${styles.body}`}>
         <div style={{ maxHeight: "60%" }}>
           <Card.Img

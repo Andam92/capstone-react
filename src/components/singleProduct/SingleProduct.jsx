@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./singleProduct.module.css";
 import { Button, Container } from "react-bootstrap";
+import { Chip } from "@mui/material";
 
 export const SingleProduct = () => {
   const { id } = useParams();
@@ -26,6 +27,10 @@ export const SingleProduct = () => {
     recuperaProdotto();
   }, []);
 
+  const handleClick = () => {
+    console.log("Chip categoria cliccata!");
+  };
+
   return (
     <>
       <div className={`${styles.body}`}>
@@ -39,7 +44,13 @@ export const SingleProduct = () => {
             />
           </div>
           <div className={`${styles.text}`}>
-            <p>{prodotto?.categoria}</p>
+            <Chip
+              label={prodotto?.categoria}
+              variant="outlined"
+              onClick={handleClick}
+              style={{ marginTop: "2rem" }}
+            />
+
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Voluptatibus, illo. Voluptates, amet. Magnam, vel obcaecati ipsa
@@ -47,7 +58,12 @@ export const SingleProduct = () => {
               natus distinctio facilis? Itaque!
             </p>
             <p>
-              <Button variant="primary" size="lg" role="button">
+              <Button
+                className={`${styles.button}`}
+                variant="primary"
+                size="lg"
+                role="button"
+              >
                 Acquista
               </Button>
             </p>
