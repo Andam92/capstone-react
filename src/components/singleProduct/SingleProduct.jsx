@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./singleProduct.module.css";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Image, Row } from "react-bootstrap";
 import { Chip } from "@mui/material";
 
 export const SingleProduct = () => {
@@ -33,43 +33,70 @@ export const SingleProduct = () => {
 
   return (
     <>
-      <div className={`${styles.body}`}>
-        <Container>
-          <h1 className={`${styles.text}`}>{prodotto?.titolo}</h1>
-          <div style={{ height: "500px" }}>
-            <img
-              src={`${prodotto?.immagine}`}
-              className={`${styles.img}`}
-              alt="img"
-            />
-          </div>
+      <div
+        style={{
+          zIndex: "10",
+          opacity: 0.1,
+          width: "100vw",
+          height: "100vh",
+          position: "relative",
+          backgroundImage: `url(${prodotto?.immagine})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* <img
+          src={`${prodotto?.immagine}`}
+          alt="bg"
+          style={{
+            position: "absolute",
+            height: "100vh",
+            right: "0",
+          }}
+        ></img> */}
+      </div>
+      <Container className={`${styles.body}`}>
+        <Row>
+          <h1 className={`${styles.text} mt-3`}>{prodotto?.titolo}</h1>
+          <Image
+            fluid={true}
+            src={`${prodotto?.immagine}`}
+            className={`${styles.img}`}
+          ></Image>
+
           <div className={`${styles.text}`}>
             <Chip
               label={prodotto?.categoria}
               variant="outlined"
               onClick={handleClick}
-              style={{ marginTop: "2rem" }}
+              style={{ marginTop: "1rem", marginBottom: "2rem" }}
             />
+            <p>
+              <span style={{ fontSize: "0.7rem" }} className="text-secondary">
+                EDITORE:
+              </span>{" "}
+              {prodotto?.editore}
+            </p>
+            <p>
+              <span style={{ fontSize: "0.7rem" }} className="text-secondary">
+                SVILUPPATORE:
+              </span>{" "}
+              {prodotto?.casaProduzione}
+            </p>
+            <p>
+              <span style={{ fontSize: "0.7rem" }} className="text-secondary">
+                DATA di RILASCIO:
+              </span>{" "}
+              {prodotto?.dataPubblicazione}
+            </p>
+            <p>DESCRIZIONE_QUI</p>
 
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatibus, illo. Voluptates, amet. Magnam, vel obcaecati ipsa
-              nesciunt, facere id ipsum deleniti laborum error fuga eligendi sed
-              natus distinctio facilis? Itaque!
-            </p>
-            <p>
-              <Button
-                className={`${styles.button}`}
-                variant="primary"
-                size="lg"
-                role="button"
-              >
-                Acquista
-              </Button>
+              <button className={`${styles.button}`}>Acquista</button>
             </p>
           </div>
-        </Container>
-      </div>
+        </Row>
+      </Container>
     </>
   );
 };
