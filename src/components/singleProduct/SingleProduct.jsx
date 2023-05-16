@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./singleProduct.module.css";
-import { Button, Container, Image, Row } from "react-bootstrap";
+import { Container, Image, Row } from "react-bootstrap";
 import { Chip } from "@mui/material";
 
 export const SingleProduct = () => {

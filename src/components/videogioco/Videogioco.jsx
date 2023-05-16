@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Card, Col } from "react-bootstrap";
 import styles from "./videogioco.module.css";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export const Videogioco = (props) => {
   const [hover, setHover] = useState(false);
+  const [highlight, setHighlight] = useState(false);
+  const [like, setLike] = useState(false);
   const navigate = useNavigate();
   //const [id] = useState(props.id);
 
@@ -14,9 +16,18 @@ export const Videogioco = (props) => {
     navigate(`/store/${props.id}`);
   };
 
+  // HANDLE CARD MOUSE-OVER
+  const handleOver = (over) => {
+    setHighlight(over);
+  };
+
   return (
     <Col xs={12} sm={6} lg={4} xl={3} className="mt-3 px-4">
-      <Card className={`${styles.body}`}>
+      <Card
+        className={`${highlight ? styles.body : styles.body_opacity}`}
+        onMouseOver={() => handleOver(true)}
+        onMouseLeave={() => handleOver(false)}
+      >
         <div style={{ maxHeight: "60%" }}>
           <Card.Img
             className={`${styles.img}`}
@@ -38,7 +49,7 @@ export const Videogioco = (props) => {
               bulk of the card's content.
             </Card.Text>
           </div>
-          <div className="d-flex justify-content-center align-items-center">
+          <div className="d-flex justify-content-between align-items-center">
             <button
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
@@ -52,6 +63,18 @@ export const Videogioco = (props) => {
               />
               Acquista
             </button>
+            {!like && (
+              <FaRegHeart
+                className={`${styles.heart_icon}`}
+                onClick={() => setLike(!like)}
+              />
+            )}
+            {like && (
+              <FaHeart
+                className={`${styles.heart_icon}`}
+                onClick={() => setLike(!like)}
+              />
+            )}
           </div>
         </Card.Body>
       </Card>
