@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Videogioco } from "../videogioco/Videogioco";
 import { PacmanLoader } from "react-spinners";
 import styles from "./store.module.css";
@@ -9,6 +9,7 @@ export const Store = () => {
   // HOOKS
   const [prodotti, setProdotti] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selected, setSelected] = useState(0);
 
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
@@ -70,9 +71,9 @@ export const Store = () => {
             (p, i) => (
               <Videogioco
                 key={i}
-                titolo={p.titolo}
-                immagine={p?.immagine}
-                id={p?.id}
+                videogioco={p}
+                selected={selected}
+                setSelected={setSelected}
               ></Videogioco>
             )
 

@@ -12,21 +12,20 @@
 } */
 
 .body {
+  margin: 0 auto;
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 10%;
-  right: 40%;
-  z-index: 9999;
+  opacity: 1 !important;
+  position: relative;
 }
 
 .img {
   max-width: 70%;
   height: 100%;
   animation: image ease 2s;
-  margin: 15px;
+  margin-top: 15px;
 }
 
 @keyframes image {

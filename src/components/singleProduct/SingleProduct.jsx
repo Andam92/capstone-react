@@ -35,26 +35,15 @@ export const SingleProduct = () => {
     <>
       <div
         style={{
-          zIndex: "10",
           opacity: 0.1,
           width: "100vw",
           height: "100vh",
-          position: "relative",
+          position: "absolute",
           backgroundImage: `url(${prodotto?.immagine})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
-      >
-        {/* <img
-          src={`${prodotto?.immagine}`}
-          alt="bg"
-          style={{
-            position: "absolute",
-            height: "100vh",
-            right: "0",
-          }}
-        ></img> */}
-      </div>
+      ></div>
       <Container className={`${styles.body}`}>
         <Row>
           <h1 className={`${styles.text} mt-3`}>{prodotto?.titolo}</h1>
@@ -92,7 +81,10 @@ export const SingleProduct = () => {
             <p>DESCRIZIONE_QUI</p>
 
             <p>
-              <button className={`${styles.button}`}>Acquista</button>
+              <button className={`${styles.button}`}>
+                <span className="me-2">€ {prodotto?.prezzo}</span>
+                Acquista
+              </button>
             </p>
           </div>
         </Row>

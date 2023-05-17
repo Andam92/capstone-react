@@ -71,153 +71,154 @@ const RegisterPage = () => {
   return (
     <>
       {tokenList && navigate("/")}
-      <div
-        style={{
-          width: "100%",
-          textAlign: "center",
-          color: "white",
-          marginTop: "2rem",
-          marginBottom: "1rem",
-        }}
-      >
-        {<h2>Registrati ora</h2>}
-      </div>
-      <div
-        className={`${styles.login} d-flex justify-content-center align-items-center flex-column`}
-      >
-        {
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="name">
-              <Form.Control
-                required
-                style={{ backgroundColor: "#2E2E34", color: "white" }}
-                value={formNameValue}
-                type="text"
-                placeholder="Nome"
-                onChange={(e) => {
-                  setformNameValue(e.target.value);
-                }}
-                isInvalid={validated && !formNameValue}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci il tuo nome
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="username">
-              <Form.Control
-                className={`${failed && styles.error} ${
-                  success && styles.success
-                }`}
-                required
-                style={{
-                  backgroundColor: "#2E2E34",
-                  width: "500px",
-                  color: "white",
-                }}
-                value={formUsernameValue}
-                type="username"
-                placeholder="Username"
-                onChange={(e) => {
-                  // console.log(formEmailValue);
-                  setFormUserValue(e.target.value);
-                }}
-                isInvalid={validated && !formUsernameValue}
-              />
-              {!failed && !success && (
+      <div style={{ height: "100vh" }}>
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center",
+            color: "white",
+            marginTop: "2rem",
+            marginBottom: "1rem",
+          }}
+        >
+          {<h2>Registrati ora</h2>}
+        </div>
+        <div
+          className={`${styles.login} d-flex justify-content-center align-items-center flex-column`}
+        >
+          {
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="name">
+                <Form.Control
+                  required
+                  style={{ backgroundColor: "#2E2E34", color: "white" }}
+                  value={formNameValue}
+                  type="text"
+                  placeholder="Nome"
+                  onChange={(e) => {
+                    setformNameValue(e.target.value);
+                  }}
+                  isInvalid={validated && !formNameValue}
+                />
                 <Form.Control.Feedback type="invalid">
-                  Inserisci il tuo username
+                  Inserisci il tuo nome
                 </Form.Control.Feedback>
-              )}
-              {failed && !success && (
-                <Form.Control.Feedback type="error" style={{ color: "red" }}>
-                  Username già esistente!
-                </Form.Control.Feedback>
-              )}
-              {/* {failed && !success && validated && (
-                <p style={{ color: "red", marginTop: "1rem", marginBottom: 0 }}>
-                  Utente già presente nel database ⚠️
-                </p>
-              )} */}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Control
-                required
-                className={`${failed && styles.error} ${
-                  success && styles.success
-                }`}
-                style={{ backgroundColor: "#2E2E34", color: "white" }}
-                value={formEmailValue}
-                type="email"
-                placeholder="Email"
-                onChange={(e) => {
-                  setformEmailValue(e.target.value);
-                }}
-                isInvalid={validated && !formEmailValue}
-              />
-              {!failed && !success && (
-                <Form.Control.Feedback type="invalid">
-                  Inserisci la tua mail
-                </Form.Control.Feedback>
-              )}
-              {failed && !success && (
-                <Form.Control.Feedback type="error" style={{ color: "red" }}>
-                  Email già esistente!
-                </Form.Control.Feedback>
-              )}
-              {/* {failed && !success && validated && (
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="username">
+                <Form.Control
+                  className={`${failed && styles.error} ${
+                    success && styles.success
+                  }`}
+                  required
+                  style={{
+                    backgroundColor: "#2E2E34",
+                    width: "500px",
+                    color: "white",
+                  }}
+                  value={formUsernameValue}
+                  type="username"
+                  placeholder="Username"
+                  onChange={(e) => {
+                    // console.log(formEmailValue);
+                    setFormUserValue(e.target.value);
+                  }}
+                  isInvalid={validated && !formUsernameValue}
+                />
+                {!failed && !success && (
+                  <Form.Control.Feedback type="invalid">
+                    Inserisci il tuo username
+                  </Form.Control.Feedback>
+                )}
+                {failed && !success && (
+                  <Form.Control.Feedback type="error" style={{ color: "red" }}>
+                    Username già esistente!
+                  </Form.Control.Feedback>
+                )}
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Control
+                  required
+                  className={`${failed && styles.error} ${
+                    success && styles.success
+                  }`}
+                  style={{ backgroundColor: "#2E2E34", color: "white" }}
+                  value={formEmailValue}
+                  type="email"
+                  placeholder="Email"
+                  onChange={(e) => {
+                    setformEmailValue(e.target.value);
+                  }}
+                  isInvalid={validated && !formEmailValue}
+                />
+                {!failed && !success && (
+                  <Form.Control.Feedback type="invalid">
+                    Inserisci la tua mail
+                  </Form.Control.Feedback>
+                )}
+                {failed && !success && (
+                  <Form.Control.Feedback type="error" style={{ color: "red" }}>
+                    Email già esistente!
+                  </Form.Control.Feedback>
+                )}
+                {/* {failed && !success && validated && (
                 <p style={{ color: "red", marginTop: "1rem", marginBottom: 0 }}>
                   Email già presente nel database ⚠️
                 </p>
               )} */}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Control
-                required
-                style={{ backgroundColor: "#2E2E34", color: "white" }}
-                value={formPswValue}
-                type="password"
-                placeholder="Password"
-                onChange={(e) => {
-                  setformPswValue(e.target.value);
-                }}
-                isInvalid={validated && !formPswValue}
-              />
-              <Form.Control.Feedback type="invalid">
-                Inserisci una password
-              </Form.Control.Feedback>
-            </Form.Group>
-            <div className="w-100 d-flex flex-column justify-content-center">
-              {!success && (
-                <Button
-                  className={`${styles.login_button}`}
-                  variant="primary"
-                  type="submit"
-                >
-                  Registrati
-                </Button>
-              )}
-              {success && (
-                <p
-                  style={{ color: "green", marginTop: "1rem", marginBottom: 0 }}
-                >
-                  Registrazione avvenuta con successo!{" "}
-                  <p
-                    style={{ textDecoration: "underline" }}
-                    className=" text-light"
-                    onClick={() => setLogin(true)}
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="password">
+                <Form.Control
+                  required
+                  style={{ backgroundColor: "#2E2E34", color: "white" }}
+                  value={formPswValue}
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => {
+                    setformPswValue(e.target.value);
+                  }}
+                  isInvalid={validated && !formPswValue}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Inserisci una password
+                </Form.Control.Feedback>
+              </Form.Group>
+              <div className="w-100 d-flex flex-column justify-content-center">
+                {!success && (
+                  <Button
+                    className={`${styles.login_button}`}
+                    variant="primary"
+                    type="submit"
                   >
-                    Clicca qui per cominciare
+                    Registrati
+                  </Button>
+                )}
+                {success && (
+                  <p
+                    style={{
+                      color: "green",
+                      marginTop: "1rem",
+                      marginBottom: 0,
+                    }}
+                  >
+                    Registrazione avvenuta con successo!{" "}
+                    <p
+                      style={{ textDecoration: "underline" }}
+                      className=" text-light"
+                      onClick={() => setLogin(true)}
+                    >
+                      Clicca qui per cominciare
+                    </p>
                   </p>
-                </p>
-              )}
-              {/* {failed && !success && (
+                )}
+                {/* {failed && !success && (
                 <p style={{ color: "red", marginTop: "1rem", marginBottom: 0 }}>
                   Utente già presente nel database
                 </p>
               )} */}
-            </div>
-          </Form>
-        }
+              </div>
+            </Form>
+          }
+        </div>
       </div>
     </>
   );

@@ -13,23 +13,23 @@ export const authRequest = (formUsernameValue, formPswValue) => {
           password: formPswValue,
         }),
       });
-      if (!response.ok) {
-        throw new Error("response non ok");
-
-        //data.then((e) => console.log(e));
+      if (response.ok) {
+        const data = (await response).json();
+        const value = await data.then((e) => e);
+        dispatch({
+          type: "ADD_TOKEN",
+          payload: value,
+        });
+      } else {
+        console.log("response not OK");
+        dispatch({
+          type: "NOT_FOUND",
+          payload: true,
+        });
       }
-      console.log("Nessun utente trovato, effettua la registrazione");
-      const data = (await response).json();
-      const value = await data.then((e) => e);
-      dispatch({
-        type: "ADD_TOKEN",
-        payload: value,
-      });
     } catch (error) {
-      dispatch({
-        type: "NOT_FOUND",
-        payload: true,
-      });
+      console.log("Sono catch", error);
+
       return error;
     }
   };

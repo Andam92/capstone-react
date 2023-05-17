@@ -5,18 +5,15 @@ import { authRequest } from "../../redux/actions/authRequest";
 import styles from "./login.module.css";
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { MyAlert } from "../login_alert/MyAlert";
 
 const LoginModal = (props) => {
   const [formUsernameValue, setFormUserValue] = useState("");
   const [formPswValue, setformPswValue] = useState("");
   const [stato, setStato] = useState([]);
-  // const [storage, setStorage] = useState(null);
   const [token, setToken] = useState(null);
   const tokenList = useSelector((state) => state?.authReducer?.bearerToken);
   const failedLogin = useSelector((state) => state?.failedLogin?.failedLogin);
   const dispatch = useDispatch();
-  //useEffect(() => console.log(formEmailValue), [formEmailValue]);
 
   useEffect(() => {
     if (tokenList) props.setModale(false);
@@ -78,7 +75,7 @@ const LoginModal = (props) => {
                     setformPswValue("");
                     // props.setModale(false);
                   } else {
-                    console.log("troppo breveh!!!!");
+                    console.log("errore login");
                   }
                 }}
               >
