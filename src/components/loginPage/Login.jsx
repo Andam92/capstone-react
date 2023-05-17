@@ -80,7 +80,9 @@ export const Login = () => {
               Inserisci il tuo username
             </Form.Control.Feedback>
           ) : (
-            <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Nessun utente trovato!
+            </Form.Control.Feedback>
           )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
@@ -100,7 +102,7 @@ export const Login = () => {
           />
           {!failedLogin ? (
             <Form.Control.Feedback type="invalid">
-              Inserisci il tuo username
+              Inserisci la tua password
             </Form.Control.Feedback>
           ) : (
             <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
