@@ -14,16 +14,19 @@
 .body {
   margin: 0 auto;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   opacity: 1 !important;
   position: relative;
 }
 
+.img_container {
+  max-width: 45%;
+  height: auto;
+}
+
 .img {
-  max-width: 70%;
-  height: 100%;
   animation: image ease 2s;
   margin-top: 15px;
 }
@@ -56,6 +59,12 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.bottom {
+  background-color: transparent;
+  padding: 0 1rem;
+  backdrop-filter: blur(5px);
 }
 
 .button {

@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { Container, Navbar, Nav, Dropdown } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
-import { FaUser } from "react-icons/fa";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { AiOutlineDoubleLeft } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/logout";
 import { useNavigate } from "react-router-dom";
+import Carrello from "../offcanvas_carrello/Carrello";
 
 const MyNavbar = () => {
   // HOOKS
   const [modale, setModale] = useState(false);
+  const [showCarrello, setShowCarrello] = useState(false);
+  const handleShow = () => setShowCarrello(true);
+  const handleClose = () => setShowCarrello(false);
   const [out, setOut] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,6 +31,13 @@ const MyNavbar = () => {
         className={`${styles.navContainer}`}
         style={{ position: "relative" }}
       >
+        {showCarrello && (
+          <Carrello
+            show={showCarrello}
+            setShow={setShowCarrello}
+            onHide={handleClose}
+          />
+        )}
         {modale && (
           <div
             className={`${styles.overlay}`}
@@ -62,10 +73,20 @@ const MyNavbar = () => {
                   <Nav.Link className={`${styles.navLink}`}>SUPPORTO</Nav.Link>
                 </div>
                 <div className="d-flex">
+                  {token && (
+                    <Nav.Item>
+                      <Nav.Link>
+                        <FaShoppingCart
+                          onClick={() => handleShow()}
+                          style={{ marginRight: "10px", fontSize: "1.5rem" }}
+                        />
+                      </Nav.Link>
+                    </Nav.Item>
+                  )}
                   <Nav.Item>
                     {!token ? (
                       <Nav.Link
-                        onClick={() => setModale(!modale)}
+                        onClick={() => setModale(true)}
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -91,7 +112,10 @@ const MyNavbar = () => {
                           <Dropdown.Item href="#/action-1" active>
                             Profilo
                           </Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
+                          <Dropdown.Item
+                            href="#/action-2"
+                            onClick={() => handleShow()}
+                          >
                             Carrello
                           </Dropdown.Item>
 

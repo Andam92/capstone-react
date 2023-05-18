@@ -14,7 +14,13 @@ const carrelloReducer = (state = initialState, action) => {
         console.log("Elemento già presente nel carrello!");
       }
       return state;
-
+    case "DELETE_FROM_CART":
+      return {
+        ...state,
+        carrello: state.carrello.filter(
+          (element) => element.id !== action.payload.id
+        ),
+      };
     default:
       return state;
   }

@@ -48,7 +48,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
         onMouseOver={() => handleOver()}
         onMouseLeave={() => setSelected(0)}
       >
-        <div style={{ maxHeight: "60%" }}>
+        <div>
           <Card.Img
             className={`${styles.img}`}
             variant="top"

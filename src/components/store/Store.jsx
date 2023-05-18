@@ -46,7 +46,7 @@ export const Store = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <div className={`${styles.body}`}>
       <h1>Giochi in evidenza</h1>
       <div>
         <Row>
