@@ -42,7 +42,7 @@ function Carrello({ show, setShow }) {
           onClick={() => {
             handleClose();
           }}
-          className="text-light"
+          className="text-light cross"
         />
       </Offcanvas.Header>
       <Offcanvas.Body className="body">
@@ -53,8 +53,7 @@ function Carrello({ show, setShow }) {
               carrello?.map((p, i) => (
                 <Item key={i} prodotto={p} loading={loading} />
               ))}
-            {/* {carrello?.length > 0 &&
-              carrello?.map((p, i) => <Prova prodotto={p} />)} */}
+            {/* <button className="button_buy rounded">Procedi all'acquisto</button> */}
           </Container>
         ) : (
           <p>Aggiungi un gioco dallo store</p>

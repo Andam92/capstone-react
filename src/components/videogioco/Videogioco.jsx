@@ -73,7 +73,6 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
             <button
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
-              onClick={() => handleClick()}
               className={`${styles.button}`}
             >
               <FaShoppingCart
@@ -87,13 +86,16 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
             {!like && (
               <FaRegHeart
                 className={`${styles.heart_icon}`}
-                onClick={() => setLike(!like)}
+                onClick={() => (setLike(!like), handleClick())}
               />
             )}
             {like && (
               <FaHeart
                 className={`${styles.heart_icon}`}
-                onClick={() => setLike(!like)}
+                onClick={() => (
+                  setLike(!like),
+                  dispatch({ type: "DELETE_FROM_CART", payload: videogioco })
+                )}
               />
             )}
           </div>

@@ -21,6 +21,7 @@ const Home = () => {
         <Route path="/store/:id" element={<SingleProduct />}></Route>
       </Routes>
       {/* <MyCarousel /> */}
+      mn{" "}
     </div>
   );
 };

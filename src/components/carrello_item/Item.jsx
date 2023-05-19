@@ -15,7 +15,7 @@ const Item = ({ prodotto, loading }) => {
 
   return (
     <div>
-      <Row>
+      <Row className={`${styles.row}`}>
         <Col>
           {!loading ? (
             <img
@@ -30,19 +30,21 @@ const Item = ({ prodotto, loading }) => {
           )}
         </Col>
 
-        <Col className="text-center flex-column d-flex">
+        <Col className="text-start flex-column d-flex">
           <p className="fs-5">{prodotto.titolo}</p>
           <span className="fs-6">€ {prodotto.prezzo}</span>
-          <button className={`${styles.button_buy}`} size="sm">
-            Acquista
-          </button>
-          <AiFillDelete
-            onClick={() =>
-              dispatch({ type: "DELETE_FROM_CART", payload: prodotto })
-            }
-            className={`${styles.button_remove}`}
-            size="sm"
-          />
+          <div className="d-flex align-items-center justify-content-between">
+            <button className={`${styles.button_buy} rounded`} size="sm">
+              Acquista
+            </button>
+            <AiFillDelete
+              onClick={() =>
+                dispatch({ type: "DELETE_FROM_CART", payload: prodotto })
+              }
+              className={`${styles.button_remove}`}
+              size="sm"
+            />
+          </div>
         </Col>
         <hr className={`${styles.hr}`} />
       </Row>
