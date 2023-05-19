@@ -9,7 +9,7 @@ const cartReducer = (state = initialState, action) => {
       //     (elemento) => elemento.id === action.payload.id
       //   );
 
-      return { ...state, cart: action.payload };
+      return { ...state, cart: [...state.cart, action.payload] };
 
     default:
       return state;
