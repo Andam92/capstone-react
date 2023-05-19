@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import "./carrello.css";
+import "./wish.css";
 import { useSelector } from "react-redux";
-import { Container, Row } from "react-bootstrap";
-import Item from "../carrello_item/Item";
+import { Container } from "react-bootstrap";
+import Item from "../wishlist_item/Item";
 import { GiCrossMark } from "react-icons/gi";
-import { Prova } from "../Prova";
 
-function Carrello({ show, setShow }) {
+function Wish({ show, setShow }) {
   const [showCarrello, setShowCarrello] = useState(false);
   const [loading, setLoading] = useState(true);
-  const carrello = useSelector((state) => state?.carrelloReducer?.carrello);
+  const wish = useSelector((state) => state?.wishReducer?.wish);
 
   useEffect(() => {
     setShowCarrello(show);
@@ -47,10 +46,10 @@ function Carrello({ show, setShow }) {
       </Offcanvas.Header>
       <Offcanvas.Body className="body">
         <h4 className="mb-3">Ecco tutti i tuoi giochi preferiti</h4>
-        {carrello?.length > 0 ? (
+        {wish?.length > 0 ? (
           <Container>
-            {carrello?.length > 0 &&
-              carrello?.map((p, i) => (
+            {wish?.length > 0 &&
+              wish?.map((p, i) => (
                 <Item key={i} prodotto={p} loading={loading} />
               ))}
             {/* <button className="button_buy rounded">Procedi all'acquisto</button> */}
@@ -59,10 +58,10 @@ function Carrello({ show, setShow }) {
           <p>Aggiungi un gioco dallo store</p>
         )}
 
-        {/* <p onClick={() => console.log(carrello)}>PROVA</p> */}
+        {/* <p onClick={() => console.log(wish)}>PROVA</p> */}
       </Offcanvas.Body>
     </Offcanvas>
   );
 }
 
-export default Carrello;
+export default Wish;

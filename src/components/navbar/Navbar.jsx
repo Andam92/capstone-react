@@ -7,7 +7,7 @@ import { AiOutlineDoubleLeft } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/logout";
 import { useNavigate } from "react-router-dom";
-import Carrello from "../offcanvas_carrello/Carrello";
+import Wish from "../offcanvas_wish/Wish";
 
 const MyNavbar = () => {
   // HOOKS
@@ -32,7 +32,7 @@ const MyNavbar = () => {
         style={{ position: "relative" }}
       >
         {showCarrello && (
-          <Carrello
+          <Wish
             show={showCarrello}
             setShow={setShowCarrello}
             onHide={handleClose}
@@ -70,14 +70,19 @@ const MyNavbar = () => {
                     ASSISTENZA
                   </Nav.Link>
 
-                  <Nav.Link className={`${styles.navLink}`}>SUPPORTO</Nav.Link>
+                  <Nav.Link
+                    onClick={() => handleShow()}
+                    className={`${styles.navLink}`}
+                  >
+                    WISHLIST
+                  </Nav.Link>
                 </div>
                 <div className="d-flex">
                   {token && (
                     <Nav.Item>
                       <Nav.Link>
                         <FaShoppingCart
-                          onClick={() => handleShow()}
+                          // onClick={() => handleShow()}
                           style={{ marginRight: "10px", fontSize: "1.5rem" }}
                         />
                       </Nav.Link>
@@ -116,7 +121,7 @@ const MyNavbar = () => {
                             href="#/action-2"
                             onClick={() => handleShow()}
                           >
-                            Carrello
+                            Wishlist
                           </Dropdown.Item>
 
                           <Dropdown.Divider />

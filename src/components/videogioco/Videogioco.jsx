@@ -4,7 +4,7 @@ import styles from "./videogioco.module.css";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/actions/addCart";
+import addToWish from "../../redux/actions/addWish";
 
 export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const [hover, setHover] = useState(false);
@@ -12,7 +12,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const [alert, setAlert] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const carrello = useSelector((state) => state?.carrelloReducer?.carrello);
+  const wish = useSelector((state) => state?.wishReducer?.wish);
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
@@ -32,9 +32,9 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
 
   // HANDLE Click-DISPATCH
   const handleClick = () => {
-    token ? dispatch(addToCart(videogioco)) : setAlert(true);
+    token ? dispatch(addToWish(videogioco)) : setAlert(true);
     // console.log(videogioco);
-    console.log(carrello);
+    console.log(wish);
   };
 
   return (

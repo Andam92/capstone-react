@@ -46,8 +46,8 @@ const Item = ({ prodotto, loading }) => {
             />
           </div>
         </Col>
-        <hr className={`${styles.hr}`} />
       </Row>
+      <hr className={`${styles.hr}`} />
     </div>
   );
 };
