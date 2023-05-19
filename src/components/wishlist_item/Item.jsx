@@ -39,7 +39,7 @@ const Item = ({ prodotto, loading }) => {
             </button>
             <AiFillDelete
               onClick={() =>
-                dispatch({ type: "DELETE_FROM_CART", payload: prodotto })
+                dispatch({ type: "DELETE_FROM_WISH", payload: prodotto })
               }
               className={`${styles.button_remove}`}
               size="sm"

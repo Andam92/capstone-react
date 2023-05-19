@@ -84,6 +84,7 @@ const MyNavbar = () => {
                         <FaShoppingCart
                           // onClick={() => handleShow()}
                           style={{ marginRight: "10px", fontSize: "1.5rem" }}
+                          onClick={() => navigate("/checkout")}
                         />
                       </Nav.Link>
                     </Nav.Item>

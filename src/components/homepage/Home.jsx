@@ -8,6 +8,7 @@ import RegisterPage from "../registerPage/RegisterPage";
 import { Login } from "../loginPage/Login";
 import { Store } from "../store/Store";
 import { SingleProduct } from "../singleProduct/SingleProduct";
+import { Checkout } from "../checkout/Checkout";
 
 const Home = () => {
   return (
@@ -19,9 +20,8 @@ const Home = () => {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/store" element={<Store />}></Route>
         <Route path="/store/:id" element={<SingleProduct />}></Route>
+        <Route path="/checkout" element={<Checkout />}></Route>
       </Routes>
-      {/* <MyCarousel /> */}
-      mn{" "}
     </div>
   );
 };

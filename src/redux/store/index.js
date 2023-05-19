@@ -9,6 +9,7 @@ import storage from "redux-persist/lib/storage";
 import failedLogin from "../reducers/failedLogin";
 import prodottiReducer from "../reducers/prodotti";
 import wishReducer from "../reducers/whishlist";
+import cartReducer from "../reducers/cart";
 
 // const store = configureStore({reducer: tokenReducer});
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   failedLogin: failedLogin,
   prodotti: prodottiReducer,
   wishReducer: wishReducer,
+  cartReducer: cartReducer,
 });
 
 const persistConfig = {

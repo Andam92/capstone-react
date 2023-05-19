@@ -15,7 +15,7 @@ function Wish({ show, setShow }) {
     setShowCarrello(show);
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 700);
   }, [show]);
 
   const handleClose = () => {
