@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./checkout.module.css";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ export const Checkout = () => {
     try {
       const data = cart;
       const response = await fetch(
-        `http://localhost:8080/api/auth/checkout/add-to/${id}`,
+        `http://localhost:8080/api/auth/checkout/add/${id}`,
         {
           method: "POST",
           headers: {
@@ -36,6 +36,8 @@ export const Checkout = () => {
       console.log("Sono catch!", error);
     }
   };
+
+  useEffect(() => console.log(cart), [cart]);
 
   return (
     <Container className={`${styles.body}`}>
