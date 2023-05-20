@@ -16,16 +16,19 @@ export const Checkout = () => {
     try {
       const data = cart;
       const response = await fetch(
-        fetch(`http://localhost:8080/api/auth/vg/${id}`, {
+        `http://localhost:8080/api/auth/checkout/add-to/${id}`,
+        {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        })
+        }
       );
       if (response.ok) {
+        console.log(response);
         const responseData = await response.json();
+        console.log(responseData);
       } else {
         throw new Error("Errore nella richiesta POST");
       }
