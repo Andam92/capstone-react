@@ -4,6 +4,8 @@ import { Col, Container, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Item } from "./Item";
 import { AiFillDelete } from "react-icons/ai";
+import { cleanCart } from "../../redux/actions/cleanCart";
+import { Link } from "react-router-dom";
 
 export const Checkout = () => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
@@ -25,18 +27,24 @@ export const Checkout = () => {
             </tr>
           </thead>
           <tbody>
-            {cart.length > 0 ? (
+            {cart && cart.length > 0 ? (
               cart.map((prodotto) => <Item prodotto={prodotto} />)
             ) : (
-              <p>Non hai ancora nulla nel carrello</p>
+              <div>
+                <p>Non hai ancora nulla nel carrello </p>
+                <Link to={"/store"}>Visita lo Store</Link>
+              </div>
             )}
           </tbody>
         </Table>
         <Col className="d-flex justify-content-between align-items-center">
-          <button className={`${styles.button}`}>Completa l'acquisto</button>
+          {cart && (
+            <button className={`${styles.button}`}>Completa l'acquisto</button>
+          )}
           <p className={`${styles.total}`}>
             Totale:{" "}
-            {cart.length > 0 &&
+            {cart &&
+              cart.length > 0 &&
               cart.reduce(
                 (acc, element) => acc + parseInt(element.prezzo),
                 0
@@ -45,10 +53,12 @@ export const Checkout = () => {
           </p>
         </Col>
         <Col>
-          <AiFillDelete
-            onClick={() => dispatch({ type: "CLEAN_CART", payload: null })}
-            className={`${styles.button_remove}`}
-          />
+          {cart && (
+            <AiFillDelete
+              onClick={() => dispatch(cleanCart())}
+              className={`${styles.button_remove}`}
+            />
+          )}
         </Col>
         {/* {cart.length > 0 ? (
           cart.map((prodotto) => <Item prodotto={prodotto}></Item>)
