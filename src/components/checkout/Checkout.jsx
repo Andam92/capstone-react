@@ -18,42 +18,46 @@ export const Checkout = () => {
       </Row>
       <Row className="flex-column">
         <h2>Checkout</h2>
-        <Table striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th className="text-center">Titolo</th>
-              <th className="text-center">Prezzo</th>
-              <th className="text-center">Rimuovi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart && cart.length > 0 ? (
-              cart.map((prodotto) => <Item prodotto={prodotto} />)
-            ) : (
-              <div>
-                <p>Non hai ancora nulla nel carrello </p>
-                <Link to={"/store"}>Visita lo Store</Link>
-              </div>
-            )}
-          </tbody>
-        </Table>
+        {cart && cart.length > 0 ? (
+          <Table striped bordered hover variant="dark">
+            <thead>
+              <tr>
+                <th className="text-center">Titolo</th>
+                <th className="text-center">Prezzo</th>
+                <th className="text-center">Rimuovi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart &&
+                cart.length > 0 &&
+                cart.map((prodotto) => <Item prodotto={prodotto} />)}
+            </tbody>
+          </Table>
+        ) : (
+          <div>
+            <p>Non hai ancora nulla nel carrello </p>
+            <Link to={"/store"}>Visita lo Store</Link>
+          </div>
+        )}
         <Col className="d-flex justify-content-between align-items-center">
-          {cart && (
+          {cart.length > 0 && (
             <button className={`${styles.button}`}>Completa l'acquisto</button>
           )}
-          <p className={`${styles.total}`}>
-            Totale:{" "}
-            {cart &&
-              cart.length > 0 &&
-              cart.reduce(
-                (acc, element) => acc + parseInt(element.prezzo),
-                0
-              )}{" "}
-            €
-          </p>
+          {cart.length > 0 && (
+            <p className={`${styles.total}`}>
+              Totale:{" "}
+              {cart &&
+                cart.length > 0 &&
+                cart.reduce(
+                  (acc, element) => acc + parseInt(element.prezzo),
+                  0
+                )}{" "}
+              €
+            </p>
+          )}
         </Col>
         <Col>
-          {cart && (
+          {cart.length > 0 && (
             <AiFillDelete
               onClick={() => dispatch(cleanCart())}
               className={`${styles.button_remove}`}
