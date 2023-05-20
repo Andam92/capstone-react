@@ -75,24 +75,27 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
               </Card.Text>
             </div>
             <div className="d-flex justify-content-between align-items-center mt-3">
-              <button
-                onClick={() => (dispatch(addToCart(videogioco)), setShow(true))}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
-                className={`${styles.button}`}
-              >
-                {!show ? (
+              {!show ? (
+                <button
+                  onClick={() => (
+                    dispatch(addToCart(videogioco)), setShow(true)
+                  )}
+                  onMouseEnter={() => setHover(true)}
+                  onMouseLeave={() => setHover(false)}
+                  className={`${styles.button}`}
+                >
                   <FaShoppingCart
                     className={`${!hover && styles.cart} ${
                       hover && styles.cartHover
                     }`}
                     style={{ marginRight: "10px" }}
                   />
-                ) : (
-                  <MdDone />
-                )}
-                {!show && <span>Acquista</span>}
-              </button>
+
+                  {!show && <span>Acquista</span>}
+                </button>
+              ) : (
+                <MdDone />
+              )}
               {!like && (
                 <FaRegHeart
                   className={`${styles.heart_icon}`}
