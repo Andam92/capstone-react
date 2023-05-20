@@ -3,13 +3,13 @@ import "./popup.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-function MyPopup(show, setShow) {
-  const cart = useSelector((state) => state?.cartReducer?.cart);
+function MyPopup({ show, setShow, titolo }) {
+  // const cart = useSelector((state) => state?.cartReducer?.cart);
   const [away, setAway] = useState(false);
 
   // const handleShow = () => setShow(true);
   useEffect(() => {
-    console.log(cart);
+    console.log(titolo);
     setTimeout(() => {
       setAway(true);
     }, 2000);
@@ -20,7 +20,7 @@ function MyPopup(show, setShow) {
       {!away && (
         <Modal style={{ backdropFilter: "blur(2px)" }} show={show}>
           <Modal.Body className="body">
-            <h4>Gioco aggiunto al carrello!</h4>
+            <h4>{titolo} aggiunto al carrello!</h4>
           </Modal.Body>
         </Modal>
       )}

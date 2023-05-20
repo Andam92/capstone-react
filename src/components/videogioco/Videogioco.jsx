@@ -20,6 +20,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
+  const cart = useSelector((state) => state?.cartReducer?.cart);
   //const [id] = useState(props.id);
 
   // HANDLE NAVIGATE
@@ -78,7 +79,9 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
               {!show ? (
                 <button
                   onClick={() => (
-                    dispatch(addToCart(videogioco)), setShow(true)
+                    dispatch(addToCart(videogioco)),
+                    setShow(true),
+                    console.log(cart)
                   )}
                   onMouseEnter={() => setHover(true)}
                   onMouseLeave={() => setHover(false)}
@@ -122,7 +125,9 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
         </Card>
       </Col>
 
-      {show && <MyPopup show={show} setShow={setShow} />}
+      {show && (
+        <MyPopup titolo={videogioco.titolo} show={show} setShow={setShow} />
+      )}
     </>
   );
 };
