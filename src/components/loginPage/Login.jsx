@@ -14,7 +14,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const token = useSelector((state) => state?.authReducer?.bearerToken);
   const failedLogin = useSelector((state) => state?.failedLogin?.failedLogin);
-  const [loginFailed, setLoginFailed] = useState(false);
+  // const [loginFailed, setLoginFailed] = useState(false);
 
   // CONTROLLO SUI CAMPI DEL FORM AL SUBMIT & DEL LOGIN FALLITO
   const handleSubmit = (event) => {

@@ -10,6 +10,7 @@ import failedLogin from "../reducers/failedLogin";
 import prodottiReducer from "../reducers/prodotti";
 import wishReducer from "../reducers/whishlist";
 import cartReducer from "../reducers/cart";
+import usersReducer from "../reducers/users";
 
 // const store = configureStore({reducer: tokenReducer});
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   prodotti: prodottiReducer,
   wishReducer: wishReducer,
   cartReducer: cartReducer,
+  usersReducer: usersReducer,
 });
 
 const persistConfig = {

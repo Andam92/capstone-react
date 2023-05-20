@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Dropdown } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/logout";
 import { useNavigate } from "react-router-dom";
 import Wish from "../offcanvas_wish/Wish";
+import getUsers from "../../redux/actions/getUsers";
 
 const MyNavbar = () => {
   // HOOKS
@@ -24,6 +25,13 @@ const MyNavbar = () => {
   const username = useSelector(
     (state) => state?.authReducer?.bearerToken?.username
   );
+  const users = useSelector((state) => state?.usersReducer?.users);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(getUsers(username, token)).then(console.log(users));
+    }, 100);
+  }, []);
 
   return (
     <>
@@ -84,7 +92,7 @@ const MyNavbar = () => {
                         <FaShoppingCart
                           // onClick={() => handleShow()}
                           style={{ marginRight: "10px", fontSize: "1.5rem" }}
-                          onClick={() => navigate("/checkout")}
+                          onClick={() => navigate(`/checkout/${users.id}`)}
                         />
                       </Nav.Link>
                     </Nav.Item>

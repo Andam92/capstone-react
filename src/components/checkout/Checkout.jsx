@@ -5,11 +5,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { Item } from "./Item";
 import { AiFillDelete } from "react-icons/ai";
 import { cleanCart } from "../../redux/actions/cleanCart";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const Checkout = () => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const dispatch = useDispatch();
+  const { id } = useParams();
+
+  const addToLibrary = async () => {
+    try {
+      const data = cart;
+      const response = await fetch(
+        fetch(`http://localhost:8080/api/auth/vg/${id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+      );
+      if (response.ok) {
+        const responseData = await response.json();
+      } else {
+        throw new Error("Errore nella richiesta POST");
+      }
+    } catch (error) {
+      console.log("Sono catch!", error);
+    }
+  };
 
   return (
     <Container className={`${styles.body}`}>
@@ -41,7 +64,12 @@ export const Checkout = () => {
         )}
         <Col className="d-flex justify-content-between align-items-center">
           {cart.length > 0 && (
-            <button className={`${styles.button}`}>Completa l'acquisto</button>
+            <button
+              onClick={() => addToLibrary()}
+              className={`${styles.button}`}
+            >
+              Completa l'acquisto
+            </button>
           )}
           {cart.length > 0 && (
             <p className={`${styles.total}`}>

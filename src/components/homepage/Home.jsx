@@ -20,7 +20,7 @@ const Home = () => {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/store" element={<Store />}></Route>
         <Route path="/store/:id" element={<SingleProduct />}></Route>
-        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/checkout/:id" element={<Checkout />}></Route>
       </Routes>
     </div>
   );
