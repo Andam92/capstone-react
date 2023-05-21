@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 
 export const Checkout = () => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
+  const token = useSelector((state) => state?.authReducer?.bearerToken);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -16,13 +17,14 @@ export const Checkout = () => {
     try {
       const data = cart;
       const response = await fetch(
-        `http://localhost:8080/api/auth/checkout/add/${id}`,
+        `http://localhost:8080/api/auth/checkout/add-one/${id}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authentication: `Bearer ${token}`,
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(cart[0]),
         }
       );
       if (response.ok) {
@@ -30,10 +32,10 @@ export const Checkout = () => {
         const responseData = await response.json();
         console.log(responseData);
       } else {
-        throw new Error("Errore nella richiesta POST");
+        throw new Error("Response not ok");
       }
     } catch (error) {
-      console.log("Sono catch!", error);
+      console.log("CATCH: ", error);
     }
   };
 
