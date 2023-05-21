@@ -3,7 +3,7 @@ import MyCarousel from "../MyCarousel";
 
 export const Main = () => {
   return (
-    <div>
+    <div style={{ marginTop: "110px" }}>
       <MyCarousel />
     </div>
   );

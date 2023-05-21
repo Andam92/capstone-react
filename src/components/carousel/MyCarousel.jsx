@@ -4,16 +4,20 @@ import styles from "./carousel.module.css";
 function MyCarousel() {
   return (
     <div className={`${styles.body}`}>
-      <Carousel>
+      <Carousel interval={null}>
         <Carousel.Item>
           <div className={`${styles.slide}`}>
             <div className={`${styles.slide_inner}`}>
-              <h3>PROVA</h3>
+              <img
+                src="https://drive.google.com/u/0/uc?id=1pn--Zld8P3MwE9l92Rr8jYu5YvhZn875"
+                alt=""
+              />
+              <h5 className="mt-5">DISPONIBILE ORA</h5>
+              <hr className="text-center" />
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Ratione rem molestias unde totam ex qui numquam natus incidunt
-                odio debitis quae id perferendis assumenda, praesentium impedit,
-                blanditiis laborum excepturi! Eum!
+                Dai il meglio di te. Nella Stagione 3 di Call of Duty: Warzone
+                2.0 puoi competere contro gli avversari più agguerriti e
+                dimostrare la tua superiorità.
               </p>
               <button className={`${styles.slide_button}`}>ACQUISTA ORA</button>
             </div>

@@ -32,6 +32,7 @@ const MyNavbar = () => {
     dispatch({
       type: "LOGOUT_USER",
     });
+    navigate("/");
   };
 
   useEffect(() => {
@@ -59,11 +60,16 @@ const MyNavbar = () => {
             onClick={() => setModale(false)}
           ></div>
         )}
-        <Navbar variant="dark" expand="lg" className={`${styles.mainNav} p-4`}>
+        <Navbar
+          fixed="top"
+          variant="dark"
+          expand="lg"
+          className={`${styles.mainNav} p-4`}
+        >
           <Container>
             <Navbar.Brand
               className={`${styles.navLink} ${styles.brand}`}
-              href="#home"
+              onClick={() => navigate("/")}
             >
               Logo_here
             </Navbar.Brand>

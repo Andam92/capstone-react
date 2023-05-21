@@ -1,48 +1,65 @@
-.body {
-  margin: auto;
-  width: 100%;
-  height: 300px;
-}
-
 .slide {
-  color: white;
-  padding: 120px;
-  padding-right: 200px;
+  background-image: url("https://drive.google.com/u/0/uc?id=1glxyfG_u5yRLOMxy0whwKmn8q9s9y5Zy");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   display: flex;
   flex-direction: row-reverse;
   position: relative;
-  width: 100%;
-  height: 800px;
-  background-image: url("http://placekitten.com/3000/800");
 }
 
 .slide_inner {
+  text-align: center;
+  position: absolute;
+  font-size: larger;
+  top: 20%;
+  right: 10%;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  background-color: transparent;
-  padding: 20px;
+  backdrop-filter: blur(5px);
+  background-color: #0c0a2081;
+  width: 400px;
+  height: auto;
+  border: 1px solid rgba(211, 211, 211, 0.452);
+  /* background-color: transparent; */
+  padding: 45px 60px 65px !important;
   text-align: justify;
-  /* border-radius: 30px;
-  border: 1px solid lightgray;
-  box-shadow: 0px 0px 8px 3px rgba(255, 255, 255, 0.75);
-  -webkit-box-shadow: 0px 0px 8px 3px rgba(255, 255, 255, 0.75);
-  -moz-box-shadow: 0px 0px 8px 3px rgba(255, 255, 255, 0.75); */
+  border-radius: 30px;
+  box-shadow: 10px 14px 13px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 14px 13px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 14px 13px 1px rgba(0, 0, 0, 0.75);
+}
+
+@media screen and (max-width: 990px) {
+  .slide_inner {
+    background-color: #0c0a20a6;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .slide_inner {
+    background-color: #0c0a20cc;
+    width: 80%;
+    height: auto;
+  }
 }
 
 .slide_button {
+  text-align: center;
   margin-top: 20px;
   color: white;
   padding: 10px;
   background-color: transparent;
   border: 0.5px solid white;
   border-radius: 20px;
+  transition: all 1s;
 }
 
 .slide_button:hover {
   background-color: #15171e;
   border: 0.5px solid rgb(0, 0, 0);
-  animation: button_hover ease 1s;
+
+  animation: button_hover ease 1s both;
 }
 
 @keyframes button_hover {

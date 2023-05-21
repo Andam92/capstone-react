@@ -21,14 +21,14 @@ export const Checkout = () => {
     try {
       const data = cart;
       const response = await fetch(
-        `http://localhost:8080/pippo/add-one/${id}`,
+        `http://localhost:8080/checkout/addAll/${id}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(cart[0]),
+          body: JSON.stringify(data),
         }
       );
       if (response.ok) {
