@@ -2,7 +2,7 @@ const getUsers = (username, token) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/checkout/find/${username}`,
+        `http://localhost:8080/api/auth/checkout/find/${username}`,
         {
           method: "GET",
           headers: {

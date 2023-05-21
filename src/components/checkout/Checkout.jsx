@@ -9,20 +9,24 @@ import { Link, useParams } from "react-router-dom";
 
 export const Checkout = () => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
-  const token = useSelector((state) => state?.authReducer?.bearerToken);
+  const token = useSelector(
+    (state) => state?.authReducer?.bearerToken?.accessToken
+  );
   const dispatch = useDispatch();
   const { id } = useParams();
 
   const addToLibrary = async () => {
+    console.log("TOKEN", token);
+    console.log("ID: ", id);
     try {
       const data = cart;
       const response = await fetch(
-        `http://localhost:8080/api/auth/checkout/add-one/${id}`,
+        `http://localhost:8080/pippo/add-one/${id}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authentication: `Bearer ${token}`,
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(cart[0]),
         }

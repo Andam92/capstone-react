@@ -27,11 +27,18 @@ const MyNavbar = () => {
   );
   const users = useSelector((state) => state?.usersReducer?.users);
 
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch({
+      type: "LOGOUT_USER",
+    });
+  };
+
   useEffect(() => {
     setTimeout(() => {
       dispatch(getUsers(username, token)).then(console.log(users));
     }, 100);
-  }, []);
+  }, [token]);
 
   return (
     <>
@@ -138,7 +145,7 @@ const MyNavbar = () => {
                             href="#/action-4"
                             onMouseOver={() => setOut(true)}
                             onMouseLeave={() => setOut(false)}
-                            onClick={() => dispatch(logout())}
+                            onClick={handleLogout}
                           >
                             <AiOutlineDoubleLeft
                               className={`${styles.out} ${
