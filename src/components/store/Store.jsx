@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Videogioco } from "../videogioco/Videogioco";
 import { PacmanLoader } from "react-spinners";
 import styles from "./store.module.css";
+import { StoreCarousel } from "../store_carousel/StoreCarousel";
 
 export const Store = () => {
   // HOOKS
+  const [search, setSearch] = useState("");
   const [prodotti, setProdotti] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState(0);
 
+  const libreria = useSelector(
+    (state) => state?.usersReducer?.users?.libreriaPersonale
+  );
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
@@ -25,10 +30,6 @@ export const Store = () => {
         const data = await response.json();
         console.log(data);
         setProdotti(data);
-        // dispatch({
-        //   type: "STORE_FETCH",
-        //   payload: data,
-        // });
       }
     } catch (error) {
       console.log(error);
@@ -38,6 +39,7 @@ export const Store = () => {
   // EFFECT
   useEffect(() => {
     if (prodotti.length === 0) {
+      console.log("LIBRERIA", libreria);
       recuperaProdotti();
       setInterval(() => {
         setIsLoading(false);
@@ -45,41 +47,146 @@ export const Store = () => {
     }
   }, []);
 
+  //CATEGORIE
+  const categorie = [
+    "RPG",
+    "AZIONE",
+    "FPS",
+    "NARRATIVO",
+    "ROMPICAPO",
+    "HORROR",
+    "STRATEGIA",
+    "MULTIPLAYER",
+    "SPORT",
+  ];
+
   return (
     <div className={`${styles.body}`}>
-      <h1>Giochi in evidenza</h1>
+      <Col className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <h1 className="mt-4">Giochi in evidenza</h1>
+        <Form className="mt-4">
+          <Form.Control
+            onChange={(e) => (setSearch(e.target.value), console.log(search))}
+            value={search}
+            type="text"
+            placeholder="Cerca un gioco"
+          />
+        </Form>
+      </Col>
       <div>
         <Row>
-          {/* {loading && <Spinner animation="grow" />} */}
-          {/* {
-            prodotti?.map(
-              (p, i) => (
-                <Videogioco
-                  key={i}
-                  titolo={p.titolo}
-                  immagine={p?.immagine}
-                ></Videogioco>
-              )
-
-              )} */}
           {isLoading && (
             <div className={`${styles.pacman}`}>
               <PacmanLoader color="#FFE900" />
             </div>
           )}
-          {prodotti?.map(
-            (p, i) => (
-              <Videogioco
-                key={i}
-                videogioco={p}
-                selected={selected}
-                setSelected={setSelected}
-              ></Videogioco>
-            )
-
-            /* <PacmanLoader color="#FFE900" /> */
-          )}
+          {!search
+            ? prodotti?.map((p, i) => (
+                <Videogioco
+                  key={i}
+                  videogioco={p}
+                  selected={selected}
+                  setSelected={setSelected}
+                ></Videogioco>
+              ))
+            : prodotti
+                .filter((videogioco) =>
+                  videogioco.titolo
+                    .toLowerCase()
+                    .includes(search.toLocaleLowerCase())
+                )
+                .map((p, i) => (
+                  <Videogioco
+                    key={i}
+                    videogioco={p}
+                    selected={selected}
+                    setSelected={setSelected}
+                  ></Videogioco>
+                ))}
         </Row>
+        {categorie.map((e) => (
+          <Row style={{ marginTop: "3rem" }}>
+            <h2>{e}</h2>
+            <StoreCarousel
+              selected={selected}
+              setSelected={setSelected}
+              categoria={e}
+              prodotti={prodotti}
+            />
+          </Row>
+        ))}
+        {/* <Row style={{ height: "500px" }}>
+          <h2>RPG</h2>
+          <RpgCarousel
+            categoria="RPG"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>AZIONE</h2>
+          <RpgCarousel
+            categoria="AZIONE"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>FPS</h2>
+          <RpgCarousel
+            categoria="FPS"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>NARRATIVO</h2>
+          <RpgCarousel
+            categoria="NARRATIVO"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>ROMPICAPO</h2>
+          <RpgCarousel
+            categoria="ROMPICAPO"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>HORROR</h2>
+          <RpgCarousel
+            categoria="HORROR"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>STRATEGIA</h2>
+          <RpgCarousel
+            categoria="STRATEGIA"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>MULTIPLAYER</h2>
+          <RpgCarousel
+            categoria="MULTIPLAYER"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row>
+        <Row style={{ height: "500px" }}>
+          <h2>SPORT</h2>
+          <RpgCarousel
+            categoria="SPORT"
+            prodotti={prodotti}
+            style={{ height: "500px" }}
+          />
+        </Row> */}
       </div>
     </div>
   );

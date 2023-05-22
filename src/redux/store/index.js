@@ -11,6 +11,7 @@ import prodottiReducer from "../reducers/prodotti";
 import wishReducer from "../reducers/whishlist";
 import cartReducer from "../reducers/cart";
 import usersReducer from "../reducers/users";
+import { libraryReducer } from "../reducers/library";
 
 // const store = configureStore({reducer: tokenReducer});
 

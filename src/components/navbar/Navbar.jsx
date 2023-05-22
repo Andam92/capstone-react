@@ -84,19 +84,19 @@ const MyNavbar = () => {
                     STORE
                   </Nav.Link>
                   <Nav.Link
-                    className={`${styles.navLink}`}
-                    style={{ marginRight: "4rem" }}
-                    eventKey="link-2"
-                  >
-                    ASSISTENZA
-                  </Nav.Link>
-
-                  <Nav.Link
                     onClick={() => handleShow()}
                     className={`${styles.navLink}`}
                   >
                     WISHLIST
                   </Nav.Link>
+                  {token && (
+                    <Nav.Link
+                      onClick={() => navigate(`/library/${users.id}`)}
+                      className={`${styles.navLink}`}
+                    >
+                      LIBRERIA
+                    </Nav.Link>
+                  )}
                 </div>
                 <div className="d-flex">
                   {token && (

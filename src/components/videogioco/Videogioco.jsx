@@ -20,8 +20,19 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
+  const libreria = useSelector(
+    (state) => state?.usersReducer?.users?.libreriaPersonale
+  );
   const cart = useSelector((state) => state?.cartReducer?.cart);
   //const [id] = useState(props.id);
+
+  const inLibrary = ({ titolo }) => {
+    const arrayTitoli = libreria?.map((v) => v?.titolo);
+    if (arrayTitoli?.includes(titolo)) {
+      return true;
+    }
+    return false;
+  };
 
   // HANDLE NAVIGATE
   const handleNavigate = () => {
@@ -44,7 +55,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
 
   return (
     <>
-      <Col xs={12} sm={6} lg={4} xl={3} className="mt-3 px-4">
+      <Col xs={12} md={6} lg={4} xl={3} className="mt-3 px-4">
         <Card
           className={`${
             selected === 0 || selected === videogioco.id
@@ -76,13 +87,16 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
               </Card.Text>
             </div>
             <div className="d-flex justify-content-between align-items-center mt-3">
-              {!show ? (
+              {!show && !inLibrary(videogioco) ? (
                 <button
-                  onClick={() => (
-                    dispatch(addToCart(videogioco)),
-                    setShow(true),
-                    console.log(cart)
-                  )}
+                  onClick={() => {
+                    if (token) {
+                      dispatch(addToCart(videogioco));
+                    } else {
+                      setAlert(true);
+                    }
+                    setShow(true);
+                  }}
                   onMouseEnter={() => setHover(true)}
                   onMouseLeave={() => setHover(false)}
                   className={`${styles.button}`}
@@ -97,7 +111,9 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
                   {!show && <span>Acquista</span>}
                 </button>
               ) : (
-                <MdDone />
+                <div className={`${styles.button}`}>
+                  <MdDone />
+                </div>
               )}
               {!like && (
                 <FaRegHeart
@@ -121,6 +137,9 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
                 <Link to={"/login"}>se non hai effettato il login!</Link>
               </Alert>
             )}
+            {/* <button onClick={() => console.log(inLibrary(videogioco))}>
+              controllo
+            </button> */}
           </Card.Body>
         </Card>
       </Col>
