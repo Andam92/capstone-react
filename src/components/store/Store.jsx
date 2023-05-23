@@ -5,6 +5,8 @@ import { Videogioco } from "../videogioco/Videogioco";
 import { PacmanLoader } from "react-spinners";
 import styles from "./store.module.css";
 import { StoreCarousel } from "../store_carousel/StoreCarousel";
+import MyPopup from "../videogioco/MyPopup";
+import { Prova } from "../prova/Prova";
 
 export const Store = () => {
   // HOOKS
@@ -12,6 +14,7 @@ export const Store = () => {
   const [prodotti, setProdotti] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState(0);
+  const [pippo, setPippo] = useState(0);
 
   const libreria = useSelector(
     (state) => state?.usersReducer?.users?.libreriaPersonale
@@ -64,6 +67,14 @@ export const Store = () => {
     <div className={`${styles.body}`}>
       <Col className="d-flex flex-column flex-md-row justify-content-between align-items-center">
         <h1 className="mt-4">Giochi in evidenza</h1>
+        <button
+          onClick={() => {
+            console.log(pippo);
+            setPippo("pippo");
+          }}
+        >
+          check
+        </button>
         <Form className="mt-4">
           <Form.Control
             onChange={(e) => (setSearch(e.target.value), console.log(search))}
@@ -82,12 +93,16 @@ export const Store = () => {
           )}
           {!search
             ? prodotti?.map((p, i) => (
-                <Videogioco
-                  key={i}
-                  videogioco={p}
-                  selected={selected}
-                  setSelected={setSelected}
-                ></Videogioco>
+                <>
+                  <Prova
+                    key={i}
+                    videogioco={p}
+                    selected={selected}
+                    setSelected={setSelected}
+                    setPippo={setPippo}
+                    pippo={pippo}
+                  ></Prova>
+                </>
               ))
             : prodotti
                 .filter((videogioco) =>
@@ -96,12 +111,15 @@ export const Store = () => {
                     .includes(search.toLocaleLowerCase())
                 )
                 .map((p, i) => (
-                  <Videogioco
-                    key={i}
-                    videogioco={p}
-                    selected={selected}
-                    setSelected={setSelected}
-                  ></Videogioco>
+                  <>
+                    {/* <Videogioco
+                      key={i}
+                      videogioco={p}
+                      selected={selected}
+                      setSelected={setSelected}
+                      pippo={pippo}
+                    ></Videogioco> */}
+                  </>
                 ))}
         </Row>
         {categorie.map((e) => (
