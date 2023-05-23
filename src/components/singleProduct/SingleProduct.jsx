@@ -46,7 +46,9 @@ export const SingleProduct = () => {
       ></div>
       <Container className={`${styles.body}`}>
         <Row>
-          <h1 className={`${styles.text} mt-3`}>{prodotto?.titolo}</h1>
+          <h1 style={{ marginTop: "110px" }} className={`${styles.text}`}>
+            {prodotto?.titolo}
+          </h1>
           <div className={`${styles.img_container}`}>
             <Image
               fluid={true}

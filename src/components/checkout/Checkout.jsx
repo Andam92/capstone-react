@@ -35,6 +35,10 @@ export const Checkout = () => {
         console.log(response);
         const responseData = await response.json();
         console.log(responseData);
+        console.log("PIPONE", cart);
+        dispatch({
+          type: "CLEAN_CART",
+        });
       } else {
         throw new Error("Response not ok");
       }

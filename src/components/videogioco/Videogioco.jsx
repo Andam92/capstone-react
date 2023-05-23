@@ -26,6 +26,14 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
   //const [id] = useState(props.id);
 
+  const inCart = ({ titolo }) => {
+    const arrayTitoli = cart?.map((v) => v?.titolo);
+    if (arrayTitoli?.includes(titolo)) {
+      return true;
+    }
+    return false;
+  };
+
   const inLibrary = ({ titolo }) => {
     const arrayTitoli = libreria?.map((v) => v?.titolo);
     if (arrayTitoli?.includes(titolo)) {
@@ -46,11 +54,22 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
     }
   };
 
-  // HANDLE Click-DISPATCH
+  // HANDLE Click-DISPATCH-Wish
   const handleClick = () => {
     token ? dispatch(addToWish(videogioco)) : setAlert(true);
     // console.log(videogioco);
     console.log(wish);
+  };
+
+  // HANDLE Click-shop
+  const handleClickShop = (e) => {
+    if (token && !inLibrary(videogioco)) {
+      dispatch(addToCart(videogioco));
+      setShow(true);
+    } else if (!token) {
+      e.preventDefault();
+      setAlert(true);
+    }
   };
 
   return (
@@ -87,16 +106,9 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
               </Card.Text>
             </div>
             <div className="d-flex justify-content-between align-items-center mt-3">
-              {!show && !inLibrary(videogioco) ? (
+              {!show && !inLibrary(videogioco) && (
                 <button
-                  onClick={() => {
-                    if (token) {
-                      dispatch(addToCart(videogioco));
-                    } else {
-                      setAlert(true);
-                    }
-                    setShow(true);
-                  }}
+                  onClick={handleClickShop}
                   onMouseEnter={() => setHover(true)}
                   onMouseLeave={() => setHover(false)}
                   className={`${styles.button}`}
@@ -108,13 +120,17 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
                     style={{ marginRight: "10px" }}
                   />
 
-                  {!show && <span>Acquista</span>}
+                  {(!show && <span>Acquista</span>) || (
+                    <span>Già acquistato</span>
+                  )}
                 </button>
-              ) : (
-                <div className={`${styles.button}`}>
-                  <MdDone />
-                </div>
-              )}
+              )}{" "}
+              {inLibrary(videogioco) ||
+                (inCart(videogioco) && (
+                  <div className={`${styles.button}`}>
+                    <MdDone />
+                  </div>
+                ))}
               {!like && (
                 <FaRegHeart
                   className={`${styles.heart_icon}`}
