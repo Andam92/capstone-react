@@ -1,5 +1,5 @@
 .custom-background {
-  background-color: RGBA(21, 40, 85, 0.7) !important;
+  background-color: RGBA(21, 40, 85, 0.6) !important;
   backdrop-filter: blur(5px);
   width: 36vw !important;
 }

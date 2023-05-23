@@ -3,15 +3,18 @@ import { Col, Row, Spinner } from "react-bootstrap";
 import styles from "./item.module.css";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/actions/addCart";
 
 const Item = ({ prodotto, loading }) => {
   const dispatch = useDispatch();
 
-  // const handleDelete = () => {
-  //   dispatch({
-  //     type: "DELETE_FROM_CART",
-  //     payload: prodotto,
-  //   });
+  const handleClick = () => {
+    dispatch(addToCart(prodotto));
+    dispatch({
+      type: "DELETE_FROM_WISH",
+      payload: prodotto,
+    });
+  };
 
   return (
     <div>
@@ -34,7 +37,11 @@ const Item = ({ prodotto, loading }) => {
           <p className="fs-5">{prodotto.titolo}</p>
           <span className="fs-6">€ {prodotto.prezzo}</span>
           <div className="d-flex align-items-center justify-content-between">
-            <button className={`${styles.button_buy} rounded`} size="sm">
+            <button
+              onClick={handleClick}
+              className={`${styles.button_buy} rounded`}
+              size="sm"
+            >
               Acquista
             </button>
             <AiFillDelete

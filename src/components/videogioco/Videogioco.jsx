@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Card, Col } from "react-bootstrap";
 import styles from "./videogioco.module.css";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
@@ -14,6 +14,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const [show, setShow] = useState(false);
   const [like, setLike] = useState(false);
   const [alert, setAlert] = useState(false);
+  const [checkWish, setCheckWish] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const wish = useSelector((state) => state?.wishReducer?.wish);
@@ -24,7 +25,15 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
     (state) => state?.usersReducer?.users?.libreriaPersonale
   );
   const cart = useSelector((state) => state?.cartReducer?.cart);
-  //const [id] = useState(props.id);
+  const id = useSelector((state) => state?.usersReducer?.users?.id);
+
+  const inWish = ({ titolo }) => {
+    const arrayTitoli = wish?.map((v) => v?.titolo);
+    if (arrayTitoli.includes(titolo)) {
+      return true;
+    }
+    return false;
+  };
 
   const inCart = ({ titolo }) => {
     const arrayTitoli = cart?.map((v) => v?.titolo);
@@ -63,7 +72,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
 
   // HANDLE Click-shop
   const handleClickShop = (e) => {
-    if (token && !inLibrary(videogioco)) {
+    if (token && !inLibrary(videogioco) && !inCart(videogioco)) {
       dispatch(addToCart(videogioco));
       setShow(true);
     } else if (!token) {
@@ -71,6 +80,13 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
       setAlert(true);
     }
   };
+
+  useEffect(() => {
+    console.log("Questo è useEffect con checkWish");
+    if (!inWish(videogioco)) {
+      setCheckWish(false);
+    }
+  }, [wish]);
 
   return (
     <>
@@ -105,48 +121,100 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
                 the bulk of the card's content.
               </Card.Text>
             </div>
-            <div className="d-flex justify-content-between align-items-center mt-3">
-              {!show && !inLibrary(videogioco) && (
-                <button
-                  onClick={handleClickShop}
-                  onMouseEnter={() => setHover(true)}
-                  onMouseLeave={() => setHover(false)}
-                  className={`${styles.button}`}
-                >
-                  <FaShoppingCart
-                    className={`${!hover && styles.cart} ${
-                      hover && styles.cartHover
-                    }`}
-                    style={{ marginRight: "10px" }}
-                  />
 
-                  {(!show && <span>Acquista</span>) || (
-                    <span>Già acquistato</span>
-                  )}
-                </button>
-              )}{" "}
-              {inLibrary(videogioco) ||
-                (inCart(videogioco) && (
-                  <div className={`${styles.button}`}>
-                    <MdDone />
-                  </div>
-                ))}
-              {!like && (
-                <FaRegHeart
-                  className={`${styles.heart_icon}`}
-                  onClick={() => (setLike(!like), handleClick())}
-                />
+            <div className="d-flex justify-content-between align-items-center">
+              {!inLibrary(videogioco) && (
+                <div className="d-flex justify-content-between align-items-center">
+                  <button
+                    onClick={handleClickShop}
+                    onMouseEnter={() => setHover(true)}
+                    onMouseLeave={() => setHover(false)}
+                    className={`${styles.button}`}
+                  >
+                    <FaShoppingCart
+                      className={`${!hover && styles.cart} ${
+                        hover && styles.cartHover
+                      }`}
+                      style={{ marginRight: "10px" }}
+                    />
+
+                    {!inCart(videogioco) && <span>Acquista</span>}
+
+                    {inCart(videogioco) && (
+                      <span onClick={() => navigate(`/checkout/${id}`)}>
+                        Nel carrello
+                      </span>
+                    )}
+                  </button>{" "}
+                </div>
               )}
-              {like && (
-                <FaHeart
-                  className={`${styles.heart_icon}`}
-                  onClick={() => (
-                    setLike(!like),
-                    dispatch({ type: "DELETE_FROM_WISH", payload: videogioco })
-                  )}
-                />
+              {inLibrary(videogioco) && (
+                <>
+                  <p
+                    style={{ textAlign: "center" }}
+                    className={`${styles.inLibrary}`}
+                  >
+                    In libreria
+                  </p>
+                </>
               )}
+              <div>
+                {!checkWish && (
+                  <FaRegHeart
+                    className={`${styles.heart_icon}`}
+                    onClick={() => {
+                      setLike(like);
+                      if (!inWish(videogioco)) {
+                        setCheckWish(true);
+                      }
+                      handleClick();
+                    }}
+                  />
+                )}
+
+                {checkWish && (
+                  <FaHeart
+                    className={`${styles.heart_icon}`}
+                    onClick={() => {
+                      if (inWish(videogioco)) {
+                        setCheckWish(false);
+                      }
+                      setLike(!like);
+                      dispatch({
+                        type: "DELETE_FROM_WISH",
+                        payload: videogioco,
+                      });
+                    }}
+                  />
+                )}
+              </div>
             </div>
+
+            {/* {inLibrary(videogioco) && (
+                <span className={`${styles.button}`}>In libreria</span>
+              )}
+              {!inCart(videogioco) && !inLibrary(videogioco) && (
+                <div>
+                  {!like && !inWish(videogioco) ? (
+                    <FaRegHeart
+                      className={`${styles.heart_icon}`}
+                      onClick={() => (setLike(!like), handleClick())}
+                    />
+                  ) : (
+                    <FaHeart
+                      className={`${styles.heart_icon}`}
+                      onClick={() => (
+                        setLike(!like),
+                        dispatch({
+                          type: "DELETE_FROM_WISH",
+                          payload: videogioco,
+                        })
+                      )}
+                    />
+                  )}
+                </div>
+              )} */}
+
             {alert && (
               <Alert key="danger" variant="danger">
                 Non puoi fare acquisti{" "}

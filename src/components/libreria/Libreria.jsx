@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import styles from "./libreria.module.css";
+import { Item } from "./Item";
 
 export const Libreria = () => {
   const token = useSelector(
@@ -38,16 +40,11 @@ export const Libreria = () => {
   }, []);
 
   return (
-    <Container style={{ marginTop: "110px" }}>
+    <Container className={`${styles.body}`} style={{ marginTop: "110px" }}>
       <Row>
-        <Col>
-          <p>ID: {id}</p>
-          <ul>
-            {libreria?.map((l, i) => (
-              <li>{l.titolo}</li>
-            ))}
-          </ul>
-        </Col>
+        {libreria?.map((l, i) => (
+          <Item key={i} videogioco={l} />
+        ))}
       </Row>
     </Container>
   );

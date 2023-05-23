@@ -35,7 +35,7 @@ export const Checkout = () => {
         console.log(response);
         const responseData = await response.json();
         console.log(responseData);
-        console.log("PIPONE", cart);
+        console.log("CART", cart);
         dispatch({
           type: "CLEAN_CART",
         });
