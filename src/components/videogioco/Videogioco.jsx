@@ -27,25 +27,25 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const id = useSelector((state) => state?.usersReducer?.users?.id);
 
-  const inWish = ({ titolo }) => {
+  const inWish = (videogioco) => {
     const arrayTitoli = wish?.map((v) => v?.titolo);
-    if (arrayTitoli.includes(titolo)) {
+    if (arrayTitoli.includes(videogioco?.titolo)) {
       return true;
     }
     return false;
   };
 
-  const inCart = ({ titolo }) => {
+  const inCart = (videogioco) => {
     const arrayTitoli = cart?.map((v) => v?.titolo);
-    if (arrayTitoli?.includes(titolo)) {
+    if (arrayTitoli?.includes(videogioco?.titolo)) {
       return true;
     }
     return false;
   };
 
-  const inLibrary = ({ titolo }) => {
+  const inLibrary = (videogioco) => {
     const arrayTitoli = libreria?.map((v) => v?.titolo);
-    if (arrayTitoli?.includes(titolo)) {
+    if (arrayTitoli?.includes(videogioco?.titolo)) {
       return true;
     }
     return false;
