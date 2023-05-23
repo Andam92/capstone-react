@@ -19,6 +19,7 @@ export const Store = () => {
   const libreria = useSelector(
     (state) => state?.usersReducer?.users?.libreriaPersonale
   );
+
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
@@ -41,6 +42,7 @@ export const Store = () => {
 
   // EFFECT
   useEffect(() => {
+    console.log(libreria);
     if (prodotti.length === 0) {
       console.log("LIBRERIA", libreria);
       recuperaProdotti();

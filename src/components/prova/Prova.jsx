@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Card, Col } from "react-bootstrap";
-import styles from "../prova/prova.module.css";
+import styles from "../prova/myStyle.module.css";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
-import { MdDone } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import addToWish from "../../redux/actions/addWish";
@@ -16,8 +15,7 @@ export const Prova = ({
   pippo,
   setPippo,
 }) => {
-  const [prova, setProva] = useState(false);
-
+  const [isInLibrary, setIsInLibrary] = useState(false);
   const [show, setShow] = useState(false);
   const [like, setLike] = useState(false);
   const [alert, setAlert] = useState(false);
@@ -28,34 +26,33 @@ export const Prova = ({
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
-  const libreria = useSelector(
-    (state) => state?.usersReducer?.users?.libreriaPersonale
-  );
+  const libreria = useSelector((state) => state?.libraryReducer?.library);
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const id = useSelector((state) => state?.usersReducer?.users?.id);
 
-  const inWish = (titolo) => {
+  const inWish = (videogioco) => {
     const arrayTitoli = wish?.map((v) => v?.titolo);
-    if (arrayTitoli.includes(titolo)) {
+    if (arrayTitoli.includes(videogioco?.titolo)) {
       return true;
     }
     return false;
   };
 
-  const inCart = (titolo) => {
+  const inCart = (videogioco) => {
     const arrayTitoli = cart?.map((v) => v?.titolo);
-    if (arrayTitoli?.includes(titolo)) {
+    if (arrayTitoli?.includes(videogioco?.titolo)) {
       return true;
     }
     return false;
   };
 
-  const inLibrary = (titolo) => {
+  const inLibrary = (videogioco) => {
     const arrayTitoli = libreria?.map((v) => v?.titolo);
-    if (arrayTitoli?.includes(titolo)) {
+    if (arrayTitoli?.includes(videogioco?.titolo)) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   };
 
   // HANDLE MOUSE ENTER
@@ -85,11 +82,7 @@ export const Prova = ({
 
   // HANDLE Click-shop
   const handleClickShop = (e) => {
-    if (
-      token &&
-      !inLibrary(videogioco?.titolo) &&
-      !inCart(videogioco?.titolo)
-    ) {
+    if (token && !inCart(videogioco)) {
       dispatch(addToCart(videogioco));
       setShow(true);
     } else if (!token) {
@@ -99,11 +92,16 @@ export const Prova = ({
   };
 
   useEffect(() => {
-    console.log("Questo è useEffect con checkWish");
-    if (!inWish(videogioco?.titolo)) {
+    if (!inWish(videogioco)) {
       setCheckWish(false);
     }
   }, [wish]);
+
+  useEffect(() => {
+    if (inLibrary(videogioco)) {
+      setIsInLibrary(true);
+    }
+  }, [libreria]);
 
   return (
     <>
@@ -117,8 +115,8 @@ export const Prova = ({
           // console.log(selected === videogioco.id);
           // console.log(selected);
 
-          className={`${pippo === 0 && styles.body} ${
-            pippo !== videogioco?.id && styles.body_opacity
+          className={`${styles.body} ${
+            pippo === videogioco?.id && styles.body_opacity
           }`}
           // onMouseLeave={() => setSelected(0)}
         >
@@ -138,17 +136,19 @@ export const Prova = ({
               >
                 {videogioco?.titolo}
               </Card.Title>
+
               <Card.Text>
                 Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                the bulk of the card's content.{" "}
+                <button onClick={() => console.log(libreria)}>libreria</button>
               </Card.Text>
             </div>
 
             <div className="d-flex justify-content-between align-items-center">
-              {!inLibrary(videogioco?.titolo) && (
+              {!inLibrary(videogioco) && (
                 <div className="d-flex justify-content-between align-items-center">
                   <button
-                    onClick={handleClickShop}
+                    onClick={(e) => handleClickShop(e)}
                     // onMouseEnter={() => handleMouseEnter()}
                     // onMouseLeave={() => setHover(false)}
                     className={`${styles.button}`}
@@ -158,9 +158,9 @@ export const Prova = ({
                       style={{ marginRight: "10px" }}
                     />
 
-                    {!inCart(videogioco?.titolo) && <span>Acquista</span>}
-
-                    {inCart(videogioco?.titolo) && (
+                    {!inCart(videogioco) ? (
+                      <span>Acquista</span>
+                    ) : (
                       <span onClick={() => navigate(`/checkout/${id}`)}>
                         Nel carrello
                       </span>
@@ -168,16 +168,15 @@ export const Prova = ({
                   </button>{" "}
                 </div>
               )}
-              {inLibrary(videogioco?.titolo) && (
-                <>
-                  <p
-                    style={{ textAlign: "center" }}
-                    className={`${styles.inLibrary}`}
-                  >
-                    In libreria
-                  </p>
-                </>
+              {inLibrary(videogioco) && (
+                <p
+                  style={{ textAlign: "center" }}
+                  className={`${styles.inLibrary}`}
+                >
+                  In libreria
+                </p>
               )}
+
               <div>
                 {!checkWish && (
                   <FaRegHeart

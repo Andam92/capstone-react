@@ -6,12 +6,15 @@ import { Item } from "./Item";
 import { AiFillDelete } from "react-icons/ai";
 import { cleanCart } from "../../redux/actions/cleanCart";
 import { Link, useParams } from "react-router-dom";
+import getUsers from "../../redux/actions/getUsers";
+import { recuperaLibreria } from "../../redux/actions/addLibrary";
 
 export const Checkout = () => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
+  const username = useSelector((state) => state?.usersReducer?.users?.username);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -47,7 +50,9 @@ export const Checkout = () => {
     }
   };
 
-  useEffect(() => console.log(cart), [cart]);
+  useEffect(() => {
+    dispatch(recuperaLibreria(id, token));
+  }, [cart]);
 
   return (
     <Container className={`${styles.body}`}>

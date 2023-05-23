@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./libreria.module.css";
 import { Item } from "./Item";
+import { recuperaLibreria } from "../../redux/actions/addLibrary";
 
 export const Libreria = () => {
   const token = useSelector(
@@ -12,26 +13,8 @@ export const Libreria = () => {
   const libreria = useSelector(
     (state) => state?.usersReducer?.users?.libreriaPersonale
   );
-  const { id } = useParams();
-  const [library, setLibrary] = useState([]);
 
-  // RECUPERO LIBRERIA UTENTE
-  const recuperaLibreria = async (id, token) => {
-    console.log(token);
-    try {
-      const response = await fetch(`http://localhost:8080/library/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { id } = useParams();
 
   useEffect(() => {
     if (token !== undefined) {

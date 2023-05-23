@@ -1,12 +1,12 @@
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
 }
 
 .body {
-  display: flex;
+  display: block;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 1000px !important;
   border: none !important;
   transition: all 0.9s ease;
 }
@@ -28,8 +28,7 @@
 }
 
 .title {
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
+ 
   text-overflow: ellipsis;
   overflow: auto;
   white-space: nowrap;
@@ -86,10 +85,7 @@
   transition-timing-function: ease-out;
 }
 
-/* .cart:hover {
-  transform: translate(0, -10px);
-  transition: all 0.3s;
-} */
+
 
 .button:hover .cart {
   transition: all 0.3s;
@@ -97,11 +93,7 @@
   transition-timing-function: ease-out;
 }
 
-/* .cartHover {
-  transition: all 0.3s;
-  transition-timing-function: ease-in;
-  transform: translate(0, -10px);
-} */
+
 
 .heart_icon {
   margin-top: 10px;
@@ -121,4 +113,4 @@
   background: -webkit-linear-gradient(180deg, #15171e 0%, #152855 100%);
   background: -moz-linear-gradient(180deg, #15171e 0%, #152855 100%);
   border: none;
-}
+} */
