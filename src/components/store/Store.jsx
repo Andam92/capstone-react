@@ -67,14 +67,6 @@ export const Store = () => {
     <div className={`${styles.body}`}>
       <Col className="d-flex flex-column flex-md-row justify-content-between align-items-center">
         <h1 className="mt-4">Giochi in evidenza</h1>
-        <button
-          onClick={() => {
-            console.log(pippo);
-            setPippo("pippo");
-          }}
-        >
-          check
-        </button>
         <Form className="mt-4">
           <Form.Control
             onChange={(e) => (setSearch(e.target.value), console.log(search))}
@@ -112,13 +104,14 @@ export const Store = () => {
                 )
                 .map((p, i) => (
                   <>
-                    {/* <Videogioco
+                    <Prova
                       key={i}
                       videogioco={p}
                       selected={selected}
                       setSelected={setSelected}
+                      setPippo={setPippo}
                       pippo={pippo}
-                    ></Videogioco> */}
+                    ></Prova>
                   </>
                 ))}
         </Row>
@@ -133,78 +126,6 @@ export const Store = () => {
             />
           </Row>
         ))}
-        {/* <Row style={{ height: "500px" }}>
-          <h2>RPG</h2>
-          <RpgCarousel
-            categoria="RPG"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>AZIONE</h2>
-          <RpgCarousel
-            categoria="AZIONE"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>FPS</h2>
-          <RpgCarousel
-            categoria="FPS"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>NARRATIVO</h2>
-          <RpgCarousel
-            categoria="NARRATIVO"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>ROMPICAPO</h2>
-          <RpgCarousel
-            categoria="ROMPICAPO"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>HORROR</h2>
-          <RpgCarousel
-            categoria="HORROR"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>STRATEGIA</h2>
-          <RpgCarousel
-            categoria="STRATEGIA"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>MULTIPLAYER</h2>
-          <RpgCarousel
-            categoria="MULTIPLAYER"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row>
-        <Row style={{ height: "500px" }}>
-          <h2>SPORT</h2>
-          <RpgCarousel
-            categoria="SPORT"
-            prodotti={prodotti}
-            style={{ height: "500px" }}
-          />
-        </Row> */}
       </div>
     </div>
   );

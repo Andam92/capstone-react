@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Card, Col } from "react-bootstrap";
-import styles from "../videogioco/videogioco.module.css";
+import styles from "../prova/prova.module.css";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
@@ -108,25 +108,6 @@ export const Prova = ({
   return (
     <>
       <Col xs={12} md={6} lg={4} xl={3} className="mt-3 px-4">
-        <button
-          className="text-dark"
-          onClick={() => {
-            setPippo("waifhnaowubfaw");
-            console.log(pippo);
-          }}
-        >
-          PIPPO {pippo}
-        </button>
-        <button
-          className="text-dark"
-          onClick={() => {
-            setSelected("ciao");
-            console.log(selected);
-          }}
-        >
-          {" "}
-          PROVA {selected}
-        </button>
         <Card
           onMouseEnter={() => handleOver()}
           // if (selected !== videogioco.id) {

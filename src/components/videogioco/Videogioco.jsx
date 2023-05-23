@@ -98,13 +98,6 @@ export const Videogioco = ({ videogioco, selected, setSelected, pippo }) => {
   return (
     <>
       <Col xs={12} md={6} lg={4} xl={3} className="mt-3 px-4">
-        <button
-          onClick={() => {
-            console.log(pippo);
-          }}
-        >
-          PIPPO CHECK
-        </button>
         <Card
           onMouseEnter={() => handleOver()}
           // if (selected !== videogioco.id) {
