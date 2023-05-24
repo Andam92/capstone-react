@@ -37,6 +37,16 @@
   max-width: 100%;
   flex-direction: column;
   overflow-y: auto;
+  animation: asideTranslate ease 1.3s;
+}
+
+@keyframes asideTranslate {
+  0% {
+    transform: translateX(-1000px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .searchbar {
