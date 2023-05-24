@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./libreria.module.css";
@@ -35,33 +35,36 @@ export const Libreria = () => {
   }, [selected]);
 
   return (
-    <div className={`${styles.body}`}>
+    <div style={{ marginTop: "110px" }} className={`${styles.body}`}>
       {" "}
       <div
         className={`${styles.background}`}
         style={{ backgroundImage: `url(${selected?.immagine})` }}
       >
         <div className={`${styles.overlay}`}>
-          <Container
-            fluid
-            className={`${styles.container} `}
-            style={{ marginTop: "110px" }}
-          >
-            <Row className={`${styles.aside}`}>
+          <Container fluid className={`${styles.container} `}>
+            <div className={`${styles.aside}`}>
               <Form className="mt-4">
-                <Form.Control
-                  onChange={(e) => setSearch(e.target.value)}
-                  value={search}
-                  type="text"
-                  className={`${styles.searchbar}`}
-                  placeholder={<FaSearch />}
-                />
+                <div className="position-relative ps-3">
+                  <div
+                    style={{ top: "7%", right: "27%" }}
+                    className="position-absolute"
+                  >
+                    <FaSearch className="text-dark" />
+                  </div>
+                  <Form.Control
+                    onChange={(e) => setSearch(e.target.value)}
+                    value={search}
+                    type="text"
+                    className={`${styles.searchbar}`}
+                    placeholder="Cerca..."
+                  />
+                </div>
               </Form>{" "}
-              <p>{selected?.titolo}</p>
               {libreria?.map((v, i) => (
                 <Item onSelect={handleSelection} key={i} videogioco={v} />
               ))}
-            </Row>
+            </div>
           </Container>
         </div>
       </div>
