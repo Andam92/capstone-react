@@ -73,11 +73,13 @@
   padding: 2rem;
   border-top: 1px solid rgba(248, 249, 250, 0.6);
   border-left: 1px solid rgba(248, 249, 250, 0.6);
-
   width: 55%;
-  background-color: rgba(23, 3, 54, 0.8);
+  background-color: rgba(23, 3, 54, 0.5);
   max-width: 1200px;
   backdrop-filter: blur(2px);
+  box-shadow: -5px 4px 5px 0px rgba(0, 0, 0, 0.77);
+  -webkit-box-shadow: -5px 4px 5px 0px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: -5px 4px 5px 0px rgba(0, 0, 0, 0.77);
 }
 
 @keyframes popup {
