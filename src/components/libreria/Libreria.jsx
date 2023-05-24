@@ -5,11 +5,10 @@ import { useParams } from "react-router-dom";
 import styles from "./libreria.module.css";
 import { Item } from "./Item";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
-import { FaSearch } from "react-icons/fa";
-import MyAccordion from "../accordion/MyAccordion";
 
 export const Libreria = () => {
   const [selected, setSelected] = useState(false);
+  const [deselect, setDeselect] = useState(false);
   const [search, setSearch] = useState("");
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
@@ -33,7 +32,7 @@ export const Libreria = () => {
   }, []);
 
   useEffect(() => {
-    console.log(selected.titolo);
+    setDeselect(!deselect);
   }, [selected]);
 
   return (
@@ -76,7 +75,7 @@ export const Libreria = () => {
           )}
           <Container fluid className={`${styles.container} `}>
             <div className={`${styles.aside}`}>
-              <Form className="mt-4">
+              <Form className="mt-4 ">
                 <div className="position-relative ps-3">
                   <div
                     style={{ top: "7%", right: "27%" }}

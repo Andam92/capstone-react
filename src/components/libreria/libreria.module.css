@@ -12,7 +12,7 @@
 }
 
 .overlay {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   height: 100%;
   position: relative;
   background: #170336;
@@ -63,7 +63,7 @@
   padding: 2rem;
   border-top: 1px solid rgba(248, 249, 250, 0.6);
   border-left: 1px solid rgba(248, 249, 250, 0.6);
-  height: 470px;
+
   width: 55%;
   background-color: rgba(23, 3, 54, 0.8);
   max-width: 1200px;
@@ -107,6 +107,12 @@
   100% {
     border: 0.5px solid rgb(0, 0, 0);
     background-color: #15171e;
+  }
+}
+
+@media screen and (max-width: 998px) {
+  .textBox {
+    display: none;
   }
 }
 
