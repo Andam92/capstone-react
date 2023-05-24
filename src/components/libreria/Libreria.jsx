@@ -6,6 +6,7 @@ import styles from "./libreria.module.css";
 import { Item } from "./Item";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
 import { FaSearch } from "react-icons/fa";
+import MyAccordion from "../accordion/MyAccordion";
 
 export const Libreria = () => {
   const [selected, setSelected] = useState(false);
@@ -21,6 +22,7 @@ export const Libreria = () => {
   const handleSelection = (selected) => {
     const selectedGame = libreria?.filter((element) => element === selected);
     setSelected(selectedGame[0]);
+
     console.log("Gioco selezionato -> ", selectedGame);
   };
 
@@ -42,6 +44,36 @@ export const Libreria = () => {
         style={{ backgroundImage: `url(${selected?.immagine})` }}
       >
         <div className={`${styles.overlay}`}>
+          {selected && (
+            <div className={`${styles.textBox}`}>
+              <div className={`${styles.textInner}`}>
+                <h1
+                  className="pb-2"
+                  style={{
+                    borderBottom: "1px solid white",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {selected?.titolo}
+                </h1>
+                <p style={{ marginBottom: "2rem" }}>{selected?.categoria}</p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Accusamus veniam placeat maiores voluptatem quis enim quam
+                  eligendi necessitatibus numquam sint odit voluptas deserunt
+                  ex, dolore doloremque velit sed fugiat dolorem.
+                </p>
+                <p className="mb-1">
+                  Sviluppato da:{" "}
+                  <span className="fw-bold">{selected?.casaProduzione}</span>
+                </p>
+                <p>
+                  Editore: <span className="fw-bold">{selected?.editore}</span>
+                </p>
+                <button className={`${styles.textPlay} mt-3`}>Play</button>
+              </div>
+            </div>
+          )}
           <Container fluid className={`${styles.container} `}>
             <div className={`${styles.aside}`}>
               <Form className="mt-4">
@@ -50,7 +82,7 @@ export const Libreria = () => {
                     style={{ top: "7%", right: "27%" }}
                     className="position-absolute"
                   >
-                    <FaSearch className="text-dark" />
+                    {/* <FaSearch className="text-dark" /> */}
                   </div>
                   <Form.Control
                     onChange={(e) => setSearch(e.target.value)}

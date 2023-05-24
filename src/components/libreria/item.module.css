@@ -3,19 +3,14 @@
   display: flex;
   align-items: center;
   padding-left: 10px;
-  transition: all 0.2s;
 }
 
 /* .row:hover {
   border-left: 5px solid rgb(0, 89, 255);
 } */
 
-.row:hover span {
-  color: #4ea8de;
-}
-
 .row span {
-  width: 100%;
+  width: fit-content;
   margin-left: 18px;
   font-size: large;
   cursor: pointer;
@@ -23,11 +18,12 @@
 }
 
 .row span:hover {
+  color: #4ea8de;
   transform: translateX(20px);
 }
 
 .roundImg {
-  width: 4rem;
+  width: 80px;
   border: 1px solid lightgray;
   aspect-ratio: 5/5;
   border-radius: 50%;
@@ -40,8 +36,8 @@
   object-fit: cover;
 }
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
   .roundImg {
     display: none;
   }
-}
+} */
