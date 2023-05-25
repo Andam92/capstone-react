@@ -7,6 +7,7 @@ import styles from "./store.module.css";
 import { StoreCarousel } from "../store_carousel/StoreCarousel";
 import MyPopup from "../videogioco/MyPopup";
 import { Prova } from "../prova/Prova";
+import { Chip } from "@mui/material";
 
 export const Store = () => {
   // HOOKS
@@ -52,6 +53,11 @@ export const Store = () => {
     }
   }, []);
 
+  //HANDLE CLICK CATEGORIE
+  const handleClick = () => {
+    console.log("Chip cliccata");
+  };
+
   //CATEGORIE
   const categorie = [
     "RPG",
@@ -78,6 +84,62 @@ export const Store = () => {
           />
         </Form>
       </Col>
+      <div>
+        <Chip
+          label="RPG"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="AZIONE"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="FPS"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="NARRATIVI"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="ROMPICAPO"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="HORROR"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="STRATEGIA"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="MULTIPLAYER"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+        <Chip
+          label="SPORT"
+          variant="outlined"
+          onClick={handleClick}
+          style={{ margin: "30px 15px 10px", padding: "2px 15px" }}
+        />
+      </div>
       <div>
         <Row>
           {isLoading && (

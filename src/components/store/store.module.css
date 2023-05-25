@@ -21,3 +21,14 @@
   align-items: center;
   justify-content: center;
 }
+/* 
+.accordionBody {
+  background-color: transparent !important;
+  backdrop-filter: blur(4px) !important;
+  z-index: 9999 !important;
+} */
+
+/* .accordion {
+  position: absolute;
+  z-index: 999999;
+} */
