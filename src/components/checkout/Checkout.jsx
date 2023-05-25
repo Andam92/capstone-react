@@ -78,7 +78,7 @@ export const Checkout = () => {
             </tbody>
           </Table>
         )}
-        {!cart && (
+        {!cart.length && !bought && (
           <div>
             <p>Non hai ancora nulla nel carrello!</p>
             <span style={{ fontSize: "larger" }}>
