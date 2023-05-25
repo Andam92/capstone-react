@@ -29,6 +29,9 @@ export const Libreria = () => {
     if (token !== undefined) {
       recuperaLibreria(id, token);
     }
+    if (!selected && libreria?.length > 0) {
+      handleSelection(libreria[0]);
+    }
   }, []);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./checkout.module.css";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import getUsers from "../../redux/actions/getUsers";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
 
 export const Checkout = () => {
+  const [bought, setBought] = useState(false);
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
@@ -57,11 +58,11 @@ export const Checkout = () => {
   return (
     <Container className={`${styles.body}`}>
       <Row className="text-center">
-        <h1>Il tuo carrello</h1>
+        <h1 className="mb-3">Il tuo carrello</h1>
       </Row>
       <Row className="flex-column">
-        <h2>Checkout</h2>
-        {cart && cart.length > 0 ? (
+        <h2 className="mb-3">Checkout</h2>
+        {cart && cart.length > 0 && (
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
@@ -76,16 +77,27 @@ export const Checkout = () => {
                 cart.map((prodotto) => <Item prodotto={prodotto} />)}
             </tbody>
           </Table>
-        ) : (
+        )}
+        {!cart && (
           <div>
-            <p>Non hai ancora nulla nel carrello </p>
-            <Link to={"/store"}>Visita lo Store</Link>
+            <p>Non hai ancora nulla nel carrello!</p>
+            <span style={{ fontSize: "larger" }}>
+              <Link to={"/store"}>Visita lo Store</Link>
+            </span>
           </div>
+        )}
+        {bought && (
+          <p className={`${styles.bought}`}>
+            Fatto! <span>Troverai i tuoi acquisti in libreria 👌</span>
+          </p>
         )}
         <Col className="d-flex justify-content-between align-items-center">
           {cart.length > 0 && (
             <button
-              onClick={() => addToLibrary()}
+              onClick={() => {
+                addToLibrary();
+                setBought(true);
+              }}
               className={`${styles.button}`}
             >
               Completa l'acquisto

@@ -15,6 +15,7 @@ export const Prova = ({
   pippo,
   setPippo,
 }) => {
+  const [addedToWish, setAddedToWish] = useState(false);
   const [isInLibrary, setIsInLibrary] = useState(false);
   const [show, setShow] = useState(false);
   const [like, setLike] = useState(false);
@@ -176,10 +177,10 @@ export const Prova = ({
                 </p>
               )}
 
-              <div>
+              <div style={{ position: "relative" }}>
                 {!checkWish && (
                   <FaRegHeart
-                    className={`${styles.heart_icon}`}
+                    className={`${styles.heart_icon} `}
                     onClick={() => {
                       setLike(like);
                       if (!inWish(videogioco?.titolo)) {
@@ -192,10 +193,15 @@ export const Prova = ({
 
                 {checkWish && (
                   <FaHeart
-                    className={`${styles.heart_icon}`}
+                    className={`${styles.heart_icon} ${
+                      addedToWish && styles.heart_icon_clicked
+                    } `}
                     onClick={() => {
                       if (inWish(videogioco?.titolo)) {
                         setCheckWish(false);
+                        setTimeout(() => {
+                          setAddedToWish(true);
+                        }, 500);
                       }
                       setLike(!like);
                       dispatch({
@@ -205,6 +211,11 @@ export const Prova = ({
                     }}
                   />
                 )}
+                {/* {addedToWish && (
+                  <div className={`${styles.addedToWishlist}`}>
+                    Aggiunto alla wishlist
+                  </div>
+                )} */}
               </div>
             </div>
 

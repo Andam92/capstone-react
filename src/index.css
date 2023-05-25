@@ -2,6 +2,14 @@
   color: whitesmoke;
 }
 
+body {
+  min-height: 100vh;
+  background: #15171e;
+  background: linear-gradient(180deg, #15171e 0%, #152855 100%);
+  background: -webkit-linear-gradient(180deg, #15171e 0%, #152855 100%);
+  background: -moz-linear-gradient(180deg, #15171e 0%, #152855 100%);
+}
+
 /* Nascondi la scrollbar predefinita */
 *::-webkit-scrollbar {
   width: 10px;

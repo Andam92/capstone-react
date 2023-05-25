@@ -1,6 +1,7 @@
 .body {
   height: 100vh;
   width: auto;
+  margin-top: 120px;
 }
 
 .button {
@@ -31,4 +32,15 @@
   margin-top: 1rem;
   padding: 5px 20px;
   background-color: #0c0a20;
+}
+
+.bought {
+  color: green;
+  font-size: large;
+  transform: translateY(20px);
+  transition: all 0.5s;
+}
+
+.bought span {
+  color: whitesmoke;
 }
