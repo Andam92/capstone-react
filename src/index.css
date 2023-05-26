@@ -3,6 +3,7 @@
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   background: #15171e;
   background: linear-gradient(180deg, #15171e 0%, #152855 100%);

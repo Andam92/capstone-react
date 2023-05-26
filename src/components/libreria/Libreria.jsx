@@ -59,12 +59,7 @@ export const Libreria = () => {
                   {selected?.titolo}
                 </h1>
                 <p style={{ marginBottom: "2rem" }}>{selected?.categoria}</p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Accusamus veniam placeat maiores voluptatem quis enim quam
-                  eligendi necessitatibus numquam sint odit voluptas deserunt
-                  ex, dolore doloremque velit sed fugiat dolorem.
-                </p>
+                <p>{selected?.descrizione}</p>
                 <p className="mb-1">
                   Sviluppato da:{" "}
                   <span className="fw-bold">{selected?.casaProduzione}</span>
@@ -95,9 +90,18 @@ export const Libreria = () => {
                   />
                 </div>
               </Form>{" "}
-              {libreria?.map((v, i) => (
-                <Item onSelect={handleSelection} key={i} videogioco={v} />
-              ))}
+              {!search &&
+                libreria?.map((v, i) => (
+                  <Item onSelect={handleSelection} key={i} videogioco={v} />
+                ))}
+              {search &&
+                libreria
+                  ?.filter((item) =>
+                    item.titolo.toLowerCase().includes(search.toLowerCase())
+                  )
+                  .map((v, i) => (
+                    <Item onSelect={handleSelection} key={i} videogioco={v} />
+                  ))}
             </div>
           </Container>
         </div>
