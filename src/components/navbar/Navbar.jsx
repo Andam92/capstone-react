@@ -32,7 +32,7 @@ const MyNavbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch({
-      type: "LOGOUT_USER",
+      type: "CLEAN_CART",
     });
     navigate("/");
   };

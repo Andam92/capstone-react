@@ -9,11 +9,11 @@
 }
 
 .formContainer {
-  max-width: 700px;
+  width: 700px;
   height: 500px;
   text-align: center;
-  width: 100%;
-  max-width: 35rem;
+  /* width: 100%;
+  max-width: 35rem; */
   background-color: #15171e;
   padding: 1rem 5rem;
 }
@@ -32,6 +32,10 @@
 
 @media screen and (max-width: 630px) {
   .formContainer {
-    padding: 18px;
+    width: 100%;
+    padding: 10px;
+  }
+  .loginContainer {
+    padding: 0 10px;
   }
 }

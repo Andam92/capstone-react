@@ -60,6 +60,13 @@ export const Login = () => {
           <h2 style={{ color: "white", marginBottom: "40px" }}>Accedi</h2>
           <Form.Group className="mb-3" controlId="username">
             <Form.Control
+              onClick={() => {
+                console.log("pippoooooooooo");
+                dispatch({
+                  type: "NOT_FOUND",
+                  payload: false,
+                });
+              }}
               required
               style={{
                 backgroundColor: "#2E2E34",
@@ -89,6 +96,13 @@ export const Login = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="password">
             <Form.Control
+              onClick={() => {
+                console.log("pippoooooooooo");
+                dispatch({
+                  type: "NOT_FOUND",
+                  payload: false,
+                });
+              }}
               required
               style={{ backgroundColor: "#2E2E34", color: "white" }}
               value={formPswValue}
@@ -128,7 +142,7 @@ export const Login = () => {
                 </span>
               </div>
             )}
-            {failedLogin &&  (
+            {failedLogin && (
               <Alert className="mt-2" key="danger" variant="danger">
                 Forse volevi
                 <span className="ms-1">
