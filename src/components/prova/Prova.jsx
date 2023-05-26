@@ -185,6 +185,9 @@ export const Prova = ({
                       setLike(like);
                       if (!inWish(videogioco?.titolo)) {
                         setCheckWish(true);
+                        setTimeout(() => {
+                          setAddedToWish(true);
+                        }, 100);
                       }
                       handleClick();
                     }}
@@ -195,13 +198,13 @@ export const Prova = ({
                   <FaHeart
                     className={`${styles.heart_icon} ${
                       addedToWish && styles.heart_icon_clicked
-                    } `}
+                    }  `}
                     onClick={() => {
                       if (inWish(videogioco?.titolo)) {
                         setCheckWish(false);
-                        setTimeout(() => {
-                          setAddedToWish(true);
-                        }, 500);
+                        // setTimeout(() => {
+                        //   setAddedToWish(true);
+                        // }, 500);
                       }
                       setLike(!like);
                       dispatch({
@@ -213,46 +216,17 @@ export const Prova = ({
                 )}
                 {/* {addedToWish && (
                   <div className={`${styles.addedToWishlist}`}>
-                    Aggiunto alla wishlist
+                    Aggiunto alla wishlist!
                   </div>
                 )} */}
               </div>
             </div>
-
-            {/* {inLibrary(videogioco) && (
-                <span className={`${styles.button}`}>In libreria</span>
-              )}
-              {!inCart(videogioco) && !inLibrary(videogioco) && (
-                <div>
-                  {!like && !inWish(videogioco) ? (
-                    <FaRegHeart
-                      className={`${styles.heart_icon}`}
-                      onClick={() => (setLike(!like), handleClick())}
-                    />
-                  ) : (
-                    <FaHeart
-                      className={`${styles.heart_icon}`}
-                      onClick={() => (
-                        setLike(!like),
-                        dispatch({
-                          type: "DELETE_FROM_WISH",
-                          payload: videogioco,
-                        })
-                      )}
-                    />
-                  )}
-                </div>
-              )} */}
-
             {alert && (
               <Alert key="danger" variant="danger">
                 Non puoi fare acquisti{" "}
                 <Link to={"/login"}>se non hai effettato il login!</Link>
               </Alert>
             )}
-            {/* <button onClick={() => console.log(inLibrary(videogioco))}>
-              controllo
-            </button> */}
           </Card.Body>
         </Card>
       </Col>

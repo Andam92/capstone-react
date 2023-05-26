@@ -37,7 +37,7 @@ export const SingleProduct = () => {
         style={{
           opacity: 0.1,
           width: "100vw",
-          height: "100%",
+          minHeight: "100%",
           position: "absolute",
           backgroundImage: `url(${prodotto?.immagine})`,
           backgroundSize: "cover",
@@ -92,7 +92,7 @@ export const SingleProduct = () => {
                   </span>{" "}
                   {prodotto?.dataPubblicazione}
                 </p>
-                <p>DESCRIZIONE_QUI</p>
+                <p>{prodotto?.descrizione}</p>
 
                 <p>
                   <button className={`${styles.button}`}>

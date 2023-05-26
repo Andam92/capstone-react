@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Videogioco } from "../videogioco/Videogioco";
+
 import { PacmanLoader } from "react-spinners";
 import styles from "./store.module.css";
-import { StoreCarousel } from "../store_carousel/StoreCarousel";
-import MyPopup from "../videogioco/MyPopup";
+
 import { Prova } from "../prova/Prova";
 import { Chip } from "@mui/material";
 
