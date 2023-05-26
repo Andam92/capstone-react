@@ -10,6 +10,7 @@ import { Store } from "../store/Store";
 import { SingleProduct } from "../singleProduct/SingleProduct";
 import { Checkout } from "../checkout/Checkout";
 import { Libreria } from "../libreria/Libreria";
+import NotFoundPage from "../not found page/NotFoundPage";
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
         <Route path="/store/:id" element={<SingleProduct />}></Route>
         <Route path="/checkout/:id" element={<Checkout />}></Route>
         <Route path="/library/:id" element={<Libreria />}></Route>
+        <Route path="/*" element={<NotFoundPage />}></Route>
       </Routes>
     </div>
   );

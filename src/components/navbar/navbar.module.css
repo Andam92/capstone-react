@@ -6,6 +6,7 @@
 .navLink {
   margin-right: 4rem;
   color: whitesmoke;
+  letter-spacing: 4px !important;
 }
 
 @media screen and (max-width: 360px) {
@@ -43,4 +44,51 @@
 
 .outHover {
   transform: translate(-0.3rem);
+}
+
+.cart {
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.cartContainer {
+  position: relative;
+  cursor: default;
+  margin-right: 40px;
+  margin-top: -10px;
+  width: 30px;
+  background-color: transparent;
+  padding: 8px 10px;
+}
+
+.cartCounter {
+  font-size: small;
+  position: absolute;
+  top: -12px;
+  left: 50px;
+  /* background-color: rgba(255, 255, 255, 0.233); */
+  border-radius: 50%;
+  /* padding: 2px 6px; */
+}
+
+.cartUpdated {
+  animation: cartAnimation 1s;
+  transform: scale(1);
+  color: white;
+}
+
+@keyframes cartAnimation {
+  0% {
+    color: white;
+    transform: scale(1);
+  }
+  50% {
+    color: rgb(56, 56, 255);
+    transform: scale(1.7);
+  }
+  100% {
+    color: white;
+    transform: scale(1);
+  }
 }

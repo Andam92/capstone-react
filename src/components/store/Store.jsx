@@ -153,17 +153,6 @@ export const Store = () => {
               </>
             ))}
         </Row>
-        {/* {categorie.map((e) => (
-          <Row style={{ marginTop: "3rem" }}>
-            <h2>{e}</h2>
-            <StoreCarousel
-              selected={selected}
-              setSelected={setSelected}
-              categoria={e}
-              prodotti={prodotti}
-            />
-          </Row>
-        ))} */}
       </div>
     </div>
   );

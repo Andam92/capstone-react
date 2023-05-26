@@ -14,6 +14,7 @@ const MyNavbar = () => {
   // HOOKS
   const [modale, setModale] = useState(false);
   const [showCarrello, setShowCarrello] = useState(false);
+  const [cartCounter, setCartCounter] = useState(false);
   const handleShow = () => setShowCarrello(true);
   const handleClose = () => setShowCarrello(false);
   const [out, setOut] = useState(false);
@@ -26,6 +27,7 @@ const MyNavbar = () => {
     (state) => state?.authReducer?.bearerToken?.username
   );
   const users = useSelector((state) => state?.usersReducer?.users);
+  const cart = useSelector((state) => state?.cartReducer?.cart);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -40,6 +42,13 @@ const MyNavbar = () => {
       dispatch(getUsers(username, token)).then(console.log(users));
     }, 100);
   }, [token]);
+
+  useEffect(() => {
+    setCartCounter(true);
+    setTimeout(() => {
+      setCartCounter(false);
+    }, 1000);
+  }, [cart?.length]);
 
   return (
     <>
@@ -102,11 +111,19 @@ const MyNavbar = () => {
                   {token && (
                     <Nav.Item>
                       <Nav.Link>
-                        <FaShoppingCart
-                          // onClick={() => handleShow()}
-                          style={{ marginRight: "10px", fontSize: "1.5rem" }}
-                          onClick={() => navigate(`/checkout/${users.id}`)}
-                        />
+                        <div className={`${styles.cartContainer}`}>
+                          <FaShoppingCart
+                            className={`${styles.cart}`}
+                            onClick={() => navigate(`/checkout/${users.id}`)}
+                          />
+                          <span
+                            className={`${styles.cartCounter} ${
+                              cartCounter && styles.cartUpdated
+                            }`}
+                          >
+                            {cart?.length}
+                          </span>
+                        </div>
                       </Nav.Link>
                     </Nav.Item>
                   )}
@@ -123,7 +140,7 @@ const MyNavbar = () => {
                         <FaUser
                           style={{ marginRight: "10px", color: "whitesmoke" }}
                         />
-                        <span className={`${styles.navLink}`}>ACCEDI</span>
+                        <span className={`${styles.navLink} `}>ACCEDI</span>
                       </Nav.Link>
                     ) : (
                       <Dropdown className={`${styles.down}`}>
@@ -136,7 +153,7 @@ const MyNavbar = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu variant="dark">
-                          <Dropdown.Item href="#/action-1" active>
+                          <Dropdown.Item href="#/action-1">
                             Profilo
                           </Dropdown.Item>
                           <Dropdown.Item

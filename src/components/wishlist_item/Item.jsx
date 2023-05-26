@@ -5,11 +5,12 @@ import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/addCart";
 
-const Item = ({ prodotto, loading }) => {
+const Item = ({ prodotto, loading, setAcquistato }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(addToCart(prodotto));
+    setAcquistato(true);
     dispatch({
       type: "DELETE_FROM_WISH",
       payload: prodotto,

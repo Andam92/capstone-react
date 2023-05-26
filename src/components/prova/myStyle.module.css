@@ -58,7 +58,6 @@
 }
 
 .button {
-  margin-top: 20px;
   color: white;
   padding: 10px 20px;
   background: #15171e;
@@ -125,7 +124,7 @@
 }
 
 .inLibrary {
-  margin: 20px 0 0;
+  margin: 0;
   color: white;
   padding: 10px 20px;
   background: #15171e;

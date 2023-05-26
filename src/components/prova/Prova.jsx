@@ -139,8 +139,7 @@ export const Prova = ({
               </Card.Title>
 
               <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.{" "}
+                <p>{videogioco?.prezzo} €</p>
               </Card.Text>
             </div>
 
@@ -231,9 +230,9 @@ export const Prova = ({
         </Card>
       </Col>
 
-      {show && (
+      {/* {show && (
         <MyPopup titolo={videogioco?.titolo} show={show} setShow={setShow} />
-      )}
+      )} */}
     </>
   );
 };
