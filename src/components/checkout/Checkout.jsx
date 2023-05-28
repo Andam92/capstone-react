@@ -8,6 +8,7 @@ import { cleanCart } from "../../redux/actions/cleanCart";
 import { Link, useParams } from "react-router-dom";
 import getUsers from "../../redux/actions/getUsers";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
+import PayPal from "../paypal/PayPal";
 
 export const Checkout = () => {
   const [bought, setBought] = useState(false);
@@ -124,6 +125,9 @@ export const Checkout = () => {
             />
           )}
         </Col>
+        {/* <Col>
+          <PayPal />
+        </Col> */}
         {/* {cart.length > 0 ? (
           cart.map((prodotto) => <Item prodotto={prodotto}></Item>)
         ) : (
