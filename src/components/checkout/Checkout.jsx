@@ -8,6 +8,7 @@ import { cleanCart } from "../../redux/actions/cleanCart";
 import { Link, useParams } from "react-router-dom";
 import getUsers from "../../redux/actions/getUsers";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export const Checkout = () => {
   const [bought, setBought] = useState(false);
@@ -124,11 +125,40 @@ export const Checkout = () => {
             />
           )}
         </Col>
-        {/* {cart.length > 0 ? (
-          cart.map((prodotto) => <Item prodotto={prodotto}></Item>)
-        ) : (
-          <p>Carrello vuoto!</p>
-        )} */}
+
+        <Col>
+          <PayPalScriptProvider
+            options={{
+              currency: "EUR",
+              "client-id":
+                "AeODpXNbQ7O0kmQDW0DxJoAaBboO_n9hLvFTemLayHQyD5wkCXAP9eRDZgJ4iAwWFnQzw42QtwDkMk2q",
+            }}
+          >
+            <PayPalButtons
+              createOrder={(data, actions) => {
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: `${cart.reduce(
+                          (acc, element) => acc + parseInt(element.prezzo),
+                          0
+                        )}`,
+                      },
+                    },
+                  ],
+                });
+              }}
+              onApprove={(data, actions) => {
+                addToLibrary();
+                setBought(true);
+                return actions.order.capture().then(function (details) {
+                  alert("Transazione andata a buon fine per " + username);
+                });
+              }}
+            />
+          </PayPalScriptProvider>
+        </Col>
       </Row>
     </Container>
   );

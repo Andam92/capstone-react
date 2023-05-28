@@ -124,7 +124,7 @@ export const Login = () => {
             )}
           </Form.Group>
           <div className="w-100 d-flex flex-column justify-content-center">
-            {!failedLogin && (
+            {
               <Button
                 className={`${styles.login_button}`}
                 variant="primary"
@@ -132,7 +132,7 @@ export const Login = () => {
               >
                 Accedi ora
               </Button>
-            )}
+            }
             {!token && !failedLogin && (
               <div style={{ color: "white", marginTop: "2rem" }}>
                 Non hai ancora un account?{" "}
