@@ -90,6 +90,11 @@ export const Libreria = () => {
                   />
                 </div>
               </Form>{" "}
+              {!libreria?.length && (
+                <p className="ms-3">
+                  Non hai ancora acquistato niente, la tua libreria è vuota!
+                </p>
+              )}
               {!search &&
                 libreria?.map((v, i) => (
                   <Item onSelect={handleSelection} key={i} videogioco={v} />

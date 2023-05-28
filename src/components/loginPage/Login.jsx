@@ -97,7 +97,6 @@ export const Login = () => {
           <Form.Group className="mb-3" controlId="password">
             <Form.Control
               onClick={() => {
-                console.log("pippoooooooooo");
                 dispatch({
                   type: "NOT_FOUND",
                   payload: false,

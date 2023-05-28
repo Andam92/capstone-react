@@ -56,11 +56,6 @@ export const Prova = ({
     }
   };
 
-  // HANDLE MOUSE ENTER
-  // const handleMouseEnter = () => {
-  //   setHover(true);
-  // };
-
   // HANDLE NAVIGATE
   const handleNavigate = () => {
     navigate(`/store/${videogioco?.id}`);
@@ -109,17 +104,9 @@ export const Prova = ({
       <Col xs={12} md={6} lg={4} xl={3} className="mt-3 px-4">
         <Card
           onMouseEnter={() => handleOver()}
-          // if (selected !== videogioco.id) {
-          //   console.log(selected);
-          //   setSelected(videogioco.id);
-          // }
-          // console.log(selected === videogioco.id);
-          // console.log(selected);
-
           className={`${styles.body} ${
             pippo === videogioco?.id && styles.body_opacity
           }`}
-          // onMouseLeave={() => setSelected(0)}
         >
           <div>
             <Card.Img
@@ -148,8 +135,6 @@ export const Prova = ({
                 <div className="d-flex justify-content-between align-items-center">
                   <button
                     onClick={(e) => handleClickShop(e)}
-                    // onMouseEnter={() => handleMouseEnter()}
-                    // onMouseLeave={() => setHover(false)}
                     className={`${styles.button}`}
                   >
                     <FaShoppingCart
@@ -161,7 +146,7 @@ export const Prova = ({
                       <span>Acquista</span>
                     ) : (
                       <span onClick={() => navigate(`/checkout/${id}`)}>
-                        Nel carrello
+                        Nel carrello!
                       </span>
                     )}
                   </button>{" "}
