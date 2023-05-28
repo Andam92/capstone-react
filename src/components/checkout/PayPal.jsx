@@ -82,7 +82,9 @@ const PayPal = ({
     <PayPalScriptProvider
       options={{
         currency: "EUR",
-        "client-id": process.env.CLIENT_ID,
+        // "client-id": process.env.CLIENT_ID,
+        "client-id":
+          "AeODpXNbQ7O0kmQDW0DxJoAaBboO_n9hLvFTemLayHQyD5wkCXAP9eRDZgJ4iAwWFnQzw42QtwDkMk2q",
       }}
     >
       <PayPalButtons

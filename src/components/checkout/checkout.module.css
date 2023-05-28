@@ -56,4 +56,15 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  transform: translateY(1000px);
+  animation: paypal 1s forwards;
+}
+
+@keyframes paypal {
+  0% {
+    transform: translateY(1000px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }

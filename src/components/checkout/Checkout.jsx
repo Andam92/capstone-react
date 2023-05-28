@@ -149,7 +149,7 @@ export const Checkout = () => {
               className={`${styles.button}`}
               type="submit"
             >
-              Invia
+              Continua su PayPal...
             </button>
           </Form>
         )}
