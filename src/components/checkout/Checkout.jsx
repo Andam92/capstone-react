@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./checkout.module.css";
-import { Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Item } from "./Item";
 import { AiFillDelete } from "react-icons/ai";
@@ -9,9 +9,16 @@ import { Link, useParams } from "react-router-dom";
 import getUsers from "../../redux/actions/getUsers";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { ShopTwo } from "@mui/icons-material";
+import PayPal from "./PayPal";
 
 export const Checkout = () => {
+  const [showForm, setShowForm] = useState(false);
+  const [giftUser, setGiftUser] = useState("");
+  const [showPayPal, setShowPayPal] = useState(false);
+  const [showPayPalGift, setShowPayPalGift] = useState(false);
   const [bought, setBought] = useState(false);
+  const [gifted, setGifted] = useState(false);
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
@@ -19,38 +26,6 @@ export const Checkout = () => {
   const username = useSelector((state) => state?.usersReducer?.users?.username);
   const dispatch = useDispatch();
   const { id } = useParams();
-
-  const addToLibrary = async () => {
-    console.log("TOKEN", token);
-    console.log("ID: ", id);
-    try {
-      const data = cart;
-      const response = await fetch(
-        `http://localhost:8080/checkout/addAll/${id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      if (response.ok) {
-        console.log(response);
-        const responseData = await response.json();
-        console.log(responseData);
-        console.log("CART", cart);
-        dispatch({
-          type: "CLEAN_CART",
-        });
-      } else {
-        throw new Error("Response not ok");
-      }
-    } catch (error) {
-      console.log("CATCH: ", error);
-    }
-  };
 
   useEffect(() => {
     dispatch(recuperaLibreria(id, token));
@@ -92,16 +67,37 @@ export const Checkout = () => {
             Fatto! <span>Troverai i tuoi acquisti in libreria 👌</span>
           </p>
         )}
+        {gifted && (
+          <p className={`${styles.bought}`}>
+            Regalo inviato!{" "}
+            <span>{giftUser} lo troverà nella sua libreria 👌</span>
+          </p>
+        )}
         <Col className="d-flex justify-content-between align-items-center">
           {cart.length > 0 && (
             <button
               onClick={() => {
-                addToLibrary();
-                setBought(true);
+                setShowPayPal(true);
+                // addToLibrary();
+                // setBought(true);
               }}
               className={`${styles.button}`}
             >
-              Completa l'acquisto
+              Acquista per te
+            </button>
+          )}
+          {cart.length > 0 && (
+            <button
+              onClick={() => {
+                setShowForm(!showForm);
+                setShowPayPal(false);
+                // setShowPayPal(true);
+                // addToLibrary();
+                // setBought(true);
+              }}
+              className={`${styles.button}`}
+            >
+              Fai un regalo 🎁
             </button>
           )}
           {cart.length > 0 && (
@@ -117,48 +113,78 @@ export const Checkout = () => {
             </p>
           )}
         </Col>
-        <Col>
+        <Col className="d-flex align-items-center mt-4">
           {cart.length > 0 && (
-            <AiFillDelete
-              onClick={() => dispatch(cleanCart())}
-              className={`${styles.button_remove}`}
-            />
+            <>
+              <AiFillDelete
+                onClick={() => dispatch(cleanCart())}
+                className={`${styles.button_remove} m-0`}
+              />{" "}
+              <p className="m-0 ms-3">Svuota carrello</p>
+            </>
           )}
         </Col>
-
-        <Col>
-          <PayPalScriptProvider
-            options={{
-              currency: "EUR",
-              "client-id":
-                "AeODpXNbQ7O0kmQDW0DxJoAaBboO_n9hLvFTemLayHQyD5wkCXAP9eRDZgJ4iAwWFnQzw42QtwDkMk2q",
-            }}
-          >
-            <PayPalButtons
-              createOrder={(data, actions) => {
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: `${cart.reduce(
-                          (acc, element) => acc + parseInt(element.prezzo),
-                          0
-                        )}`,
-                      },
-                    },
-                  ],
-                });
+        {showForm && !gifted && (
+          <Form className="mt-5">
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Control
+                onChange={(e) => {
+                  setGiftUser(e.target.value);
+                  console.log(giftUser);
+                }}
+                value={giftUser}
+                type="username"
+                placeholder="Enter username"
+              />
+              <Form.Text className="text-muted">
+                Inserisci il nome dell'utente a cui inviare il regalo.
+              </Form.Text>
+            </Form.Group>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                // sendGift();
+                setShowPayPalGift(!showPayPalGift);
               }}
-              onApprove={(data, actions) => {
-                addToLibrary();
-                setBought(true);
-                return actions.order.capture().then(function (details) {
-                  alert("Transazione andata a buon fine per " + username);
-                });
-              }}
-            />
-          </PayPalScriptProvider>
-        </Col>
+              className={`${styles.button}`}
+              type="submit"
+            >
+              Invia
+            </button>
+          </Form>
+        )}
+        {showPayPal && cart.length > 0 && (
+          <div className={`${styles.paypalContainer}`}>
+            <div>
+              <PayPal
+                token={token}
+                cart={cart}
+                setBought={setBought}
+                username={username}
+                giftUser={giftUser}
+                id={id}
+                action={"buy"}
+              />
+            </div>
+          </div>
+        )}
+        {showPayPalGift && cart.length > 0 && (
+          <div className={`${styles.paypalContainer}`}>
+            <div>
+              <PayPal
+                token={token}
+                cart={cart}
+                setGifted={setGifted}
+                setBought={setBought}
+                username={username}
+                giftUser={giftUser}
+                id={id}
+                action={"gift"}
+                setShowPayPalGift={setShowPayPalGift}
+              />
+            </div>
+          </div>
+        )}
       </Row>
     </Container>
   );

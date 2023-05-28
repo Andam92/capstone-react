@@ -45,3 +45,15 @@
 .bought span {
   color: whitesmoke;
 }
+
+.paypalContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.paypalContainer div {
+  max-width: 750px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
