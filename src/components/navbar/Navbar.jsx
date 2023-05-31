@@ -9,6 +9,7 @@ import { logout } from "../../redux/actions/logout";
 import { useNavigate } from "react-router-dom";
 import Wish from "../offcanvas_wish/Wish";
 import getUsers from "../../redux/actions/getUsers";
+import { recuperaLibreria } from "../../redux/actions/addLibrary";
 
 const MyNavbar = () => {
   // HOOKS
@@ -30,17 +31,32 @@ const MyNavbar = () => {
   const cart = useSelector((state) => state?.cartReducer?.cart);
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch({
+      type: "CLEAN_LIBRARY",
+    });
     dispatch({
       type: "CLEAN_CART",
     });
+    dispatch({
+      type: "LOGOUT_USER",
+    });
+    dispatch(logout());
     navigate("/");
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(getUsers(username, token)).then(console.log(users));
-    }, 100);
+    console.log("PIPPO", users?.id, token);
+    dispatch(recuperaLibreria(users?.id, token));
+  }, [users]);
+
+  useEffect(() => {
+    if (token) {
+      setTimeout(() => {
+        dispatch(getUsers(username, token)).then(
+          console.log("UTENTE: ", users)
+        );
+      }, 100);
+    }
   }, [token]);
 
   useEffect(() => {

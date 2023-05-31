@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styles from "./checkout.module.css";
-import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  Row,
+  Table,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Item } from "./Item";
 import { AiFillDelete } from "react-icons/ai";
 import { cleanCart } from "../../redux/actions/cleanCart";
 import { Link, useParams } from "react-router-dom";
-import getUsers from "../../redux/actions/getUsers";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { ShopTwo } from "@mui/icons-material";
@@ -17,6 +24,8 @@ export const Checkout = () => {
   const [giftUser, setGiftUser] = useState("");
   const [showPayPal, setShowPayPal] = useState(false);
   const [showPayPalGift, setShowPayPalGift] = useState(false);
+  const [failedGift, setFailedGift] = useState(false);
+  const [invalidNumber, setInvalidNumber] = useState(false);
   const [bought, setBought] = useState(false);
   const [gifted, setGifted] = useState(false);
   const cart = useSelector((state) => state?.cartReducer?.cart);
@@ -67,10 +76,17 @@ export const Checkout = () => {
             Fatto! <span>Troverai i tuoi acquisti in libreria 👌</span>
           </p>
         )}
-        {gifted && (
+        {gifted && !failedGift && (
           <p className={`${styles.bought}`}>
             Regalo inviato!{" "}
             <span>{giftUser} lo troverà nella sua libreria 👌</span>
+          </p>
+        )}
+        {failedGift && (
+          <p style={{ color: "red" }}>
+            Impossibile inviare il regalo a {giftUser} perché{" "}
+            {cart?.map((prodotto) => prodotto.titolo)} è già presente nella sua
+            libreria.
           </p>
         )}
         <Col className="d-flex justify-content-between align-items-center">
@@ -89,11 +105,17 @@ export const Checkout = () => {
           {cart.length > 0 && (
             <button
               onClick={() => {
-                setShowForm(!showForm);
-                setShowPayPal(false);
-                // setShowPayPal(true);
-                // addToLibrary();
-                // setBought(true);
+                if (cart?.length > 1) {
+                  setInvalidNumber(true);
+                  setTimeout(() => {
+                    setInvalidNumber(false);
+                  }, 2500);
+
+                  console.log("AIUTOOOOOOOOOOOOO");
+                } else {
+                  setShowForm(!showForm);
+                  setShowPayPal(false);
+                }
               }}
               className={`${styles.button}`}
             >
@@ -124,68 +146,83 @@ export const Checkout = () => {
             </>
           )}
         </Col>
-        {showForm && !gifted && (
-          <Form className="mt-5">
-            <Form.Group className="mb-3" controlId="formBasicUsername">
-              <Form.Control
-                onChange={(e) => {
-                  setGiftUser(e.target.value);
-                  console.log(giftUser);
-                }}
-                value={giftUser}
-                type="username"
-                placeholder="Enter username"
-              />
-              <Form.Text className="text-muted">
-                Inserisci il nome dell'utente a cui inviare il regalo.
-              </Form.Text>
-            </Form.Group>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                // sendGift();
-                setShowPayPalGift(!showPayPalGift);
-              }}
-              className={`${styles.button}`}
-              type="submit"
-            >
-              Continua su PayPal...
-            </button>
-          </Form>
-        )}
-        {showPayPal && cart.length > 0 && (
-          <div className={`${styles.paypalContainer}`}>
-            <div>
-              <PayPal
-                token={token}
-                cart={cart}
-                setBought={setBought}
-                username={username}
-                giftUser={giftUser}
-                id={id}
-                action={"buy"}
-              />
-            </div>
-          </div>
-        )}
-        {showPayPalGift && cart.length > 0 && (
-          <div className={`${styles.paypalContainer}`}>
-            <div>
-              <PayPal
-                token={token}
-                cart={cart}
-                setGifted={setGifted}
-                setBought={setBought}
-                username={username}
-                giftUser={giftUser}
-                id={id}
-                action={"gift"}
-                setShowPayPalGift={setShowPayPalGift}
-              />
-            </div>
-          </div>
-        )}
+        <Row>
+          <Col xs={12} md={6}>
+            {showForm && !failedGift && (
+              <div className={`${styles.giftForm}`}>
+                <Form className="mt-5 ">
+                  <Form.Group className="mb-3" controlId="formBasicUsername">
+                    <Form.Control
+                      onChange={(e) => {
+                        setGiftUser(e.target.value);
+                        console.log(giftUser);
+                      }}
+                      value={giftUser}
+                      type="username"
+                      placeholder="Enter username"
+                    />
+                    <Form.Text className="text-muted">
+                      Inserisci il nome dell'utente a cui inviare il regalo.
+                    </Form.Text>
+                  </Form.Group>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // sendGift();
+                      setShowPayPalGift(!showPayPalGift);
+                    }}
+                    className={`${styles.button}`}
+                    type="submit"
+                  >
+                    Continua su PayPal...
+                  </button>
+                </Form>
+              </div>
+            )}
+          </Col>
+          <Col>
+            {showPayPal && cart.length > 0 && (
+              <div className={`${styles.paypalContainer}`}>
+                <div>
+                  <PayPal
+                    token={token}
+                    cart={cart}
+                    setBought={setBought}
+                    username={username}
+                    giftUser={giftUser}
+                    id={id}
+                    action={"buy"}
+                  />
+                </div>
+              </div>
+            )}
+            {showPayPalGift && cart.length > 0 && (
+              <div className={`${styles.paypalContainer}`}>
+                <div>
+                  <PayPal
+                    token={token}
+                    cart={cart}
+                    setFailedGift={setFailedGift}
+                    setGifted={setGifted}
+                    setBought={setBought}
+                    username={username}
+                    giftUser={giftUser}
+                    id={id}
+                    action={"gift"}
+                    setShowPayPalGift={setShowPayPalGift}
+                    setShowPayPal={setShowPayPal}
+                  />
+                </div>
+              </div>
+            )}
+          </Col>
+        </Row>
       </Row>
+      {invalidNumber && (
+        <Alert className="mt-4" variant="danger">
+          Puoi inviare soltanto 1 gioco alla volta!
+        </Alert>
+      )}
     </Container>
   );
 };

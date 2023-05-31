@@ -13,7 +13,7 @@ const getUsers = (username, token) => {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log("PIPPO", data);
+        console.log(data);
         dispatch({
           type: "GET_USER",
           payload: data,

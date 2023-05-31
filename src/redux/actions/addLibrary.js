@@ -1,19 +1,22 @@
 // RECUPERO LIBRERIA UTENTE
 export const recuperaLibreria = (id, token) => {
   return async (dispatch) => {
+    console.log("ID:", id);
     try {
       const response = await fetch(`http://localhost:8080/library/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("SONO RESPONSE", response);
       if (response.ok) {
         const data = await response.json();
+
         dispatch({
           type: "SAVE_LIBRARY",
           payload: data,
         });
-        console.log("stefano e data", data);
+        console.log("DATA", data);
         return data;
       }
     } catch (error) {

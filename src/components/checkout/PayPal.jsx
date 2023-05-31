@@ -7,6 +7,8 @@ const PayPal = ({
   token,
   setBought,
   setGifted,
+  setFailedGift,
+  setShowPayPal,
   setShowPayPalGift,
   username,
   giftUser,
@@ -14,6 +16,7 @@ const PayPal = ({
   id,
 }) => {
   const dispatch = useDispatch();
+
   const sendGift = async () => {
     // console.log("TOKEN", token);
     // console.log("ID: ", id);
@@ -35,10 +38,13 @@ const PayPal = ({
         const responseData = await response.json();
         console.log(responseData);
         console.log("Regalo inviato");
+        setGifted(true);
         dispatch({
           type: "CLEAN_CART",
         });
       } else {
+        setGifted(false);
+        setFailedGift(true);
         throw new Error("Response not ok");
       }
     } catch (error) {
@@ -67,10 +73,12 @@ const PayPal = ({
         const responseData = await response.json();
         console.log(responseData);
         console.log("CART", cart);
+        setBought(true);
         dispatch({
           type: "CLEAN_CART",
         });
       } else {
+        setBought(false);
         throw new Error("Response not ok");
       }
     } catch (error) {
@@ -82,8 +90,7 @@ const PayPal = ({
     <PayPalScriptProvider
       options={{
         currency: "EUR",
-        "client-id":
-          "AeODpXNbQ7O0kmQDW0DxJoAaBboO_n9hLvFTemLayHQyD5wkCXAP9eRDZgJ4iAwWFnQzw42QtwDkMk2q",
+        "client-id": process.env.REACT_APP_CLIENT_ID,
       }}
     >
       <PayPalButtons
@@ -104,10 +111,9 @@ const PayPal = ({
         onApprove={(data, actions) => {
           if (action === "buy") {
             addToLibrary();
-            setBought(true);
+            setShowPayPal(false);
           } else if (action === "gift") {
             sendGift();
-            setGifted(true);
             setShowPayPalGift(false);
           }
 

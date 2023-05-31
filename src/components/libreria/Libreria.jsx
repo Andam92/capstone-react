@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "./libreria.module.css";
 import { Item } from "./Item";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
@@ -92,7 +92,9 @@ export const Libreria = () => {
               </Form>{" "}
               {!libreria?.length && (
                 <p className="ms-3">
-                  Non hai ancora acquistato niente, la tua libreria è vuota!
+                  Non hai ancora acquistato niente, la tua libreria è vuota! Vai{" "}
+                  <Link to={"/store"}>allo store </Link> per cominciare a
+                  riempirla!
                 </p>
               )}
               {!search &&
