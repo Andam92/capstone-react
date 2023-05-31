@@ -82,7 +82,7 @@ export const Checkout = () => {
             <span>{giftUser} lo troverà nella sua libreria 👌</span>
           </p>
         )}
-        {failedGift && (
+        {failedGift && cart.length !== 0 && (
           <p style={{ color: "red" }}>
             Impossibile inviare il regalo a {giftUser} perché{" "}
             {cart?.map((prodotto) => prodotto.titolo)} è già presente nella sua

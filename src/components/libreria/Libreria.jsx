@@ -10,6 +10,7 @@ export const Libreria = () => {
   const [selected, setSelected] = useState(false);
   const [deselect, setDeselect] = useState(false);
   const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
@@ -27,7 +28,7 @@ export const Libreria = () => {
 
   useEffect(() => {
     if (token !== undefined) {
-      recuperaLibreria(id, token);
+      dispatch(recuperaLibreria(id, token));
     }
     if (!selected && libreria?.length > 0) {
       handleSelection(libreria[0]);

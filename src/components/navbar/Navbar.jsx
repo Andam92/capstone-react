@@ -44,10 +44,10 @@ const MyNavbar = () => {
     navigate("/");
   };
 
-  useEffect(() => {
-    console.log("PIPPO", users?.id, token);
-    dispatch(recuperaLibreria(users?.id, token));
-  }, [users]);
+  // useEffect(() => {
+  //   console.log("PIPPO", users?.id, token);
+  //   dispatch(recuperaLibreria(users?.id, token));
+  // }, [users]);
 
   useEffect(() => {
     if (token) {
