@@ -209,8 +209,6 @@ export const Checkout = () => {
                     giftUser={giftUser}
                     id={id}
                     action={"gift"}
-                    setShowPayPalGift={setShowPayPalGift}
-                    setShowPayPal={setShowPayPal}
                   />
                 </div>
               </div>

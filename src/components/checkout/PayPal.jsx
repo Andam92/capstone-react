@@ -111,10 +111,10 @@ const PayPal = ({
         onApprove={(data, actions) => {
           if (action === "buy") {
             addToLibrary();
-            setShowPayPal(false);
+            // setShowPayPal(false);
           } else if (action === "gift") {
             sendGift();
-            setShowPayPalGift(false);
+            // setShowPayPalGift(false);
           }
 
           return actions.order.capture().then(function (details) {

@@ -1,52 +1,64 @@
 import React, { useState } from "react";
 import styles from "./profile.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import getUsers from "../../redux/actions/getUsers";
 
 const ProfilePage = () => {
+  const dispatch = useDispatch();
+  const token = useSelector(
+    (state) => state?.authReducer?.bearerToken?.accessToken
+  );
   const user = useSelector((state) => state?.usersReducer?.users);
   const [showModale, setShowModale] = useState(false);
-  const [editedName, setEditedName] = useState("");
-  const [editedUsername, setEditedUsername] = useState("");
-  const [editedEmail, setEditedEmail] = useState("");
+  const [editedName, setEditedName] = useState(null);
+  const [editedUsername, setEditedUsername] = useState(null);
+  const [editedEmail, setEditedEmail] = useState(null);
 
   // PUT
 
-  const editUser = () => {
-    return async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/api/auth/checkout/edit/${user?.id}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: editedName,
-              username: editedUsername,
-              email: editedEmail,
-            }),
-          }
-        );
-        if (response.ok) {
-          const data = await response.json();
-          console.log("Utente modificato", data);
-        } else {
-          console.log("Response not ok");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  };
+  // const editUser = () => {
+  //   return async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `http://localhost:8080/api/auth/checkout/edit/${user?.id}`,
+  //         {
+  //           method: "PUT",
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({
+  //             name: editedName || user?.name,
+  //             username: editedUsername || user?.username,
+  //             email: editedEmail || user?.email,
+  //           }),
+  //         }
+  //       );
+
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         console.log("Utente modificato", data);
+  //         dispatch({
+  //           type: "GET_USER",
+  //           payload: data,
+  //         });
+  //       } else {
+  //         console.log("Response not ok");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  // };
 
   // SUBMIT
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editUser();
-    console.log("submit fatto per l'utente con id: ", user?.id);
+    // const sendPut = editUser();
+    // sendPut();
+    // console.log("submit fatto per l'utente con id: ", user?.id);
   };
 
   return (
@@ -67,7 +79,7 @@ const ProfilePage = () => {
             <p>E-MAIL: {user?.email}</p>
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col>
             <button
               onClick={() => setShowModale(!showModale)}
@@ -126,7 +138,7 @@ const ProfilePage = () => {
               </Form>
             </Col>{" "}
           </Row>
-        )}
+        )} */}
       </Container>
     </div>
   );

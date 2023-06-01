@@ -1,13 +1,14 @@
 const getUsers = (username, token) => {
   return async (dispatch) => {
+    console.log("Username: ", username, "token", token);
     try {
       const response = await fetch(
         `http://localhost:8080/api/auth/checkout/find/${username}`,
         {
           method: "GET",
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
           },
         }
       );

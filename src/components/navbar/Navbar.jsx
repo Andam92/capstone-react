@@ -45,8 +45,9 @@ const MyNavbar = () => {
   };
 
   // useEffect(() => {
-  //   console.log("PIPPO", users?.id, token);
-  //   dispatch(recuperaLibreria(users?.id, token));
+  //   if (token) {
+  //     dispatch(getUsers(users?.username, token));
+  //   }
   // }, [users]);
 
   useEffect(() => {
@@ -163,7 +164,7 @@ const MyNavbar = () => {
                           variant="none"
                           className="text-light"
                         >
-                          Benvenuto {username}
+                          Benvenuto {users?.username}
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu variant="dark">
