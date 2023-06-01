@@ -52,9 +52,7 @@ const MyNavbar = () => {
   useEffect(() => {
     if (token) {
       setTimeout(() => {
-        dispatch(getUsers(username, token)).then(
-          console.log("UTENTE: ", users)
-        );
+        dispatch(getUsers(username, token));
       }, 100);
     }
   }, [token]);
@@ -169,7 +167,7 @@ const MyNavbar = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu variant="dark">
-                          <Dropdown.Item href="#/action-1">
+                          <Dropdown.Item onClick={() => navigate("/profile")}>
                             Profilo
                           </Dropdown.Item>
                           <Dropdown.Item

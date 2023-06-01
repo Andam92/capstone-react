@@ -198,14 +198,9 @@ export const Prova = ({
                     }}
                   />
                 )}
-                {/* {addedToWish && (
-                  <div className={`${styles.addedToWishlist}`}>
-                    Aggiunto alla wishlist!
-                  </div>
-                )} */}
               </div>
             </div>
-            {alert && (
+            {alert && !token && (
               <Alert key="danger" variant="danger">
                 Non puoi fare acquisti{" "}
                 <Link to={"/login"}>se non hai effettato il login!</Link>

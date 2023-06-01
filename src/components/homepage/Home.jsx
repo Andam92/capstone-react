@@ -1,9 +1,8 @@
 import React from "react";
 import Navbar from "../navbar/Navbar";
-
 import styles from "./home.module.css";
 import { Route, Routes } from "react-router-dom";
-import { Main } from "../carousel/main/Main";
+import { Main } from "../Carousel/main/Main";
 import RegisterPage from "../registerPage/RegisterPage";
 import { Login } from "../loginPage/Login";
 import { Store } from "../store/Store";
@@ -11,6 +10,7 @@ import { SingleProduct } from "../singleProduct/SingleProduct";
 import { Checkout } from "../checkout/Checkout";
 import { Libreria } from "../libreria/Libreria";
 import NotFoundPage from "../not found page/NotFoundPage";
+import ProfilePage from "../profilePage/ProfilePage";
 
 const Home = () => {
   return (
@@ -25,6 +25,7 @@ const Home = () => {
         <Route path="/checkout/:id" element={<Checkout />}></Route>
         <Route path="/library/:id" element={<Libreria />}></Route>
         <Route path="/*" element={<NotFoundPage />}></Route>
+        <Route path="/profile" element={<ProfilePage />}></Route>
       </Routes>
     </div>
   );
