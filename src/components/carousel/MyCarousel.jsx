@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./carousel.module.css";
 
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 function MyCarousel({ slides }) {
-  // const [next, setNext] = useState(false);
-  // const [prev, setPrev] = useState(false);
+  const [slideIn, setSlideIn] = useState(false);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const sliderStyles = {
@@ -27,13 +27,23 @@ function MyCarousel({ slides }) {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
+    setSlideIn(true);
   };
 
   const goToNext = () => {
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
+    setSlideIn(true);
+    console.log("slide in prima: ", slideIn);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSlideIn(false);
+    }, 1100);
+    console.log("slide in dopo: ", slideIn);
+  }, [currentIndex]);
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
@@ -43,7 +53,10 @@ function MyCarousel({ slides }) {
     <div style={sliderStyles}>
       <MdNavigateBefore onClick={goToPrevious} className={`${styles.prev}`} />
       <MdNavigateNext onClick={goToNext} className={`${styles.next}`} />
-      <div style={slideStyles}></div>
+      <div
+        className={`${slideIn && styles.slideAnim}`}
+        style={slideStyles}
+      ></div>
       <div className={`${styles.bottom}`}>
         {slides.map((slide, i) => (
           <div

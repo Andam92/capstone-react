@@ -58,9 +58,15 @@
   background-color: rgb(134, 134, 134);
 }
 
-/* .text {
-  position: absolute;
-  top: 20%;
-  left: 10%;
-  background-color: burlywood;
-} */
+.slideAnim {
+  animation: fadeIn 0.7s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
