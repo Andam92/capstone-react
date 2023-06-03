@@ -3,6 +3,12 @@
   min-height: 100vh;
 }
 
+.carouselContainer {
+  margin: 0 auto;
+  width: 80vw;
+  height: 70vh;
+}
+
 .startingPoint {
   transform: translateX(2500px);
 }

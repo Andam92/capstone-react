@@ -7,6 +7,20 @@ import styles from "./main.module.css";
 import { StoreCarousel } from "../../store_carousel/StoreCarousel";
 
 export const Main = () => {
+  const slides = [
+    {
+      url: "https://drive.google.com/u/0/uc?id=1JMiUmQRgEjXHlUhk_P8lV98wHM2rTk7A",
+      title: "The Legend of Zelda: Tears of the Kingdom",
+    },
+    {
+      url: "https://drive.google.com/u/0/uc?id=11dBx7gOX8iBlGJxqg1AnSsfK_Pk9hD3L",
+      title: "Monster Hunter: World",
+    },
+    {
+      url: "https://drive.google.com/u/0/uc?id=1vyd-3uHbkQSXW8oBSZneYtC04X1C0R-c",
+      title: "Warzone 2.0",
+    },
+  ];
   const [navScroll, setNavScroll] = useState(false);
   const [prodotti, setProdotti] = useState([]);
   const token = useSelector(
@@ -39,7 +53,13 @@ export const Main = () => {
 
   return (
     <div className={`${styles.body}`}>
-      <MyCarousel />
+      <div className={`${styles.carouselContainer}`}>
+        <MyCarousel slides={slides} />
+      </div>
+      <Row className={`${styles.section2}`}>
+        <h3>Giochi in evidenza</h3>
+        <StoreCarousel prodotti={prodotti} categoria={"FPS"} />
+      </Row>
       <div>
         <Row
           className={`${styles.startingPoint} ${navScroll && styles.section1} `}
@@ -58,10 +78,6 @@ export const Main = () => {
               consequatur alias odit accusantium, ipsum ea.
             </p>
           </Col>
-        </Row>
-        <Row className={`${styles.section2}`}>
-          <h3>Alcune delle nostre offerte</h3>
-          <StoreCarousel prodotti={prodotti} categoria={"FPS"} />
         </Row>
       </div>
     </div>
