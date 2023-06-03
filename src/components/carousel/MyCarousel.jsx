@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import getUsers from "../../redux/actions/getUsers";
 
 function MyCarousel() {
-  const dispatch = useDispatch();
   const username = useSelector(
     (state) => state?.authReducer?.bearerToken?.username
   );
@@ -12,8 +11,8 @@ function MyCarousel() {
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
   return (
-    <div className={`${styles.body}`}>
-      <Carousel interval={null}>
+    <div>
+      <Carousel interval={1000000}>
         <Carousel.Item>
           <div className={`${styles.slide}`}>
             <div className={`${styles.slide_inner}`}>
@@ -28,12 +27,6 @@ function MyCarousel() {
                 2.0 puoi competere contro gli avversari più agguerriti e
                 dimostrare la tua superiorità.
               </p>
-              <button
-                className="text-dark"
-                onClick={() => dispatch(getUsers(username, token))}
-              >
-                CONTROLLO
-              </button>
               <button className={`${styles.slide_button}`}>ACQUISTA ORA</button>
             </div>
           </div>

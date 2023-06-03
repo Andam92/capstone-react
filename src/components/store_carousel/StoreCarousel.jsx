@@ -1,14 +1,10 @@
 import React from "react";
 import { Carousel, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import styles from "../videogioco/videogioco.module.css";
+import { MdOutlineNavigateNext } from "react-icons/md";
+import style from "./carousel.css";
 
-export const StoreCarousel = ({
-  prodotti,
-  categoria,
-  selected,
-  setSelected,
-}) => {
+export const StoreCarousel = ({ prodotti, categoria }) => {
   //Suddivido l'array di prodotti in gruppi da 3
   const groupedElements = [];
   const arrayCategoria = prodotti.filter(
@@ -20,9 +16,13 @@ export const StoreCarousel = ({
 
   const navigate = useNavigate();
 
+  const customNext = ({ onClick }) => {
+    <MdOutlineNavigateNext className="customNext" onClick={onClick} />;
+  };
+
   return (
     <>
-      <Carousel>
+      <Carousel nextIcon={customNext}>
         {prodotti.length > 0 &&
           groupedElements
             // .filter((p) => p.categoria === "RPG")
@@ -32,20 +32,11 @@ export const StoreCarousel = ({
                   {group.map((element, index) => (
                     <Col key={index} xs={12} md={4}>
                       <div
-                        onMouseEnter={
-                          element.id !== selected && setSelected(element.id)
-                        }
-                        onMouseLeave={setSelected(0)}
                         onClick={() => navigate(`/store/${element.id}`)}
-                        className={`${
-                          selected === 0 || selected === element.id
-                            ? styles.body
-                            : styles.body_opacity
-                        } d-block w-100 position-relative`}
                         style={{
                           cursor: "pointer",
                           backgroundImage: `url(${element.immagine})`,
-                          height: "350px",
+                          height: "400px",
                           backgroundSize: "contain",
                           backgroundRepeat: "no-repeat",
                         }}

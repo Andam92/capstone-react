@@ -1,0 +1,24 @@
+.body {
+  margin-top: 110px;
+  min-height: 100vh;
+}
+
+.startingPoint {
+  transform: translateX(2500px);
+}
+
+.section1 {
+  padding: 2rem 3rem;
+  align-items: center;
+  transition: all ease 1s;
+  transform: translateX(0);
+}
+
+.section2 {
+  padding: 2rem 3rem;
+  align-items: center;
+}
+
+.payoff {
+  font-size: 2rem;
+}
