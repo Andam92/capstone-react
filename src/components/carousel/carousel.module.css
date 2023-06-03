@@ -33,7 +33,7 @@
 .bottom {
   position: absolute;
   right: 50%;
-  bottom: 10%;
+  bottom: 4%;
   display: flex;
   justify-content: center;
   transform: translateX(50%);
@@ -58,8 +58,11 @@
   background-color: rgb(134, 134, 134);
 }
 
-.slideAnim {
+/* .slideAnim {
   animation: fadeIn 0.7s ease-in;
+} */
+.slideAnim {
+  animation: slideIn 1s ease-out;
 }
 
 @keyframes fadeIn {
@@ -68,5 +71,14 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(2000px);
+  }
+  to {
+    transform: translateX(0);
   }
 }

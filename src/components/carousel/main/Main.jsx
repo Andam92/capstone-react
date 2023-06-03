@@ -21,12 +21,10 @@ export const Main = () => {
       title: "Warzone 2.0",
     },
   ];
+
   const [navScroll, setNavScroll] = useState(false);
   const [prodotti, setProdotti] = useState([]);
-  const token = useSelector(
-    (state) => state?.authReducer?.bearerToken?.accessToken
-  );
-  const users = useSelector((state) => state?.usersReducer?.users);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   // FETCH
   const recuperaProdotti = async () => {
@@ -53,9 +51,17 @@ export const Main = () => {
 
   return (
     <div className={`${styles.body}`}>
+      <div
+        style={{
+          backgroundImage: `url(${slides[currentSlide].url})`,
+        }}
+        className={`${styles.background}`}
+      ></div>
+
       <div className={`${styles.carouselContainer}`}>
-        <MyCarousel slides={slides} />
+        <MyCarousel slides={slides} setCurrentSlide={setCurrentSlide} />
       </div>
+
       <Row className={`${styles.section2}`}>
         <h3>Giochi in evidenza</h3>
         <StoreCarousel prodotti={prodotti} categoria={"FPS"} />

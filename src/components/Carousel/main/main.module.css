@@ -9,6 +9,24 @@
   height: 70vh;
 }
 
+.background {
+  position: absolute;
+  width: 100vw;
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.2;
+  }
+}
+
 .startingPoint {
   transform: translateX(2500px);
 }

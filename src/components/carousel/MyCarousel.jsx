@@ -3,7 +3,7 @@ import styles from "./carousel.module.css";
 
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
-function MyCarousel({ slides }) {
+function MyCarousel({ slides, setCurrentSlide }) {
   const [slideIn, setSlideIn] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,6 +43,10 @@ function MyCarousel({ slides }) {
       setSlideIn(false);
     }, 1100);
     console.log("slide in dopo: ", slideIn);
+  }, [currentIndex]);
+
+  useEffect(() => {
+    setCurrentSlide(currentIndex);
   }, [currentIndex]);
 
   const goToSlide = (index) => {
