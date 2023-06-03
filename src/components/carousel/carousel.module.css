@@ -5,7 +5,7 @@
   top: 45%;
   right: 10%;
   font-size: 3rem;
-  background-color: #0c0a2080;
+  background-color: #0c0a2090;
   border-radius: 50%;
   transition: all 0.3s;
 }
@@ -21,7 +21,7 @@
   top: 45%;
   left: 10%;
   font-size: 3rem;
-  background-color: #0c0a2080;
+  background-color: #0c0a2090;
   border-radius: 50%;
   transition: all 0.3s;
 }
@@ -42,8 +42,8 @@
 .bottomFiller {
   margin: 0 1rem;
   cursor: pointer;
-  width: 3rem;
-  height: 15px;
+  width: 100px;
+  height: 12px;
   border-radius: 5px;
   background-color: whitesmoke;
   transition: all 0.3s;
@@ -52,6 +52,10 @@
 .bottomFiller:hover {
   background-color: rgb(134, 134, 134);
   transform: scale(1.1);
+}
+
+.bottomFillerCurrent {
+  background-color: rgb(134, 134, 134);
 }
 
 /* .text {

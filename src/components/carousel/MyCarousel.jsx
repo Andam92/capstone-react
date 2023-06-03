@@ -48,7 +48,9 @@ function MyCarousel({ slides }) {
         {slides.map((slide, i) => (
           <div
             onClick={() => goToSlide(i)}
-            className={`${styles.bottomFiller}`}
+            className={`${styles.bottomFiller} ${
+              currentIndex === i && styles.bottomFillerCurrent
+            }`}
           ></div>
         ))}
       </div>
