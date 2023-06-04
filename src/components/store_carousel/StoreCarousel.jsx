@@ -27,7 +27,7 @@ export const StoreCarousel = ({ prodotti, categoria }) => {
           groupedElements
             // .filter((p) => p.categoria === "RPG")
             .map((group, i) => (
-              <Carousel.Item interval={100000000} key={i}>
+              <Carousel.Item key={i}>
                 <Row>
                   {group.map((element, index) => (
                     <Col key={index} xs={12} md={4}>

@@ -27,6 +27,10 @@
   }
 }
 
+.overflow {
+  overflow-x: hidden;
+}
+
 .startingPoint {
   transform: translateX(2500px);
 }

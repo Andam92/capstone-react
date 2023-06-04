@@ -11,6 +11,7 @@ import { Checkout } from "../checkout/Checkout";
 import { Libreria } from "../libreria/Libreria";
 import NotFoundPage from "../not found page/NotFoundPage";
 import ProfilePage from "../profilePage/ProfilePage";
+import Footer from "../footer/Footer";
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
         <Route path="/*" element={<NotFoundPage />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
       </Routes>
+      <Footer />
     </div>
   );
 };

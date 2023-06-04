@@ -1,16 +1,16 @@
-/* .navContainer {
-  height: 200px;
-} */
+.navContainer {
+  max-width: 100%;
+}
 
 .mainNav {
   color: rgb(219, 219, 219);
   background-color: #0c0a20af;
-  height: 80px;
+  /* height: 80px; */
   width: 95%;
   margin: 0 auto;
   margin-top: 20px;
   border-radius: 15px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px);
 }
 
 .navLink {

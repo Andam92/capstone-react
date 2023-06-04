@@ -66,7 +66,7 @@ export const Main = () => {
         <h3>Giochi in evidenza</h3>
         <StoreCarousel prodotti={prodotti} categoria={"FPS"} />
       </Row>
-      <div>
+      <div className={`${styles.overflow}`}>
         <Row
           className={`${styles.startingPoint} ${navScroll && styles.section1} `}
         >
