@@ -15,12 +15,13 @@ function MyCarousel({ slides, setCurrentSlide }) {
 
   const slideStyles = {
     width: "100%",
-    height: "800px",
-    borderRadius: "10px",
+    height: "700px",
+    borderRadius: "20px",
     backgroundPosition: "center",
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundImage: `url(${slides[currentIndex].url})`,
+    boxShadow: "-4px 6px 9px 2px rgba(0, 0, 0, 0.99);",
   };
 
   const goToPrevious = () => {
