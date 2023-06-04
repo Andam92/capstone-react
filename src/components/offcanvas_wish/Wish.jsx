@@ -5,11 +5,14 @@ import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
 import Item from "../wishlist_item/Item";
 import { GiCrossMark } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 function Wish({ show, setShow }) {
   const [showCarrello, setShowCarrello] = useState(false);
+  const [acquistato, setAcquistato] = useState(false);
   const [loading, setLoading] = useState(true);
   const wish = useSelector((state) => state?.wishReducer?.wish);
+  const id = useSelector((state) => state?.usersReducer?.users?.id);
 
   useEffect(() => {
     setShowCarrello(show);
@@ -26,8 +29,8 @@ function Wish({ show, setShow }) {
   };
 
   useEffect(() => {
-    console.log(show);
-  }, []);
+    console.log("acquistato!");
+  }, [acquistato]);
 
   return (
     <Offcanvas
@@ -46,19 +49,30 @@ function Wish({ show, setShow }) {
       </Offcanvas.Header>
       <Offcanvas.Body className="body">
         <h4 className="mb-3">Ecco tutti i tuoi giochi preferiti</h4>
-        {wish?.length > 0 ? (
+        {wish?.length > 0 && (
           <Container>
             {wish?.length > 0 &&
               wish?.map((p, i) => (
-                <Item key={i} prodotto={p} loading={loading} />
+                <Item
+                  key={i}
+                  prodotto={p}
+                  loading={loading}
+                  setAcquistato={setAcquistato}
+                />
               ))}
-            {/* <button className="button_buy rounded">Procedi all'acquisto</button> */}
           </Container>
-        ) : (
+        )}{" "}
+        {!wish?.length > 0 && !acquistato && (
           <p>Aggiungi un gioco dallo store</p>
         )}
-
-        {/* <p onClick={() => console.log(wish)}>PROVA</p> */}
+        {acquistato && (
+          <p>
+            Gioco aggiunto al{" "}
+            <Link onClick={() => setShow(false)} to={`/checkout/${id}`}>
+              carrello!
+            </Link>
+          </p>
+        )}
       </Offcanvas.Body>
     </Offcanvas>
   );

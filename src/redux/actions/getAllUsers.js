@@ -1,24 +1,19 @@
-const getUsers = (username, token) => {
-  return async (dispatch) => {
-    console.log("Username: ", username, "token", token);
+const getUsers = (token) => {
+  return async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/auth/checkout/find/${username}`,
+        `http://localhost:8080/api/auth/checkout/find/all`,
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
         }
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        dispatch({
-          type: "GET_USER",
-          payload: data,
-        });
+        console.log("PIPPO", data);
       } else {
         throw new Error("Errore, response non ok");
       }

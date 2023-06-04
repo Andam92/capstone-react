@@ -1,0 +1,52 @@
+.body {
+  /* margin-top: 20px; */
+  min-height: 100vh;
+}
+
+.carouselContainer {
+  margin: 0 auto;
+  width: 80vw;
+  height: 70vh;
+}
+
+.background {
+  position: absolute;
+  width: 100vw;
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.2;
+  }
+}
+
+.overflow {
+  overflow-x: hidden;
+}
+
+.startingPoint {
+  transform: translateX(2500px);
+}
+
+.section1 {
+  padding: 2rem 3rem;
+  align-items: center;
+  transition: all ease 1s;
+  transform: translateX(0);
+}
+
+.section2 {
+  padding: 2rem 3rem;
+  align-items: center;
+}
+
+.payoff {
+  font-size: 2rem;
+}

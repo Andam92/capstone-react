@@ -1,8 +1,12 @@
 .body {
-  /* padding: 3rem; */
   margin: 110px 50px;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
+}
+
+.loading {
+  overflow-y: hidden;
+  height: 100vh;
 }
 
 .pacman {
@@ -13,11 +17,22 @@
   margin: 0 auto;
   padding: 0;
   position: absolute;
-  width: 100%;
-  height: 100vh;
+  min-width: 100vw;
+  height: 100%;
   z-index: 9999;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
+/* 
+.accordionBody {
+  background-color: transparent !important;
+  backdrop-filter: blur(4px) !important;
+  z-index: 9999 !important;
+} */
+
+/* .accordion {
+  position: absolute;
+  z-index: 999999;
+} */

@@ -22,6 +22,7 @@ const rootReducer = combineReducers({
   wishReducer: wishReducer,
   cartReducer: cartReducer,
   usersReducer: usersReducer,
+  libraryReducer: libraryReducer,
 });
 
 const persistConfig = {

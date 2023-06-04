@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Card, Col } from "react-bootstrap";
-import styles from "./videogioco.module.css";
+import styles from "../prova/myStyle.module.css";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
-import { MdDone } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import addToWish from "../../redux/actions/addWish";
 import { addToCart } from "../../redux/actions/addCart";
-import MyPopup from "./MyPopup";
+import MyPopup from "../videogioco/MyPopup";
 
-export const Videogioco = ({ videogioco, selected, setSelected }) => {
-  const [hover, setHover] = useState(false);
+export const Prova = ({
+  videogioco,
+  selected,
+  setSelected,
+  pippo,
+  setPippo,
+}) => {
+  const [addedToWish, setAddedToWish] = useState(false);
+  const [isInLibrary, setIsInLibrary] = useState(false);
   const [show, setShow] = useState(false);
   const [like, setLike] = useState(false);
   const [alert, setAlert] = useState(false);
@@ -21,9 +27,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
-  const libreria = useSelector(
-    (state) => state?.usersReducer?.users?.libreriaPersonale
-  );
+  const libreria = useSelector((state) => state?.libraryReducer?.library);
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const id = useSelector((state) => state?.usersReducer?.users?.id);
 
@@ -47,19 +51,21 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
     const arrayTitoli = libreria?.map((v) => v?.titolo);
     if (arrayTitoli?.includes(videogioco?.titolo)) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   };
 
   // HANDLE NAVIGATE
   const handleNavigate = () => {
-    navigate(`/store/${videogioco.id}`);
+    navigate(`/store/${videogioco?.id}`);
   };
 
   // HANDLE CARD MOUSE-OVER
   const handleOver = () => {
-    if (videogioco.id !== selected) {
-      setSelected(videogioco.id);
+    if (videogioco?.id !== selected) {
+      console.log(videogioco.id);
+      setPippo(videogioco?.id);
     }
   };
 
@@ -72,7 +78,7 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
 
   // HANDLE Click-shop
   const handleClickShop = (e) => {
-    if (token && !inLibrary(videogioco) && !inCart(videogioco)) {
+    if (token && !inCart(videogioco)) {
       dispatch(addToCart(videogioco));
       setShow(true);
     } else if (!token) {
@@ -82,29 +88,31 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
   };
 
   useEffect(() => {
-    console.log("Questo è useEffect con checkWish");
     if (!inWish(videogioco)) {
       setCheckWish(false);
     }
   }, [wish]);
 
+  useEffect(() => {
+    if (inLibrary(videogioco)) {
+      setIsInLibrary(true);
+    }
+  }, [libreria]);
+
   return (
     <>
       <Col xs={12} md={6} lg={4} xl={3} className="mt-3 px-4">
         <Card
-          className={`${
-            selected === 0 || selected === videogioco.id
-              ? styles.body
-              : styles.body_opacity
+          onMouseEnter={() => handleOver()}
+          className={`${styles.body} ${
+            pippo === videogioco?.id && styles.body_opacity
           }`}
-          onMouseOver={() => handleOver()}
-          onMouseLeave={() => setSelected(0)}
         >
           <div>
             <Card.Img
               className={`${styles.img}`}
               variant="top"
-              src={videogioco.immagine}
+              src={videogioco?.immagine}
               onClick={() => handleNavigate()}
             />
           </div>
@@ -114,11 +122,11 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
                 className={`${styles.title}`}
                 onClick={() => handleNavigate()}
               >
-                {videogioco.titolo}
+                {videogioco?.titolo}
               </Card.Title>
+
               <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                <p>{videogioco?.prezzo} €</p>
               </Card.Text>
             </div>
 
@@ -126,46 +134,44 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
               {!inLibrary(videogioco) && (
                 <div className="d-flex justify-content-between align-items-center">
                   <button
-                    onClick={handleClickShop}
-                    onMouseEnter={() => setHover(true)}
-                    onMouseLeave={() => setHover(false)}
+                    onClick={(e) => handleClickShop(e)}
                     className={`${styles.button}`}
                   >
                     <FaShoppingCart
-                      className={`${!hover && styles.cart} ${
-                        hover && styles.cartHover
-                      }`}
+                      className={`${styles.cart}`}
                       style={{ marginRight: "10px" }}
                     />
 
-                    {!inCart(videogioco) && <span>Acquista</span>}
-
-                    {inCart(videogioco) && (
+                    {!inCart(videogioco) ? (
+                      <span>Acquista</span>
+                    ) : (
                       <span onClick={() => navigate(`/checkout/${id}`)}>
-                        Nel carrello
+                        Nel carrello!
                       </span>
                     )}
                   </button>{" "}
                 </div>
               )}
               {inLibrary(videogioco) && (
-                <>
-                  <p
-                    style={{ textAlign: "center" }}
-                    className={`${styles.inLibrary}`}
-                  >
-                    In libreria
-                  </p>
-                </>
+                <p
+                  style={{ textAlign: "center" }}
+                  className={`${styles.inLibrary}`}
+                >
+                  In libreria
+                </p>
               )}
-              <div>
+
+              <div style={{ position: "relative" }}>
                 {!checkWish && (
                   <FaRegHeart
-                    className={`${styles.heart_icon}`}
+                    className={`${styles.heart_icon} `}
                     onClick={() => {
                       setLike(like);
-                      if (!inWish(videogioco)) {
+                      if (!inWish(videogioco?.titolo)) {
                         setCheckWish(true);
+                        setTimeout(() => {
+                          setAddedToWish(true);
+                        }, 100);
                       }
                       handleClick();
                     }}
@@ -174,10 +180,15 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
 
                 {checkWish && (
                   <FaHeart
-                    className={`${styles.heart_icon}`}
+                    className={`${styles.heart_icon} ${
+                      addedToWish && styles.heart_icon_clicked
+                    }  `}
                     onClick={() => {
-                      if (inWish(videogioco)) {
+                      if (inWish(videogioco?.titolo)) {
                         setCheckWish(false);
+                        // setTimeout(() => {
+                        //   setAddedToWish(true);
+                        // }, 500);
                       }
                       setLike(!like);
                       dispatch({
@@ -189,48 +200,19 @@ export const Videogioco = ({ videogioco, selected, setSelected }) => {
                 )}
               </div>
             </div>
-
-            {/* {inLibrary(videogioco) && (
-                <span className={`${styles.button}`}>In libreria</span>
-              )}
-              {!inCart(videogioco) && !inLibrary(videogioco) && (
-                <div>
-                  {!like && !inWish(videogioco) ? (
-                    <FaRegHeart
-                      className={`${styles.heart_icon}`}
-                      onClick={() => (setLike(!like), handleClick())}
-                    />
-                  ) : (
-                    <FaHeart
-                      className={`${styles.heart_icon}`}
-                      onClick={() => (
-                        setLike(!like),
-                        dispatch({
-                          type: "DELETE_FROM_WISH",
-                          payload: videogioco,
-                        })
-                      )}
-                    />
-                  )}
-                </div>
-              )} */}
-
-            {alert && (
+            {alert && !token && (
               <Alert key="danger" variant="danger">
                 Non puoi fare acquisti{" "}
                 <Link to={"/login"}>se non hai effettato il login!</Link>
               </Alert>
             )}
-            {/* <button onClick={() => console.log(inLibrary(videogioco))}>
-              controllo
-            </button> */}
           </Card.Body>
         </Card>
       </Col>
 
-      {show && (
-        <MyPopup titolo={videogioco.titolo} show={show} setShow={setShow} />
-      )}
+      {/* {show && (
+        <MyPopup titolo={videogioco?.titolo} show={show} setShow={setShow} />
+      )} */}
     </>
   );
 };

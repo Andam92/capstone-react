@@ -3,10 +3,15 @@ import { useParams } from "react-router-dom";
 import styles from "./singleProduct.module.css";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { Chip } from "@mui/material";
+import { addToCart } from "../../redux/actions/addCart";
+import { useDispatch, useSelector } from "react-redux";
 
 export const SingleProduct = () => {
   const { id } = useParams();
   const [prodotto, setProdotto] = useState();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state?.cartReducer?.cart);
+  const libreria = useSelector((state) => state?.libraryReducer?.library);
 
   const recuperaProdotto = async () => {
     try {
@@ -31,13 +36,25 @@ export const SingleProduct = () => {
     console.log("Chip categoria cliccata!");
   };
 
+  const inCart = (prodotto) => {
+    const titoli = cart?.map((t) => t.titolo);
+
+    return titoli?.includes(prodotto?.titolo) || false;
+  };
+
+  const inLibrary = () => {
+    const titoli = libreria?.map((t) => t.titolo);
+
+    return titoli?.includes(prodotto?.titolo) || false;
+  };
+
   return (
     <>
       <div
         style={{
           opacity: 0.1,
           width: "100vw",
-          height: "100%",
+          minHeight: "100%",
           position: "absolute",
           backgroundImage: `url(${prodotto?.immagine})`,
           backgroundSize: "cover",
@@ -58,49 +75,68 @@ export const SingleProduct = () => {
 
             <div className={`${styles.text} `}>
               <hr />
-              <div className={`${styles.bottom}`}>
-                <Chip
-                  label={prodotto?.categoria}
-                  variant="outlined"
-                  onClick={handleClick}
-                  style={{ marginTop: "1rem", marginBottom: "2rem" }}
-                />
-                <p>
-                  <span
-                    style={{ fontSize: "0.7rem" }}
-                    className="text-secondary"
-                  >
-                    EDITORE:
-                  </span>{" "}
-                  {prodotto?.editore}
-                </p>
-                <p>
-                  <span
-                    style={{ fontSize: "0.7rem" }}
-                    className="text-secondary"
-                  >
-                    SVILUPPATORE:
-                  </span>{" "}
-                  {prodotto?.casaProduzione}
-                </p>
-                <p>
-                  <span
-                    style={{ fontSize: "0.7rem" }}
-                    className="text-secondary"
-                  >
-                    DATA di RILASCIO:
-                  </span>{" "}
-                  {prodotto?.dataPubblicazione}
-                </p>
-                <p>DESCRIZIONE_QUI</p>
+              <Row className={`${styles.bottom}`}>
+                <Col xs={12} lg={6}>
+                  <Chip
+                    label={prodotto?.categoria}
+                    variant="outlined"
+                    onClick={handleClick}
+                    style={{ marginTop: "1rem", marginBottom: "2rem" }}
+                  />
+                  <p>
+                    <span
+                      style={{ fontSize: "0.7rem" }}
+                      className="text-secondary"
+                    >
+                      EDITORE:
+                    </span>{" "}
+                    {prodotto?.editore}
+                  </p>
+                  <p>
+                    <span
+                      style={{ fontSize: "0.7rem" }}
+                      className="text-secondary"
+                    >
+                      SVILUPPATORE:
+                    </span>{" "}
+                    {prodotto?.casaProduzione}
+                  </p>
+                  <p>
+                    <span
+                      style={{ fontSize: "0.7rem" }}
+                      className="text-secondary"
+                    >
+                      DATA di RILASCIO:
+                    </span>{" "}
+                    {prodotto?.dataPubblicazione}
+                  </p>
+                </Col>
+                <Col xs={12} lg={6}>
+                  <p>{prodotto?.descrizione}</p>
 
-                <p>
-                  <button className={`${styles.button}`}>
-                    <span className="me-2">€ {prodotto?.prezzo}</span>
-                    Acquista
-                  </button>
-                </p>
-              </div>
+                  <p>
+                    {!inCart(prodotto) && !inLibrary(prodotto) && (
+                      <button
+                        onClick={() => dispatch(addToCart(prodotto))}
+                        className={`${styles.button}`}
+                      >
+                        <span>€ {prodotto?.prezzo} - </span>
+                        Acquista
+                      </button>
+                    )}
+                    {inCart(prodotto) && !inLibrary(prodotto) && (
+                      <div className={`${styles.inCart}`}>
+                        <p>Nel Carrello</p>
+                      </div>
+                    )}
+                  </p>
+                  {inLibrary(prodotto) && (
+                    <div className={`${styles.inLibrary}`}>
+                      <p>In Libreria</p>
+                    </div>
+                  )}
+                </Col>
+              </Row>
             </div>
           </div>
         </Row>

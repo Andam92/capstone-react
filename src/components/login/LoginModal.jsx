@@ -26,8 +26,13 @@ const LoginModal = (props) => {
       {!token && (
         <>
           <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <h2>Accedi</h2>
+            <Form.Group
+              className="mb-3 d-flex justify-content-center"
+              controlId="formBasicUsername"
+            >
               <Form.Control
+                className={`${styles.control}`}
                 style={{
                   backgroundColor: "#171920",
                   width: "500px",
@@ -42,8 +47,12 @@ const LoginModal = (props) => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group
+              className="mb-3 d-flex justify-content-center"
+              controlId="formBasicPassword"
+            >
               <Form.Control
+                className={`${styles.control}`}
                 style={{ backgroundColor: "#2E2E34", color: "white" }}
                 value={formPswValue}
                 type="password"
@@ -53,7 +62,7 @@ const LoginModal = (props) => {
                 }}
               />
             </Form.Group>
-            <div className="w-100 d-flex flex-column justify-content-center">
+            <div className="w-100 d-flex flex-column justify-content-center align-items-center">
               <Button
                 className={`${styles.login_button}`}
                 variant="primary"
@@ -99,7 +108,7 @@ const LoginModal = (props) => {
               </div>
             )}
             {failedLogin && (
-              <div style={{ color: "white", marginTop: "2rem" }}>
+              <div style={{ color: "red", marginTop: "2rem" }}>
                 Utente non trovato!{" "}
                 <span onClick={() => props.setModale(false)}>
                   <Link to={"/register"}>

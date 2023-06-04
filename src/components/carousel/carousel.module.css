@@ -1,75 +1,84 @@
-.slide {
-  background-image: url("https://drive.google.com/u/0/uc?id=1glxyfG_u5yRLOMxy0whwKmn8q9s9y5Zy");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: row-reverse;
-  position: relative;
-}
-
-.slide_inner {
-  text-align: center;
+.next {
+  z-index: 999;
+  cursor: pointer;
   position: absolute;
-  font-size: larger;
-  top: 20%;
+  top: 45%;
   right: 10%;
+  font-size: 3rem;
+  background-color: #0c0a2090;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.next:hover {
+  transform: translateX(10px);
+}
+
+.prev {
+  z-index: 999;
+  cursor: pointer;
+  position: absolute;
+  top: 45%;
+  left: 10%;
+  font-size: 3rem;
+  background-color: #0c0a2090;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.prev:hover {
+  transform: translateX(-10px);
+}
+
+.bottom {
+  position: absolute;
+  right: 50%;
+  bottom: 4%;
   display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(5px);
-  background-color: #0c0a2081;
-  width: 400px;
-  height: auto;
-  border: 1px solid rgba(211, 211, 211, 0.452);
-  /* background-color: transparent; */
-  padding: 45px 60px 65px !important;
-  text-align: justify;
-  border-radius: 30px;
-  box-shadow: 10px 14px 13px 1px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 14px 13px 1px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 14px 13px 1px rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  transform: translateX(50%);
 }
 
-@media screen and (max-width: 990px) {
-  .slide_inner {
-    background-color: #0c0a20a6;
+.bottomFiller {
+  margin: 0 1rem;
+  cursor: pointer;
+  width: 100px;
+  height: 12px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  transition: all 0.3s;
+}
+
+.bottomFiller:hover {
+  background-color: rgb(134, 134, 134);
+  transform: scale(1.1);
+}
+
+.bottomFillerCurrent {
+  background-color: rgb(134, 134, 134);
+}
+
+/* .slideAnim {
+  animation: fadeIn 0.7s ease-in;
+} */
+.slideAnim {
+  animation: slideIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-@media screen and (max-width: 576px) {
-  .slide_inner {
-    background-color: #0c0a20cc;
-    width: 80%;
-    height: auto;
+@keyframes slideIn {
+  from {
+    transform: translateX(2000px);
   }
-}
-
-.slide_button {
-  text-align: center;
-  margin-top: 20px;
-  color: white;
-  padding: 10px;
-  background-color: transparent;
-  border: 0.5px solid white;
-  border-radius: 20px;
-  transition: all 1s;
-}
-
-.slide_button:hover {
-  background-color: #15171e;
-  border: 0.5px solid rgb(0, 0, 0);
-
-  animation: button_hover ease 1s both;
-}
-
-@keyframes button_hover {
-  0% {
-    border: 0.5px solid white;
-    background-color: transparent;
-  }
-
-  100% {
-    border: 0.5px solid rgb(0, 0, 0);
-    background-color: #15171e;
+  to {
+    transform: translateX(0);
   }
 }
