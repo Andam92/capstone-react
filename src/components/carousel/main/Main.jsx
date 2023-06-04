@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import styles from "./main.module.css";
 import { StoreCarousel } from "../../store_carousel/StoreCarousel";
+import CarouselFadeExample from "../../carousel-test/Carousel";
 
 export const Main = () => {
   const slides = [
@@ -57,15 +58,18 @@ export const Main = () => {
         }}
         className={`${styles.background}`}
       ></div>
-
       <div className={`${styles.carouselContainer}`}>
-        <MyCarousel slides={slides} setCurrentSlide={setCurrentSlide} />
+        <CarouselFadeExample slides={slides} />
       </div>
+      {/* <div className={`${styles.carouselContainer}`}>
+        <MyCarousel slides={slides} setCurrentSlide={setCurrentSlide} />
+      </div> */}
 
       <Row className={`${styles.section2}`}>
         <h3>Giochi in evidenza</h3>
         <StoreCarousel prodotti={prodotti} categoria={"FPS"} />
       </Row>
+
       <div className={`${styles.overflow}`}>
         <Row
           className={`${styles.startingPoint} ${navScroll && styles.section1} `}
