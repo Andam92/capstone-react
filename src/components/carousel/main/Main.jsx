@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import MyCarousel from "../MyCarousel";
-import { recuperaLibreria } from "../../../redux/actions/addLibrary";
-import { useSelector } from "react-redux";
-import { Col, Container, Image, Row } from "react-bootstrap";
+// import MyCarousel from "../MyCarousel";
+import { Row } from "react-bootstrap";
 import styles from "./main.module.css";
-import { StoreCarousel } from "../../store_carousel/StoreCarousel";
+import { Samples } from "../../sample/Samples";
 import CarouselFadeExample from "../../carousel-test/Carousel";
 
 export const Main = () => {
@@ -52,12 +50,6 @@ export const Main = () => {
 
   return (
     <div className={`${styles.body}`}>
-      <div
-        style={{
-          backgroundImage: `url(${slides[currentSlide].url})`,
-        }}
-        className={`${styles.background}`}
-      ></div>
       <div className={`${styles.carouselContainer}`}>
         <CarouselFadeExample slides={slides} />
       </div>
@@ -67,7 +59,7 @@ export const Main = () => {
 
       <Row className={`${styles.section2}`}>
         <h3>Giochi in evidenza</h3>
-        <StoreCarousel prodotti={prodotti} categoria={"RPG"} />
+        <Samples prodotti={prodotti} categoria={"RPG"} />
       </Row>
       <div className={`${styles.sfondo1}`}>
         <img src="https://drive.google.com/u/0/uc?id=1eUsZN_lUo6kvQtHxTIuzu31hZklVX2Uf"></img>

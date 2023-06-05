@@ -1,58 +1,34 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { FaApple, FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import styles from "./footer.module.css";
 
 const Footer = () => {
-  const currentYear = new Date();
+  const currentYear = new Date().getFullYear();
   return (
     <div className={`${styles.container}`}>
-      <Container>
-        <Row className="justify-content-center mt-3">LOGO</Row>
-        <Row className={`${styles.firstRow} flex-wrap`}>
-          <Col xs={6} sm={4} md={2} className={`${styles.child} mt-md-1`}>
-            IMPIEGHI
+      <Container className="d-flex">
+        <Row className="flex-column align-self-start">
+          <Col className="justify-content-center mt-3">LOGO</Col>
+          <Col className="d-flex justify-content-between mt-2">
+            <FaApple className="m-2 fs-5" />
+            <FaFacebook className="m-2 fs-5" />
+            <FaGoogle className="m-2 fs-5" />
+            <FaTwitter className="m-2 fs-5" />
           </Col>
-          <Col xs={6} sm={4} md={2} className={`${styles.child} mt-md-1`}>
-            LA SOCIETÀ
-          </Col>
-          <Col xs={6} sm={4} md={2} className={`${styles.child} mt-md-1`}>
-            ASSISTENZA
-          </Col>
-          <Col xs={6} sm={4} md={2} className={`${styles.child} mt-md-1`}>
-            CONTATTACI
-          </Col>
-          <Col xs={6} sm={4} md={2} className={`${styles.child} mt-md-1`}>
-            STAMPA
-          </Col>
+        </Row>
 
-          <Col xs={6} sm={4} md={2} className="d-none d-lg-block mt-md-1">
-            MAPPA SITO
-          </Col>
+        <Row className="flex-column justify-content-start text-start">
+          <Col className={`${styles.child} mt-2`}>Impieghi</Col>
+          <Col className={`${styles.child} mt-2`}>La società</Col>
+          <Col className={`${styles.child} mt-2`}>Assistenza</Col>
+          <Col className={`${styles.child} mt-2`}>Contattaci</Col>
+          <Col className={`${styles.child} mt-2`}>Stampa</Col>
+          <Col className="d-none d-lg-block mt-2">Mappa del sito</Col>
         </Row>
-        <Row className="mt-3">
-          <Col>
-            Tutti i giochi, una sola applicazione:{" "}
-            <span className="text-primary text-decoration-underline">
-              Applicazione GamesPlanet Desktop
-            </span>
-          </Col>
-        </Row>
+
         <div className={`${styles.small}`}>
-          <Row className="flex-column mt-2">
-            <Col>
-              {" "}
-              {"©" +
-                currentYear.getFullYear() +
-                " GamesPlanet Entertainment, Inc."}
-            </Col>
-            <Col>
-              Tutti i marchi qui riportati sono di proprietà dei rispettivi
-              detentori.
-            </Col>
-          </Row>
-        </div>
-        <div className={`${styles.small}`}>
-          <Row className="mt-3">
+          <Row className="flex-column mt-2 text-start">
             <Col>Privacy</Col>
             <Col>Documentazione legale</Col>
             <Col className="d-none d-lg-block">Menzioni legali</Col>
@@ -60,6 +36,18 @@ const Footer = () => {
             <Col className="d-none d-md-block">Impostazioni sui cookie</Col>
             <Col className="d-none d-md-block">Rarità dei contenuti</Col>
           </Row>
+          <div className={`${styles.small}`}>
+            <Row className="flex-column mt-4 text-start">
+              <Col>
+                <hr className="m-0 mb-2" />
+                {"©" + currentYear + " GamesPlanet Entertainment, Inc."}
+              </Col>
+              <Col>
+                Tutti i marchi qui riportati sono di proprietà dei rispettivi
+                detentori.
+              </Col>
+            </Row>
+          </div>
         </div>
       </Container>
     </div>
