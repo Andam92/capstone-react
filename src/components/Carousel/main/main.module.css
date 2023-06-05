@@ -5,7 +5,15 @@
 
 .carouselContainer {
   margin: 0 auto;
-  width: 70vw;
+  width: 100vw;
+}
+
+.banner {
+  width: 100%;
+  object-fit: contain;
+  box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
+  -webkit-box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
+  -moz-box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
 }
 
 .sfondo1 {
@@ -83,7 +91,7 @@
 }
 
 .buttonToStore {
-  max-width: 10% !important;
+  width: 10% !important;
   margin: 0 auto;
   margin-top: 2rem !important;
   color: white;
@@ -95,6 +103,9 @@
   background: -moz-linear-gradient(180deg, #15171e 0%, #152855 100%);
   border: 0.5px solid white;
   transition: all 0.3s;
+  box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
+  -webkit-box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
+  -moz-box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
 }
 
 .buttonToStore:hover {

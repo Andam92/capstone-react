@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import MyCarousel from "../MyCarousel";
-import { Row } from "react-bootstrap";
+import { Image, Row } from "react-bootstrap";
 import styles from "./main.module.css";
 import { Samples } from "../../sample/Samples";
 import CarouselFadeExample from "../../carousel-test/Carousel";
@@ -53,7 +53,11 @@ export const Main = () => {
   return (
     <div className={`${styles.body}`}>
       <div className={`${styles.carouselContainer}`}>
-        <CarouselFadeExample slides={slides} />
+        <Image
+          className={`${styles.banner}`}
+          src="https://drive.google.com/u/0/uc?id=1dD32q57nMllueP4xq7cKXMrEfC6drvpA"
+        ></Image>
+        {/* <CarouselFadeExample slides={slides} /> */}
       </div>
       {/* <div className={`${styles.carouselContainer}`}>
         <MyCarousel slides={slides} setCurrentSlide={setCurrentSlide} />
