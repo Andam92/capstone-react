@@ -9,10 +9,9 @@
 }
 
 .sfondo1 {
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 4rem auto;
   width: 95vw;
-  height: 800px;
+  height: auto;
   position: relative;
 }
 
@@ -20,9 +19,9 @@
   width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: 7px 8px 12px 1px rgba(0, 0, 0, 0.6);
-  -webkit-box-shadow: 7px 8px 12px 1px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: 7px 8px 12px 1px rgba(0, 0, 0, 0.6);
+  box-shadow: 7px 10px 12px 3px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 7px 10px 12px 3px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 7px 10px 12px 3px rgba(0, 0, 0, 0.8);
 }
 
 .background {
@@ -64,7 +63,11 @@
 }
 
 .section2 {
-  padding: 2rem 3rem;
+  padding: 3rem 3rem;
+  background-color: #0c0a20af;
+  box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
+  -webkit-box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
+  -moz-box-shadow: -2px 8px 13px 3px rgba(0, 0, 0, 0.69);
 }
 
 .payoff {
@@ -77,4 +80,25 @@
   letter-spacing: 3px;
 
   font-family: "Ubuntu";
+}
+
+.buttonToStore {
+  max-width: 10% !important;
+  margin: 0 auto;
+  margin-top: 2rem !important;
+  color: white;
+  font-size: large;
+  padding: 20px 30px;
+  background: #15171e;
+  background: linear-gradient(180deg, #15171e 0%, #152855 100%);
+  background: -webkit-linear-gradient(180deg, #15171e 0%, #152855 100%);
+  background: -moz-linear-gradient(180deg, #15171e 0%, #152855 100%);
+  border: 0.5px solid white;
+  transition: all 0.3s;
+}
+
+.buttonToStore:hover {
+  border: 0.5px solid rgb(255, 255, 255);
+  transform: scale(1.03);
+  animation: button_hover ease-in-out 0.2s;
 }

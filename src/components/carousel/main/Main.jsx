@@ -4,6 +4,7 @@ import { Row } from "react-bootstrap";
 import styles from "./main.module.css";
 import { Samples } from "../../sample/Samples";
 import CarouselFadeExample from "../../carousel-test/Carousel";
+import { useNavigate } from "react-router-dom";
 
 export const Main = () => {
   const slides = [
@@ -24,6 +25,7 @@ export const Main = () => {
   const [navScroll, setNavScroll] = useState(false);
   const [prodotti, setProdotti] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   // FETCH
   const recuperaProdotti = async () => {
@@ -58,11 +60,20 @@ export const Main = () => {
       </div> */}
 
       <Row className={`${styles.section2}`}>
-        <h3>Giochi in evidenza</h3>
+        <h3 className="m-0">Giochi in evidenza</h3>
         <Samples prodotti={prodotti} categoria={"RPG"} />
+        <button
+          className={`${styles.buttonToStore}`}
+          onClick={() => navigate("/store")}
+        >
+          Vai al negozio
+        </button>
       </Row>
       <div className={`${styles.sfondo1}`}>
-        <img src="https://drive.google.com/u/0/uc?id=1eUsZN_lUo6kvQtHxTIuzu31hZklVX2Uf"></img>
+        <img
+          alt="alt"
+          src="https://drive.google.com/u/0/uc?id=1eUsZN_lUo6kvQtHxTIuzu31hZklVX2Uf"
+        ></img>
       </div>
 
       {/* <div className={`${styles.overflow}`}>

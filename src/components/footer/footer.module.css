@@ -10,6 +10,10 @@
   font-size: 14px;
 }
 
-.firstRow > .child {
-  border-right: 1px solid white;
+.child {
+  padding-bottom: 2px;
+}
+
+.child:hover {
+  text-decoration: underline;
 }

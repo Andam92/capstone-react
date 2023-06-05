@@ -17,7 +17,6 @@ const Footer = () => {
             <FaTwitter className="m-2 fs-5" />
           </Col>
         </Row>
-
         <Row className="flex-column justify-content-start text-start">
           <Col className={`${styles.child} mt-2`}>Impieghi</Col>
           <Col className={`${styles.child} mt-2`}>La società</Col>
@@ -29,12 +28,12 @@ const Footer = () => {
 
         <div className={`${styles.small}`}>
           <Row className="flex-column mt-2 text-start">
-            <Col>Privacy</Col>
-            <Col>Documentazione legale</Col>
-            <Col className="d-none d-lg-block">Menzioni legali</Col>
-            <Col className="d-none d-lg-block">Cookies</Col>
-            <Col className="d-none d-md-block">Impostazioni sui cookie</Col>
-            <Col className="d-none d-md-block">Rarità dei contenuti</Col>
+            <Col className={`${styles.child}`}>Privacy</Col>
+            <Col className={`${styles.child}`}>Documentazione legale</Col>
+            <Col className={`${styles.child}`}>Menzioni legali</Col>
+            <Col className={`${styles.child}`}>Cookies</Col>
+            <Col className={`${styles.child}`}>Impostazioni sui cookie</Col>
+            <Col className={`${styles.child}`}>Rarità dei contenuti</Col>
           </Row>
           <div className={`${styles.small}`}>
             <Row className="flex-column mt-4 text-start">

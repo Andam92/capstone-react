@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel, Col, Container, Image, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import styles from "./samples.css";
+import styles from "./samples.module.css";
 
 export const Samples = ({ prodotti, categoria }) => {
   //Suddivido l'array di prodotti in gruppi da 3
@@ -25,8 +25,8 @@ export const Samples = ({ prodotti, categoria }) => {
       <Container>
         <Row>
           {prodotti.length > 0 &&
-            prodotti.slice(6, 12).map((vg, i) => (
-              <Col className="mt-3 p-24slide" key={i} xs={12} lg={4}>
+            prodotti.slice(4, 12).map((vg, i) => (
+              <Col className="mt-3 p-3" key={i} xs={12} md={6} lg={4} xl={3}>
                 <Image
                   fluid
                   src={vg.immagine}
@@ -35,11 +35,8 @@ export const Samples = ({ prodotti, categoria }) => {
                   onClick={() => navigate(`/store/${vg.id}`)}
                   style={{
                     cursor: "pointer",
-                    // backgroundImage: `url(${vg.immagine})`,
                     borderRadius: "10px",
-                    objectFit: "contain",
-                    // backgroundSize: "contain",
-                    // backgroundRepeat: "no-repeat",
+                    objectFit: "cover",
                   }}
                 />
               </Col>
