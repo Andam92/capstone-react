@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Navbar, Nav, Dropdown } from "react-bootstrap";
+import { Container, Navbar, Nav, Dropdown, Image } from "react-bootstrap";
 import styles from "./navbar.module.css";
 import LoginModal from "../login/LoginModal";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
@@ -88,14 +88,14 @@ const MyNavbar = () => {
           fixed="top"
           variant="dark"
           expand="lg"
-          className={`${styles.mainNav} p-4`}
+          className={`${styles.mainNav} `}
         >
-          <Container>
+          <Container id="#">
             <Navbar.Brand
               className={`${styles.navLink} ${styles.brand}`}
               onClick={() => navigate("/")}
             >
-              Logo_here
+              LOGO
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -145,6 +145,7 @@ const MyNavbar = () => {
                   <Nav.Item>
                     {!token ? (
                       <Nav.Link
+                        href="#"
                         onClick={() => setModale(true)}
                         style={{
                           display: "flex",

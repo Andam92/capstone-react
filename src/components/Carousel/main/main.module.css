@@ -5,7 +5,7 @@
 
 .carouselContainer {
   margin: 0 auto;
-  width: 80vw;
+  width: 70vw;
 }
 
 .background {
@@ -30,22 +30,34 @@
   overflow-x: hidden;
 }
 
-.startingPoint {
-  transform: translateX(2500px);
+.startingPointText {
+  transform: translateY(2500px);
+}
+.startingPointImg {
+  transform: translateX(-2000px);
 }
 
 .section1 {
-  padding: 2rem 3rem;
+  display: flex;
+  margin-bottom: 1rem;
   align-items: center;
   transition: all ease 1s;
   transform: translateX(0);
+  transform: translateY(0);
 }
 
 .section2 {
   padding: 2rem 3rem;
-  align-items: center;
 }
 
 .payoff {
-  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payoff span {
+  letter-spacing: 3px;
+
+  font-family: "Ubuntu";
 }

@@ -70,26 +70,34 @@ export const Main = () => {
         <StoreCarousel prodotti={prodotti} categoria={"FPS"} />
       </Row>
 
-      <div className={`${styles.overflow}`}>
-        <Row
-          className={`${styles.startingPoint} ${navScroll && styles.section1} `}
-        >
-          <Col className="col-md-4">
+      {/* <div className={`${styles.overflow}`}>
+        <Row>
+          <Col
+            xs={4}
+            className={`${styles.startingPointImg} ${
+              navScroll && styles.section1
+            } `}
+          >
             <Image
               src="https://drive.google.com/u/0/uc?id=1iQRP-Al8BLWyuHZHXpipsHSUCdN_wQSZ"
               fluid
             />
           </Col>
-          <Col>
-            <p className={`${styles.payoff}`}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-              inventore nulla corrupti non id necessitatibus aliquid consectetur
-              sint quia obcaecati nostrum consequuntur, debitis excepturi
-              consequatur alias odit accusantium, ipsum ea.
-            </p>
+          <Col
+            xs={8}
+            className={`${styles.startingPointText} ${
+              navScroll && styles.section1
+            } `}
+          >
+            <div className={`${styles.payoff}`}>
+              <p className="fs-1">GamesPlanet</p>{" "}
+              <p className="fs-3">
+                Un mondo di giochi: l'unico limite è la fantasia
+              </p>
+            </div>
           </Col>
         </Row>
-      </div>
+      </div> */}
     </div>
   );
 };

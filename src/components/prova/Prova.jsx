@@ -126,7 +126,10 @@ export const Prova = ({
               </Card.Title>
 
               <Card.Text>
-                <p>{videogioco?.prezzo} €</p>
+                <p>
+                  {videogioco?.prezzo || "Gratis"}{" "}
+                  {videogioco?.prezzo ? "€" : ""}
+                </p>
               </Card.Text>
             </div>
 

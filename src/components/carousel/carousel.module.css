@@ -62,7 +62,7 @@
   animation: fadeIn 0.7s ease-in;
 } */
 .slideAnim {
-  animation: slideIn 1s ease-out;
+  animation: fadeIn 1s linear;
 }
 
 @keyframes fadeIn {
