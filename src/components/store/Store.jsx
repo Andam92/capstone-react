@@ -116,6 +116,7 @@ export const Store = () => {
                   setSelected={setSelected}
                   setPippo={setPippo}
                   pippo={pippo}
+                  libreria={libreria}
                 ></Prova>
               </>
             ))}

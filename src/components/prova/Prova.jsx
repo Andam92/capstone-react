@@ -27,7 +27,9 @@ export const Prova = ({
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
-  const libreria = useSelector((state) => state?.libraryReducer?.library);
+  const libreria = useSelector(
+    (state) => state?.usersReducer?.users?.libreriaPersonale
+  );
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const id = useSelector((state) => state?.usersReducer?.users?.id);
 

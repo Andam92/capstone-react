@@ -13,7 +13,7 @@
 
 .overlay {
   /* overflow-x: hidden; */
-  height: 100%;
+  height: 100vh;
   position: relative;
   background: #170336;
   background: linear-gradient(90deg, #170336 10%, rgba(23, 3, 54, 0) 80%);

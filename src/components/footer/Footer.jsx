@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <div className={`${styles.container}`}>
-      <Container className="d-flex">
+      <Container className="d-flex justify-content-between">
         <Row className="flex-column align-self-start">
           <Col className="justify-content-center mt-3">LOGO</Col>
           <Col className="d-flex justify-content-between mt-2">

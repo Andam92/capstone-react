@@ -40,7 +40,7 @@ export const Libreria = () => {
   }, [selected]);
 
   return (
-    <div style={{ marginTop: "110px" }} className={`${styles.body}`}>
+    <div className={`${styles.body}`}>
       {" "}
       <div
         className={`${styles.background}`}
