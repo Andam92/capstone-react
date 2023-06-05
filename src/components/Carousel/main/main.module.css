@@ -91,7 +91,8 @@
 }
 
 .buttonToStore {
-  width: 10% !important;
+  /* width: 10% !important; */
+  min-width: 10%;
   margin: 0 auto;
   margin-top: 2rem !important;
   color: white;
@@ -111,5 +112,10 @@
 .buttonToStore:hover {
   border: 0.5px solid rgb(255, 255, 255);
   transform: scale(1.03);
-  animation: button_hover ease-in-out 0.2s;
+}
+
+@media screen and (max-width: 470px) {
+  .buttonToStore {
+    font-size: small;
+  }
 }

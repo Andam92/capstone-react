@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import MyCarousel from "../MyCarousel";
-import { Image, Row } from "react-bootstrap";
+import { Col, Image, Row } from "react-bootstrap";
 import styles from "./main.module.css";
 import { Samples } from "../../sample/Samples";
 import CarouselFadeExample from "../../carousel-test/Carousel";
@@ -66,12 +66,14 @@ export const Main = () => {
       <Row className={`${styles.section2}`}>
         <h3 className="m-0">Giochi in evidenza</h3>
         <Samples prodotti={prodotti} categoria={"RPG"} />
-        <button
-          className={`${styles.buttonToStore}`}
-          onClick={() => navigate("/store")}
-        >
-          Vai al negozio
-        </button>
+        <Col className="text-center">
+          <button
+            className={`${styles.buttonToStore}`}
+            onClick={() => navigate("/store")}
+          >
+            Vai al negozio
+          </button>
+        </Col>
       </Row>
       <div className={`${styles.sfondo1}`}>
         <img
