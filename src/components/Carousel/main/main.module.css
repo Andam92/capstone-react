@@ -8,6 +8,23 @@
   width: 70vw;
 }
 
+.sfondo1 {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 95vw;
+  height: 800px;
+  position: relative;
+}
+
+.sfondo1 img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 7px 8px 12px 1px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 7px 8px 12px 1px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 7px 8px 12px 1px rgba(0, 0, 0, 0.6);
+}
+
 .background {
   position: absolute;
   width: 100vw;

@@ -67,8 +67,11 @@ export const Main = () => {
 
       <Row className={`${styles.section2}`}>
         <h3>Giochi in evidenza</h3>
-        <StoreCarousel prodotti={prodotti} categoria={"FPS"} />
+        <StoreCarousel prodotti={prodotti} categoria={"RPG"} />
       </Row>
+      <div className={`${styles.sfondo1}`}>
+        <img src="https://drive.google.com/u/0/uc?id=1eUsZN_lUo6kvQtHxTIuzu31hZklVX2Uf"></img>
+      </div>
 
       {/* <div className={`${styles.overflow}`}>
         <Row>
