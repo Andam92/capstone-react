@@ -83,6 +83,9 @@ const RegisterPage = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          backgroundImage:
+            "url(https://drive.google.com/u/0/uc?id=1Tz0NKxyiDPvLFSekBXLXcun9IGcIdft2)",
+          backgroundSize: "cover",
         }}
       >
         <div className={`${styles.login}`}>

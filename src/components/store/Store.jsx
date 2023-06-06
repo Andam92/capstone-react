@@ -71,7 +71,7 @@ export const Store = () => {
   return (
     <div className={`${styles.body}  ${isLoading && styles.loading}`}>
       <Col className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <h1 className="mt-4">Giochi in evidenza</h1>
+        <h2 className="mt-4 ms-1">Giochi in evidenza</h2>
         <Form className="mt-4">
           <Form.Control
             onChange={(e) => (setSearch(e.target.value), setFiltered(false))}
