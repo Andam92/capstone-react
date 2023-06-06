@@ -14,17 +14,23 @@
 }
 
 /* .brand {
-  padding-right: 3rem;
+  margin-right: 3rem !important;
 } */
 
 .logo {
   width: 270px;
+  cursor: pointer;
+  margin-right: 3rem !important;
 }
 
 .navLink {
   margin-right: 4rem;
   color: rgb(255, 255, 255) !important;
   letter-spacing: 4px !important;
+}
+
+.navLink:hover {
+  text-decoration: underline !important;
 }
 
 /* @media screen and (max-width: 360px) {

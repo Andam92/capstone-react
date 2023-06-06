@@ -22,7 +22,7 @@ export const Main = () => {
     },
   ];
 
-  const [navScroll, setNavScroll] = useState(false);
+  const [navScroll, setNavScroll] = useState(0);
   const [prodotti, setProdotti] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
@@ -42,13 +42,17 @@ export const Main = () => {
   };
 
   window.addEventListener("scroll", () =>
-    window.scrollY >= 100 ? setNavScroll(true) : setNavScroll(false)
+    window.scrollY >= 100 ? setNavScroll(window.scrollY) : setNavScroll(0)
   );
 
   useEffect(() => {
     recuperaProdotti();
     console.log(prodotti);
   }, []);
+
+  useEffect(() => {
+    console.log(navScroll);
+  }, [navScroll]);
 
   return (
     <div className={`${styles.body}`}>
@@ -75,7 +79,11 @@ export const Main = () => {
           </button>
         </Col>
       </Row>
-      <div className={`${styles.sfondo1}`}>
+      <div
+        className={`${styles.startingPointImg} ${
+          navScroll >= 800 && styles.sfondo1
+        }`}
+      >
         <img
           alt="alt"
           src="https://drive.google.com/u/0/uc?id=1u10O-s6nDPB9YyElByFakQcjkKx1BhNC"
