@@ -44,12 +44,6 @@ const MyNavbar = () => {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(getUsers(users?.username, token));
-  //   }
-  // }, [users]);
-
   useEffect(() => {
     if (token) {
       setTimeout(() => {
@@ -90,12 +84,15 @@ const MyNavbar = () => {
           expand="lg"
           className={`${styles.mainNav} `}
         >
-          <Container id="#">
+          <Container>
             <Navbar.Brand
               className={`${styles.navLink} ${styles.brand}`}
               onClick={() => navigate("/")}
             >
-              LOGO
+              <Image
+                className={`${styles.logo}`}
+                src="https://drive.google.com/u/0/uc?id=1Hn4dZjtMnoLEDvp3gkBCBxtC4ThpUXHT"
+              ></Image>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

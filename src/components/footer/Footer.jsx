@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import { FaApple, FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import styles from "./footer.module.css";
 
@@ -7,9 +7,15 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <div className={`${styles.container}`}>
-      <Container className="d-flex justify-content-between">
+      <Container className="d-flex flex-column justify-content-between flex-md-row">
         <Row className="flex-column align-self-start">
-          <Col className="justify-content-center mt-3">LOGO</Col>
+          <Col className="justify-content-center mt-3">
+            <Image
+              style={{ width: "260px", height: "auto" }}
+              fluid
+              src="https://drive.google.com/u/0/uc?id=1Hn4dZjtMnoLEDvp3gkBCBxtC4ThpUXHT"
+            ></Image>
+          </Col>
           <Col className="d-flex justify-content-between mt-2">
             <FaApple className="m-2 fs-5" />
             <FaFacebook className="m-2 fs-5" />

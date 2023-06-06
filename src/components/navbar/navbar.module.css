@@ -4,7 +4,7 @@
 
 .mainNav {
   color: rgb(219, 219, 219);
-  background-color: #0c0a20af;
+  background-color: #0c0a20be;
   /* height: 80px; */
   width: 95%;
   margin: 0 auto;
@@ -13,17 +13,25 @@
   backdrop-filter: blur(3px);
 }
 
+/* .brand {
+  padding-right: 3rem;
+} */
+
+.logo {
+  width: 270px;
+}
+
 .navLink {
   margin-right: 4rem;
   color: rgb(255, 255, 255) !important;
   letter-spacing: 4px !important;
 }
 
-@media screen and (max-width: 360px) {
+/* @media screen and (max-width: 360px) {
   .brand {
     display: none;
   }
-}
+} */
 
 .overlay {
   position: fixed;

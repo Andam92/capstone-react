@@ -55,7 +55,7 @@ export const Main = () => {
       <div className={`${styles.carouselContainer}`}>
         <Image
           className={`${styles.banner}`}
-          src="https://drive.google.com/u/0/uc?id=1dD32q57nMllueP4xq7cKXMrEfC6drvpA"
+          src="https://drive.google.com/u/0/uc?id=1Tz0NKxyiDPvLFSekBXLXcun9IGcIdft2"
         ></Image>
         {/* <CarouselFadeExample slides={slides} /> */}
       </div>
@@ -78,7 +78,7 @@ export const Main = () => {
       <div className={`${styles.sfondo1}`}>
         <img
           alt="alt"
-          src="https://drive.google.com/u/0/uc?id=1eUsZN_lUo6kvQtHxTIuzu31hZklVX2Uf"
+          src="https://drive.google.com/u/0/uc?id=1u10O-s6nDPB9YyElByFakQcjkKx1BhNC"
         ></img>
       </div>
 
