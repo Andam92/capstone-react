@@ -28,6 +28,7 @@ export const Samples = ({ prodotti, categoria }) => {
             prodotti.slice(4, 12).map((vg, i) => (
               <Col className="mt-3 p-3" key={i} xs={12} md={6} lg={4} xl={3}>
                 <Image
+                  loading="lazy"
                   fluid
                   src={vg.immagine}
                   alt="slide"

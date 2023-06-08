@@ -6,14 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import addToWish from "../../redux/actions/addWish";
 import { addToCart } from "../../redux/actions/addCart";
-import MyPopup from "../videogioco/MyPopup";
 
 export const Prova = ({
   videogioco,
   selected,
   setSelected,
-  pippo,
-  setPippo,
+  hovered,
+  setHovered,
 }) => {
   const [addedToWish, setAddedToWish] = useState(false);
   const [isInLibrary, setIsInLibrary] = useState(false);
@@ -27,9 +26,7 @@ export const Prova = ({
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
   );
-  const libreria = useSelector(
-    (state) => state?.usersReducer?.users?.libreriaPersonale
-  );
+  const libreria = useSelector((state) => state?.libraryReducer?.library);
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const id = useSelector((state) => state?.usersReducer?.users?.id);
 
@@ -67,7 +64,7 @@ export const Prova = ({
   const handleOver = () => {
     if (videogioco?.id !== selected) {
       console.log(videogioco.id);
-      setPippo(videogioco?.id);
+      setHovered(videogioco?.id);
     }
   };
 
@@ -98,6 +95,8 @@ export const Prova = ({
   useEffect(() => {
     if (inLibrary(videogioco)) {
       setIsInLibrary(true);
+    } else {
+      setIsInLibrary(false);
     }
   }, [libreria]);
 
@@ -107,11 +106,12 @@ export const Prova = ({
         <Card
           onMouseEnter={() => handleOver()}
           className={`${styles.body} ${
-            pippo === videogioco?.id && styles.body_opacity
+            hovered === videogioco?.id && styles.body_opacity
           }`}
         >
           <div>
             <Card.Img
+              loading="lazy"
               className={`${styles.img}`}
               variant="top"
               src={videogioco?.immagine}
@@ -136,7 +136,7 @@ export const Prova = ({
             </div>
 
             <div className="d-flex justify-content-between align-items-center">
-              {!inLibrary(videogioco) && (
+              {!isInLibrary && (
                 <div className="d-flex justify-content-between align-items-center">
                   <button
                     onClick={(e) => handleClickShop(e)}
@@ -157,7 +157,7 @@ export const Prova = ({
                   </button>{" "}
                 </div>
               )}
-              {inLibrary(videogioco) && (
+              {isInLibrary && (
                 <p
                   style={{ textAlign: "center" }}
                   className={`${styles.inLibrary}`}

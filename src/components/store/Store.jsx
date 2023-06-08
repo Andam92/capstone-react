@@ -15,11 +15,9 @@ export const Store = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState(0);
   const [filtered, setFiltered] = useState([]);
-  const [pippo, setPippo] = useState(0);
+  const [hovered, setHovered] = useState(0);
 
-  const libreria = useSelector(
-    (state) => state?.usersReducer?.users?.libreriaPersonale
-  );
+  const libreria = useSelector((state) => state?.libraryReducer?.library);
 
   const token = useSelector(
     (state) => state?.authReducer?.bearerToken?.accessToken
@@ -114,9 +112,8 @@ export const Store = () => {
                   videogioco={p}
                   selected={selected}
                   setSelected={setSelected}
-                  setPippo={setPippo}
-                  pippo={pippo}
-                  libreria={libreria}
+                  setHovered={setHovered}
+                  hovered={hovered}
                 ></Prova>
               </>
             ))}
@@ -135,8 +132,8 @@ export const Store = () => {
                     videogioco={p}
                     selected={selected}
                     setSelected={setSelected}
-                    setPippo={setPippo}
-                    pippo={pippo}
+                    setHovered={setHovered}
+                    hovered={hovered}
                   ></Prova>
                 </>
               ))}
@@ -148,8 +145,8 @@ export const Store = () => {
                   videogioco={p}
                   selected={selected}
                   setSelected={setSelected}
-                  setPippo={setPippo}
-                  pippo={pippo}
+                  setHovered={setHovered}
+                  hovered={hovered}
                 ></Prova>
               </>
             ))}
