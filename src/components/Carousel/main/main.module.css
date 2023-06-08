@@ -28,7 +28,7 @@
   margin: 4rem auto;
   width: 95vw;
   height: auto;
-  transition: all 1s ease-out;
+  transition: all 0.8s ease;
 }
 
 .sfondo1 img {

@@ -45,7 +45,7 @@ const Footer = () => {
             <Row className="flex-column mt-4 text-start">
               <Col>
                 <hr className="m-0 mb-2" />
-                {"©" + currentYear + " GamesPlanet Entertainment, Inc."}
+                {"©" + currentYear + " Prisma Games Entertainment, Inc."}
               </Col>
               <Col>
                 Tutti i marchi qui riportati sono di proprietà dei rispettivi
