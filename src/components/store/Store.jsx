@@ -7,6 +7,7 @@ import styles from "./store.module.css";
 
 import { Prova } from "../prova/Prova";
 import { Chip } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 export const Store = () => {
   // HOOKS
@@ -16,7 +17,7 @@ export const Store = () => {
   const [selected, setSelected] = useState(0);
   const [filtered, setFiltered] = useState([]);
   const [hovered, setHovered] = useState(0);
-
+  const location = useLocation();
   const libreria = useSelector((state) => state?.libraryReducer?.library);
 
   const token = useSelector(
@@ -50,6 +51,13 @@ export const Store = () => {
       }, 1500);
     }
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [location]);
 
   //CATEGORIE
   const categorie = prodotti.map((cat) => cat?.categoria);

@@ -4,7 +4,7 @@ import { Col, Image, Row } from "react-bootstrap";
 import styles from "./main.module.css";
 import { Samples } from "../../sample/Samples";
 import CarouselFadeExample from "../../carousel-test/Carousel";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Main = () => {
   const slides = [
@@ -26,6 +26,7 @@ export const Main = () => {
   const [prodotti, setProdotti] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // FETCH
   const recuperaProdotti = async () => {
@@ -53,6 +54,13 @@ export const Main = () => {
   useEffect(() => {
     console.log(navScroll);
   }, [navScroll]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [location]);
 
   return (
     <div className={`${styles.body}`}>

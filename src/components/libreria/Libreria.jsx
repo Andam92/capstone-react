@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styles from "./libreria.module.css";
 import { Item } from "./Item";
 import { recuperaLibreria } from "../../redux/actions/addLibrary";
@@ -17,6 +17,8 @@ export const Libreria = () => {
   const libreria = useSelector((state) => state?.libraryReducer?.library);
 
   const { id } = useParams();
+
+  const location = useLocation();
 
   // FUNZIONE PER GESTIRE SELEZIONE DINAMICA GIOCO
   const handleSelection = (selected) => {
@@ -38,6 +40,13 @@ export const Libreria = () => {
   useEffect(() => {
     setDeselect(!deselect);
   }, [selected]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [location]);
 
   return (
     <div className={`${styles.body}`}>

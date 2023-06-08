@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styles from "./singleProduct.module.css";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { Chip } from "@mui/material";
@@ -12,6 +12,7 @@ export const SingleProduct = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state?.cartReducer?.cart);
   const libreria = useSelector((state) => state?.libraryReducer?.library);
+  const location = useLocation();
 
   const recuperaProdotto = async () => {
     try {
@@ -31,6 +32,13 @@ export const SingleProduct = () => {
   useEffect(() => {
     recuperaProdotto();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [location]);
 
   const handleClick = () => {
     console.log("Chip categoria cliccata!");
